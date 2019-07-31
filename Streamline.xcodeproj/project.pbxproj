@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0C0D7F122EC017400A585F8 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C0D7F022EC017400A585F8 /* BoardView.swift */; };
 		B0D7E38F22EBF9A600F7FC68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D7E38E22EBF9A600F7FC68 /* AppDelegate.swift */; };
 		B0D7E39122EBF9A600F7FC68 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D7E39022EBF9A600F7FC68 /* ViewController.swift */; };
 		B0D7E39422EBF9A600F7FC68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D7E39222EBF9A600F7FC68 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B0C0D7F022EC017400A585F8 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		B0D7E38B22EBF9A600F7FC68 /* Streamline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Streamline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D7E38E22EBF9A600F7FC68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0D7E39022EBF9A600F7FC68 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				B0D7E38E22EBF9A600F7FC68 /* AppDelegate.swift */,
 				B0D7E39022EBF9A600F7FC68 /* ViewController.swift */,
 				B0D7E39222EBF9A600F7FC68 /* Main.storyboard */,
+				B0C0D7F022EC017400A585F8 /* BoardView.swift */,
 				B0D7E39522EBF9A800F7FC68 /* Assets.xcassets */,
 				B0D7E39722EBF9A800F7FC68 /* LaunchScreen.storyboard */,
 				B0D7E39A22EBF9A800F7FC68 /* Info.plist */,
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0C0D7F122EC017400A585F8 /* BoardView.swift in Sources */,
 				B0D7E39122EBF9A600F7FC68 /* ViewController.swift in Sources */,
 				B0D7E38F22EBF9A600F7FC68 /* AppDelegate.swift in Sources */,
 			);
@@ -442,7 +446,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = xzwang.Streamline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -460,7 +464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = xzwang.Streamline;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
