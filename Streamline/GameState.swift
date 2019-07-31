@@ -198,4 +198,16 @@ public class GameState {
             }
         }
     }
+    
+    public func move() {
+        
+    }
+    
+    public func toString() {
+        
+    }
+    
+    public func equals(other: GameState) {
+        
+    }
 }
