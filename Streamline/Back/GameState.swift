@@ -17,16 +17,14 @@ public class GameState {
     let CURRENT_CHAR: Character = "O";
     let GOAL_CHAR: Character = "@";
     let NEWLINE_CHAR: Character = "\n";
-    let UD_BORDER_CHAR: Character = "-"; // upper and lower of toString()
-    let SIDE_BORDER_CHAR: Character = "|"; // side border for toString()
     
     // used to format the toString() method about the upper & lower border's
     // length
-    let BORDER_MULTIPLIER = 2;
-    let BORDER_APPENDER = 3;
+    let BORDER_MULTIPLIER: Int = 2;
+    let BORDER_APPENDER: Int = 3;
     
     // how many rotation required to return to the original status
-    let rotate360 = 4;
+    let rotate360: Int = 4;
     
     // This represents a 2D map of the board
     var board: [[Character]];
@@ -68,7 +66,7 @@ public class GameState {
                 for j in 0...width {
                     self.board[i][j] = SPACE_CHAR
                 }
-            } // TODO: how to initialize it with space_char?
+            } // TODO: how to initialize it with space_char without a for loop?
             self.playerRow = playerRow; // self refers to this in Java
             self.playerCol = playerCol;
             self.goalRow = goalRow;
@@ -199,15 +197,78 @@ public class GameState {
         }
     }
     
-    public func move(direction: Directions) {
-        
+    public func move(direction: String) {
+        var rotationCount: Int = 0
+        if direction == "UP" {
+            rotationCount = 1
+        }
+        else if direction == "LEFT" {
+            rotationCount = 2
+        }
+        else if direction == "DOWN" {
+            rotationCount = 3
+        }
+        for _ in 0...rotationCount {
+            self.rotateClockwise()
+        }
+        self.moveRight()
+        for _ in 0...(4 - rotationCount) {
+            self.rotateClockwise()
+        }
     }
     
-    public func toString() {
-        
+    public func toString() -> String {
+        var ret: String = ""
+        for _ in 0...(BORDER_MULTIPLIER * self.board[0].count + BORDER_APPENDER) {
+            ret += "-"
+        }
+        for i in 0...self.board.count {
+            ret += "|"
+            for j in 0...self.board[0].count {
+                if (self.board[i][j] == OBSTACLE_CHAR) {
+                    ret += "X"
+                }
+                else if (self.board[i][j] == TRAIL_CHAR) {
+                    ret += "."
+                }
+                else if (self.board[i][j] == SPACE_CHAR) {
+                    ret += " "
+                }
+                else if (i == self.playerRow && j == self.playerCol) {
+                    ret += "O"
+                }
+                else if (i == self.goalRow && j == self.goalCol) {
+                    ret += "@"
+                }
+                ret += " "
+            }
+            ret += "|"
+            ret += "\n"
+        }
+        for _ in 0...(BORDER_MULTIPLIER * self.board[0].count + BORDER_APPENDER) {
+            ret += "-"
+        }
+        return ret
     }
     
-    public func equals(other: GameState) {
-        
+    public func equals(other: Any) -> Bool {
+        let trial = other as? GameState
+        if (trial == nil) {return false}
+        let toCheck = other as! GameState
+        if (toCheck.goalRow != self.goalRow) {return false}
+        if (toCheck.goalCol != self.goalCol) {return false}
+        if (toCheck.playerCol != self.playerCol) {return false}
+        if (toCheck.playerRow != self.playerRow) {return false}
+        if (toCheck.levelPassed != self.levelPassed) {return false}
+        if (toCheck.board.count != self.board.count) {return false}
+        if (toCheck.board[0].count != self.board[0].count) {return false}
+        for i in 0...toCheck.board.count {
+            for j in 0...toCheck.board[0].count {
+                if toCheck.board[i][j] != self.board[i][j] {
+                    return false
+                }
+            }
+        }
+        return true
     }
 }
