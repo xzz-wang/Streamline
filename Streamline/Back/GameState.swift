@@ -199,7 +199,7 @@ public class GameState {
         }
     }
     
-    public func move() {
+    public func move(direction: Directions) {
         
     }
     
