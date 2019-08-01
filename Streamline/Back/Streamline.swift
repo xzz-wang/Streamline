@@ -27,7 +27,9 @@ public class Streamline {
             print(currentState.toString())
             print("> ")
             let lastStep: GameState = GameState.init(other: currentState)
-            // takes user input and moves the board
+            
+            // TODO: takes user input and moves the board
+            
             if lastStep.equals(other: currentState) {
                 continue
             }
