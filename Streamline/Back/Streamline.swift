@@ -48,7 +48,11 @@ public class Streamline {
     }
     
     public func undo() {
-        
+        if self.previousStates.isEmpty {
+            return
+        }
+        self.currentState = self.previousStates.remove(at: self.previousStates.count - 1)
+        self.previousDirections.remove(at: self.previousDirections.count - 1)
     }
     
     public func loadFromFile() {
@@ -67,10 +71,10 @@ public class Streamline {
                 } // empty block
                 else if currentState.board[i][j] == "X" {
                     toSave += "X"
-                }
+                } // obstacle
                 else if currentState.board[i][j] == "." {
                     toSave += "."
-                }
+                } // trail
                 // toSave += currentState.board[i][j]
                 toSave += "\n" // start a new line after each row of the board
             }
