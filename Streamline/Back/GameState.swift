@@ -80,7 +80,7 @@ public class GameState {
         }
         else {
             self.board = [Array.init(repeating: SPACE_CHAR, count: height * width)]
-            self.playerRow = playerRow; // self refers to this in Java
+            self.playerRow = playerRow; // self in Swift = this in Java
             self.playerCol = playerCol;
             self.goalRow = goalRow;
             self.goalCol = goalCol;
