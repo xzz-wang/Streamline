@@ -23,25 +23,28 @@ public class Streamline {
     //TODO: public init (file: String) {} // initializer from the board written to a text file
     
     public func play() {
-        while currentState.levelPassed != true {
+        while !currentState.levelPassed {
             print(currentState.toString())
             print("> ")
             let lastStep: GameState = GameState.init(other: currentState)
             
-            // TODO: takes user input and moves the board. Use currentState.move(direction: String)
+            // TODO: takes user input and moves the board. Use self.recordAndMove(Direction)
             
             if lastStep.equals(other: currentState) {
                 continue
             }
             else {
                 previousStates.append(lastStep)
-                
             }
         }
+        print("Level passed! ")
     }
     
     public func recordAndMove(dir: String) {
-        
+        if (dir != "UP" || dir != "DOWN" || dir != "LEFT" || dir != "RIGHT") {
+            // if direction is not a valid string input
+        }
+        // 4 moves, pause, quit, save, undo. Also check last move to see if it's undo
     }
     
     public func undo() {
@@ -52,7 +55,26 @@ public class Streamline {
         
     }
     
-    public func saveToFile() {
-        
+    public func save() -> String {
+        var toSave = String.init()
+        toSave += "\(currentState.board.count) \(currentState.board[0].count)"
+        toSave += "\(currentState.playerRow) \(currentState.playerCol)"
+        toSave += "\(currentState.goalRow) \(currentState.goalCol)"
+        for i in 0...currentState.board.count {
+            for j in 0...currentState.board[0].count {
+                if currentState.board[i][j] == " " {
+                    toSave += " "
+                } // empty block
+                else if currentState.board[i][j] == "X" {
+                    toSave += "X"
+                }
+                else if currentState.board[i][j] == "." {
+                    toSave += "."
+                }
+                // toSave += currentState.board[i][j]
+                toSave += "\n" // start a new line after each row of the board
+            }
+        }
+        return toSave
     }
 }

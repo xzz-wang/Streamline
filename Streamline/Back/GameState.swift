@@ -50,23 +50,36 @@ public class GameState {
     public init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
         if (playerRow >= height || playerCol >= width) {
             print("Please enter a valid player position that is not off the board. \n");
+            self.board = [Array.init(repeating: SPACE_CHAR, count: 1)]
+            self.playerCol = -1
+            self.playerRow = -1
+            self.goalRow = -1
+            self.goalCol = -1
+            self.levelPassed = true
             return;
         }
         else if (goalRow >= height || goalCol >= width) {
             print("Please enter a valid goal position that is not off the board. \n");
+            self.board = [Array.init(repeating: SPACE_CHAR, count: 1)]
+            self.playerCol = -1
+            self.playerRow = -1
+            self.goalRow = -1
+            self.goalCol = -1
+            self.levelPassed = true
             return;
         }
         else if (goalRow == playerRow && goalCol == playerCol) {
             print("Please enter a valid goal position that does not overlap the player. \n");
+            self.board = [Array.init(repeating: SPACE_CHAR, count: 1)]
+            self.playerCol = -1
+            self.playerRow = -1
+            self.goalRow = -1
+            self.goalCol = -1
+            self.levelPassed = true
             return;
         }
         else {
-            self.board = [[]]
-            for i in 0...height {
-                for j in 0...width {
-                    self.board[i][j] = SPACE_CHAR
-                }
-            } // TODO: how to initialize it with space_char without a for loop?
+            self.board = [Array.init(repeating: SPACE_CHAR, count: height * width)]
             self.playerRow = playerRow; // self refers to this in Java
             self.playerCol = playerCol;
             self.goalRow = goalRow;
