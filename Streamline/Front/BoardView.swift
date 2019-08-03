@@ -57,7 +57,7 @@ class BoardView: UIView {
             if cols > oldValue { // If new col needs to be added
                 for i in 0..<rows {
                     for _ in oldValue..<cols {
-                        var newTile = TileView()
+                        let newTile = TileView()
                         tiles[i].append(newTile)
                         self.addSubview(newTile)
                     }
@@ -99,9 +99,9 @@ class BoardView: UIView {
     override func draw(_ rect: CGRect) {
         
         // Background rounded rect drawing code. Disabled for now.
-//        path = UIBezierPath(roundedRect: rect, cornerRadius: 30.0)
-//        fillColor.setFill()
-//        path.fill()
+        path = UIBezierPath(roundedRect: rect, cornerRadius: 30.0)
+        fillColor.setFill()
+        path.fill()
         
         
         // Now layout the tiles, starting with determining the gap, unit length ( 1 gap + 1 width ), and top/buttom margin
