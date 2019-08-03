@@ -264,10 +264,7 @@ public class GameState {
         return ret
     }
     
-    public func equals(other: Any) -> Bool {
-        let trial = other as? GameState
-        if (trial == nil) {return false}
-        let toCheck = other as! GameState
+    public func equals(toCheck: GameState) -> Bool {
         if (toCheck.goalRow != self.goalRow) {return false}
         if (toCheck.goalCol != self.goalCol) {return false}
         if (toCheck.playerCol != self.playerCol) {return false}
