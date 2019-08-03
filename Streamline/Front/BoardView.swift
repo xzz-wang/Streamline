@@ -17,60 +17,111 @@ class BoardView: UIView {
     private var path = UIBezierPath()
     private var tileRect = CGRect(x: 30.0, y: 30.0, width: 50.0, height: 50.0)
     
-    // Colors
-    @IBInspectable var fillColor: UIColor = UIColor(red: 0.0, green: 0.0, blue: 255.0, alpha: 0.3)
+    // Colors that can be accessed by interface builder
+    @IBInspectable var fillColor: UIColor = .white
     @IBInspectable var tileColor: UIColor = .yellow
     
-    // For different rols and cols, can be adjusted by interface builder
+    // rols and columns, can be adjusted by interface builder
+    // When ever these two value changes, the didSets update change the size of tiles array,
+    //  and add/remove subview accordingly
     @IBInspectable var rows: Int = 5 {
-        didSet {
+        didSet { // code inside didSet is called when the variable did finish changing
+            // If new rows need to be added, perform addition
+            if rows > oldValue {
+                for _ in oldValue..<rows {
+                    var newRow: [TileView] = []
+                    for _ in 0..<cols { // Create a new row
+                        let newTile = TileView()
+                        newRow.append(newTile)
+                        self.addSubview(newTile)
+                    }
+                    tiles.append(newRow)
+                }
+                
+            } else if rows < oldValue { // If rows needs to be removed
+                for _ in rows..<oldValue {
+                    for colTile in tiles.last! {
+                        colTile.removeFromSuperview()
+                    }
+                    tiles.removeLast()
+                }
+            }
+            
+            // Let the system redraw this view
             setNeedsDisplay()
         }
     }
+    
     @IBInspectable var cols: Int = 5 {
         didSet {
+            if cols > oldValue { // If new col needs to be added
+                for i in 0..<rows {
+                    for _ in oldValue..<cols {
+                        var newTile = TileView()
+                        tiles[i].append(newTile)
+                        self.addSubview(newTile)
+                    }
+                }
+            } else if cols < oldValue { // If cols need to be deleted
+                for i in 0..<rows {
+                    for _ in cols..<oldValue {
+                        tiles[i].last!.removeFromSuperview()
+                        tiles[i].removeLast()
+                    }
+                }
+            }
             setNeedsDisplay()
         }
     }
+    
+    // The 2D array that holds all the TileView
+    private var tiles: [[TileView]] = []
+    
+    // The ratio between the gaps and the width/height of each tile
     @IBInspectable var gapRatio: CGFloat = 5.0
+    
+    
     
     // Two Initializers
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        initTilesArr()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        initTilesArr()
     }
     
     
     // Main Drawing Function
+    // This will be called everytime the view needs to be redrawn
     override func draw(_ rect: CGRect) {
-        path = UIBezierPath(roundedRect: rect, cornerRadius: 30.0)
         
-        fillColor.setFill()
+        // Background rounded rect drawing code. Disabled for now.
+//        path = UIBezierPath(roundedRect: rect, cornerRadius: 30.0)
+//        fillColor.setFill()
+//        path.fill()
         
-        path.fill()
         
-        // Now layout the tiles, starting with some math
+        // Now layout the tiles, starting with determining the gap, unit length ( 1 gap + 1 width ), and top/buttom margin
         let gap = rect.width / ((gapRatio + 1) * CGFloat(cols) + 1) // Gap between each tile
         let unitLength = (gapRatio + 1) * gap
         var verticalMargin = rect.height - ((gapRatio + 1) * CGFloat(rows) - 1) * gap
         verticalMargin = verticalMargin / 2.0
         
-        print(gap)
-        print(unitLength)
-        print(verticalMargin)
         
         for row in 0..<rows {
             // Setup first of each row
             var tileRect = CGRect(x: gap, y: verticalMargin + CGFloat(row) * unitLength, width: gapRatio * gap, height: gapRatio * gap)
-            drawTile(tileRect)
+            tiles[row][0].frame = tileRect
+            tiles[row][0].backgroundColor = fillColor
             
             // The rest of the line
-            for _ in 1..<cols {
+            for col in 1..<cols {
                 tileRect = tileRect.offsetBy(dx: unitLength, dy: 0.0)
-                drawTile(tileRect)
+                tiles[row][col].frame = tileRect
+                tiles[row][col].backgroundColor = fillColor
             }
         }
         
@@ -81,6 +132,19 @@ class BoardView: UIView {
         let path = UIBezierPath(roundedRect: rect, cornerRadius: rect.width * 0.2)
         tileColor.setFill()
         path.fill()
+    }
+    
+    private func initTilesArr() {
+        
+        for _ in 0..<rows {
+            var aRow: [TileView] = []
+            for _ in 0..<cols {
+                let newTile = TileView()
+                aRow.append(newTile)
+                self.addSubview(newTile)
+            }
+            tiles.append(aRow)
+        }
     }
     
 }
