@@ -30,7 +30,7 @@ public class Streamline {
             
             // TODO: takes user input and moves the board. Use self.recordAndMove(Direction)
             
-            if lastStep.equals(other: currentState) {
+            if lastStep.equals(toCheck: self.currentState) {
                 continue
             }
             else {
