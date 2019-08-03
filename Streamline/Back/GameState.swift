@@ -51,7 +51,7 @@ public class GameState {
         if (playerRow >= height || playerCol >= width) {
             print("Please enter a valid player position that is not off the board. \n");
             self.board = [Array.init(repeating: SPACE_CHAR, count: 1)]
-            self.playerCol = -1
+            self.playerCol = -1 // self in Swift = this in Java
             self.playerRow = -1
             self.goalRow = -1
             self.goalCol = -1
@@ -80,7 +80,7 @@ public class GameState {
         }
         else {
             self.board = [Array.init(repeating: SPACE_CHAR, count: height * width)]
-            self.playerRow = playerRow; // self in Swift = this in Java
+            self.playerRow = playerRow;
             self.playerCol = playerCol;
             self.goalRow = goalRow;
             self.goalCol = goalCol;

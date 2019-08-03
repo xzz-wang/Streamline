@@ -1,0 +1,22 @@
+//
+//  DevelopNotes.swift
+//  Streamline
+//
+//  Created by Chongbin (Bob) Zhang on 2019/8/3.
+//  Copyright © 2019 Xuezheng Wang. All rights reserved.
+
+Ver 1.0
+Talk to the original author for copyright!
+App icon, UI upon launch
+Use buttons to move for now, and add gesture recognition later?
+On the UI: Line? Dots?
+EC effects: wiggle obstable when hit? transition animation? auto adjust board display size according to board!
+How to launch on App Store
+
+Future
+Save & keep playing
+More levels, user customize
+Gesture move?
+More elements: teleporter, dead-end, pause, dual, etc. See original game
+Share: Game Center, screenshot, etc.
+Ads & IAP to cancel
