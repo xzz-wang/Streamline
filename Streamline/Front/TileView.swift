@@ -13,13 +13,18 @@ class TileView: UIView {
     var fillColor: UIColor = .purple
     var boarderColor: UIColor = .clear
     
+    // Two initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.layer.isOpaque = false
+        setup()
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // Setup that is called in every initializers
+    private func setup() {
         self.layer.isOpaque = false
     }
     
