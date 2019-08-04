@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    // MARK: - IB Property references
     @IBOutlet weak var boardView: BoardView!
     
     @IBOutlet weak var rowStepper: UIStepper!
@@ -17,9 +18,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var rowDisplay: UILabel!
     @IBOutlet weak var colDisplay: UILabel!
     
-    private var offsetX: CGFloat = 0.0
-    private var offsetY: CGFloat = 0.0
-    
+    // MARK: - Customize variables
+
+    // MARK: - View life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,17 +30,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         colStepper.value = Double(boardView.cols)
     }
     
-    @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
-        
-        if sender.state == .changed {
-            boardView.transform = CGAffineTransform(translationX: offsetX + sender.translation(in: self.view).x, y: offsetY + sender.translation(in: self.view).y)
-        } else if sender.state == .ended {
-            offsetX = boardView.transform.tx
-            offsetY = boardView.transform.ty
-        }
-    }
     
-    @IBAction func handleReset(_ sender: UIButton, forEvent event: UIEvent) {
+    // MARK: - User actions
+    @IBAction func handleShake(_ sender: UIButton, forEvent event: UIEvent) {
         print("Called!")
         UIView.animate(withDuration: 0.2, animations: {
             self.boardView.center.y -= 100.0
