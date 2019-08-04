@@ -110,21 +110,19 @@ class BoardView: UIView {
         var verticalMargin = rect.height - ((gapRatio + 1) * CGFloat(rows) - 1) * gap
         verticalMargin = verticalMargin / 2.0
         
-        
-        for row in 0..<rows {
-            // Setup first of each row
-            var tileRect = CGRect(x: gap, y: verticalMargin + CGFloat(row) * unitLength, width: gapRatio * gap, height: gapRatio * gap)
-            tiles[row][0].frame = tileRect
-            tiles[row][0].backgroundColor = fillColor
-            
-            // The rest of the line
-            for col in 1..<cols {
-                tileRect = tileRect.offsetBy(dx: unitLength, dy: 0.0)
-                tiles[row][col].frame = tileRect
-                tiles[row][col].backgroundColor = fillColor
+        UIView.animate(withDuration: 0.5, animations: {
+            for row in 0..<self.rows {
+                // Setup first of each row
+                var tileRect = CGRect(x: gap, y: verticalMargin + CGFloat(row) * unitLength, width: self.gapRatio * gap, height: self.gapRatio * gap)
+                self.tiles[row][0].frame = tileRect
+                
+                // The rest of the line
+                for col in 1..<self.cols {
+                    tileRect = tileRect.offsetBy(dx: unitLength, dy: 0.0)
+                    self.tiles[row][col].frame = tileRect
+                }
             }
-        }
-        
+        })
     }
     
     // Helper method to draw each tile
