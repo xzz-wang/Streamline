@@ -129,7 +129,8 @@ class BoardView: UIView {
         var verticalMargin = rect.height - ((gapRatio + 1) * CGFloat(rows) - 1) * gap
         verticalMargin = verticalMargin / 2.0
         
-        UIView.animate(withDuration: 0.5, animations: {
+        //TODO: Animation removed due to Interface Builder displaying
+//        UIView.animate(withDuration: 0.5, animations: {
             for row in 0..<self.rows {
                 // Setup first of each row
                 var tileRect = CGRect(x: gap, y: verticalMargin + CGFloat(row) * unitLength, width: self.gapRatio * gap, height: self.gapRatio * gap)
@@ -141,7 +142,7 @@ class BoardView: UIView {
                     self.tiles[row][col].frame = tileRect
                 }
             }
-        })
+//        })
     }
     
     

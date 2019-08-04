@@ -32,4 +32,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         // TODO: Check if this movement is legal
         
     }
+    
+    
+    @IBAction func handleTest(_ sender: UIButton) {
+        
+    }
 }

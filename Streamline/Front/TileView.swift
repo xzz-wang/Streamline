@@ -11,9 +11,12 @@ import UIKit
 @IBDesignable
 class TileView: UIView {
     
+    // MARK: - Properties
     var fillColor: UIColor = .purple
     var boarderColor: UIColor = .clear
     
+    
+    // MARK: - Initializers
     // Two initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +32,8 @@ class TileView: UIView {
         self.layer.isOpaque = false
     }
     
-    // Custom drawing
+    
+    // MARK: - Custom drawing
     override func draw(_ rect: CGRect) {
         self.backgroundColor = .clear
         let path = UIBezierPath(roundedRect: rect, cornerRadius: rect.width * 0.2)
@@ -38,6 +42,8 @@ class TileView: UIView {
         
         path.fill()
     }
+    
+    // MARK: - Other methods.
     
 
 }
