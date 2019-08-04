@@ -75,7 +75,7 @@ class BoardView: UIView {
     }
     
     // The 2D array that holds all the TileView
-    private var tiles: [[TileView]] = []
+    public var tiles: [[TileView]] = []
     
     // The ratio between the gaps and the width/height of each tile
     @IBInspectable var gapRatio: CGFloat = 5.0
