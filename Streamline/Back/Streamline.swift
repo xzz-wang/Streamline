@@ -3,6 +3,7 @@
 //  Streamline
 //
 //  Created by Chongbin (Bob) Zhang on 2019/7/31.
+//  Edited by Chongbin (Bob) Zhang & Xuezheng Wang
 //  Copyright © 2019 Xuezheng Wang. All rights reserved.
 //
 
@@ -81,4 +82,42 @@ public class Streamline {
         }
         return toSave
     }
+    
+}
+
+
+// MARK: - Supporting Types
+
+extension Streamline {
+    
+    // The type to specify the location of a tile
+    // The coordinate system starts at upper-left corner, with index starts with 0.
+    struct boardLocation {
+        var x: UInt
+        var y: UInt
+        
+        // Initializers
+        init(x: UInt, y:UInt) {
+            self.x = x
+            self.y = y
+        }
+        
+        init(row: UInt, col:UInt) {
+            self.x = col
+            self.y = row
+        }
+
+        // Row and column are basicially the same as x and y. Just in case someone got confused.
+        var row: UInt {
+            get { return y }
+            set { y = newValue }
+        }
+        
+        var column: UInt {
+            get { return x }
+            set { x = newValue }
+        }
+
+    }
+
 }
