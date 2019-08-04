@@ -8,17 +8,15 @@
 
 import UIKit
 
+typealias boardLocation = Streamline.boardLocation
+
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - IB Property references
     @IBOutlet weak var boardView: BoardView!
     
-    @IBOutlet weak var rowStepper: UIStepper!
-    @IBOutlet weak var colStepper: UIStepper!
-    @IBOutlet weak var rowDisplay: UILabel!
-    @IBOutlet weak var colDisplay: UILabel!
-    
     // MARK: - Customize variables
+    var headLocation = boardLocation(row: 0, col: 0)
 
     // MARK: - View life cycles
     override func viewDidLoad() {
@@ -26,30 +24,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         // Do any additional setup after loading the view.
         
         boardView.isUserInteractionEnabled = false
-        rowStepper.value = Double(boardView.rows)
-        colStepper.value = Double(boardView.cols)
     }
     
     
     // MARK: - User actions
-    @IBAction func handleShake(_ sender: UIButton, forEvent event: UIEvent) {
-        print("Called!")
-        UIView.animate(withDuration: 0.2, animations: {
-            self.boardView.center.y -= 100.0
-        })
-        UIView.animate(withDuration: 0.2, delay: 0.2, options: .curveEaseInOut, animations: {
-            self.boardView.center.y += 100.0
-        }, completion: nil)
-        print("Here!")
-    }
-    
-    @IBAction func handleStepper(_ sender: UIStepper) {
-        boardView.cols = Int(colStepper.value)
-        boardView.rows = Int(rowStepper.value)
+    func moveHeadTo(tile: boardLocation) {
+        // TODO: Check if this movement is legal
         
-        rowDisplay.text = "Rows: \(boardView.rows)"
-        colDisplay.text = "Cols: \(boardView.cols)"
     }
-    
 }
-

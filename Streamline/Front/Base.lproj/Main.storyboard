@@ -19,15 +19,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bya-Vh-Gof" customClass="BoardView" customModule="Streamline" customModuleProvider="target">
-                                <rect key="frame" x="20" y="44" width="374" height="600"/>
+                                <rect key="frame" x="20" y="44" width="374" height="818"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="600" id="X7o-jr-DAV"/>
-                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rows">
-                                        <integer key="value" value="6"/>
+                                        <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cols">
                                         <integer key="value" value="6"/>
@@ -40,71 +37,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-2r-B5T">
-                                <rect key="frame" x="20" y="658" width="374" height="104"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="158" translatesAutoresizingMaskIntoConstraints="NO" id="adp-FY-sFl">
-                                        <rect key="frame" x="31" y="0.0" width="312.5" height="29"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Rows: 8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URE-hx-9OH">
-                                                <rect key="frame" x="0.0" y="0.0" width="60.5" height="29"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ORc-3M-U0C">
-                                                <rect key="frame" x="218.5" y="0.0" width="94" height="29"/>
-                                                <connections>
-                                                    <action selector="handleStepper:" destination="BYZ-38-t0r" eventType="valueChanged" id="bNY-Nj-F4j"/>
-                                                </connections>
-                                            </stepper>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="154" translatesAutoresizingMaskIntoConstraints="NO" id="bTh-v5-XTe">
-                                        <rect key="frame" x="32.5" y="37" width="309" height="29"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Cols: 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgA-f3-T7B">
-                                                <rect key="frame" x="0.0" y="0.0" width="61" height="29"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="qzz-dQ-qOe">
-                                                <rect key="frame" x="215" y="0.0" width="94" height="29"/>
-                                                <connections>
-                                                    <action selector="handleStepper:" destination="BYZ-38-t0r" eventType="valueChanged" id="RL5-uE-AR9"/>
-                                                </connections>
-                                            </stepper>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4v-ig-cib">
-                                        <rect key="frame" x="163.5" y="74" width="47" height="30"/>
-                                        <state key="normal" title="Shake!"/>
-                                        <connections>
-                                            <action selector="handleShake:forEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AXt-x9-D2h"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bya-Vh-Gof" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="518-dD-869"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JdZ-2r-B5T" secondAttribute="bottom" constant="100" id="6t9-Ah-eFa"/>
                             <constraint firstItem="bya-Vh-Gof" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9MM-qQ-mYm"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JdZ-2r-B5T" secondAttribute="trailing" constant="20" id="9qK-dE-LEh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bya-Vh-Gof" secondAttribute="bottom" id="DY9-YA-ec6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bya-Vh-Gof" secondAttribute="trailing" constant="20" id="Lcd-5o-HA8"/>
-                            <constraint firstItem="JdZ-2r-B5T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="RiQ-rZ-lja"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="boardView" destination="bya-Vh-Gof" id="N6s-pw-uwr"/>
-                        <outlet property="colDisplay" destination="XgA-f3-T7B" id="auK-Ni-7P7"/>
-                        <outlet property="colStepper" destination="qzz-dQ-qOe" id="SXW-do-eQp"/>
-                        <outlet property="rowDisplay" destination="URE-hx-9OH" id="taL-Yx-Ev2"/>
-                        <outlet property="rowStepper" destination="ORc-3M-U0C" id="52P-Ds-6fW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
