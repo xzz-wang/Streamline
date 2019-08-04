@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 class TileView: UIView {
     
     var fillColor: UIColor = .purple

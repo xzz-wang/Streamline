@@ -93,27 +93,27 @@ extension Streamline {
     // The type to specify the location of a tile
     // The coordinate system starts at upper-left corner, with index starts with 0.
     struct boardLocation {
-        var x: UInt
-        var y: UInt
+        var x: Int
+        var y: Int
         
         // Initializers
-        init(x: UInt, y:UInt) {
+        init(x: Int, y:Int) {
             self.x = x
             self.y = y
         }
         
-        init(row: UInt, col:UInt) {
+        init(row: Int, col:Int) {
             self.x = col
             self.y = row
         }
 
         // Row and column are basicially the same as x and y. Just in case someone got confused.
-        var row: UInt {
+        var row: Int {
             get { return y }
             set { y = newValue }
         }
         
-        var column: UInt {
+        var column: Int {
             get { return x }
             set { x = newValue }
         }

@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-
 @IBDesignable
 class BoardView: UIView {
+    
+    // MARK: - Properties
     
     // Main reusing path
     private var path = UIBezierPath()
@@ -82,6 +83,8 @@ class BoardView: UIView {
     
     
     
+    // MARK: - Methods
+    
     // Two Initializers
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -93,8 +96,24 @@ class BoardView: UIView {
         initTilesArr()
     }
     
+    // Called in the initializers
+    // Description: create TileViews, put them in the tiles array, and add subViews to self
+    private func initTilesArr() {
+        
+        for _ in 0..<rows {
+            var aRow: [TileView] = []
+            for _ in 0..<cols {
+                let newTile = TileView()
+                aRow.append(newTile)
+                self.addSubview(newTile)
+            }
+            tiles.append(aRow)
+        }
+    }
+
     
-    // Main Drawing Function
+    
+    // MARK: - Main Drawing Function
     // This will be called everytime the view needs to be redrawn
     override func draw(_ rect: CGRect) {
         
@@ -125,24 +144,11 @@ class BoardView: UIView {
         })
     }
     
-    // Helper method to draw each tile
-    private func drawTile(_ rect: CGRect) {
-        let path = UIBezierPath(roundedRect: rect, cornerRadius: rect.width * 0.2)
-        tileColor.setFill()
-        path.fill()
-    }
     
-    private func initTilesArr() {
-        
-        for _ in 0..<rows {
-            var aRow: [TileView] = []
-            for _ in 0..<cols {
-                let newTile = TileView()
-                aRow.append(newTile)
-                self.addSubview(newTile)
-            }
-            tiles.append(aRow)
-        }
+    // MARK: - Other Methods
+    
+    func getTileView(at location: boardLocation) -> TileView {
+        return tiles[location.row][location.column]
     }
     
 }
