@@ -10,9 +10,26 @@ import UIKit
 
 class Trail: UIView {
     
+    // UI Informationn
     private var cornerRadius: CGFloat = 5.0
-    var fillColor = UIColor.brown
-
+    var fillColor = UIColor.yellow
+    
+    // Trail animation Info
+    var targetRect: CGRect?
+    var isAnimated = false
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = UIColor.clear
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.backgroundColor = UIColor.clear
+    }
+    
     override func draw(_ rect: CGRect) {
         // Drawing code
         let path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius)

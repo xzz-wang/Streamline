@@ -19,7 +19,7 @@ class TileView: UIView {
     }
     var type: Streamline.tileType = .normal
     
-    var location: boardLocation?
+    var location: BoardLocation?
     
     // MARK: - Initializers
     // Two initializers

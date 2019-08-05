@@ -46,7 +46,7 @@ class BoardView: UIView {
                     var newRow: [TileView] = []
                     for col in 0..<cols { // Create a new row
                         let newTile = TileView()
-                        newTile.location = boardLocation(row: row, col: col)
+                        newTile.location = BoardLocation(row: row, col: col)
                         newRow.append(newTile)
                         self.addSubview(newTile)
                     }
@@ -73,7 +73,7 @@ class BoardView: UIView {
                 for row in 0..<rows {
                     for col in oldValue..<cols {
                         let newTile = TileView()
-                        newTile.location = boardLocation(row: row, col: col)
+                        newTile.location = BoardLocation(row: row, col: col)
                         tiles[row].append(newTile)
                         self.addSubview(newTile)
                     }
@@ -94,7 +94,7 @@ class BoardView: UIView {
     public var tiles: [[TileView]] = []
     
     // The location of the head of the path
-    var headLocation = boardLocation(row: 0, col: 0)
+    var headLocation = BoardLocation(row: 0, col: 0)
     
     
     
@@ -119,7 +119,7 @@ class BoardView: UIView {
             var aRow: [TileView] = []
             for col in 0..<cols {
                 let newTile = TileView()
-                newTile.location = boardLocation(row: row, col: col)
+                newTile.location = BoardLocation(row: row, col: col)
                 aRow.append(newTile)
                 self.addSubview(newTile)
             }
@@ -161,11 +161,11 @@ class BoardView: UIView {
     
     // MARK: - Other Methods
     
-    func getTileView(at location: boardLocation) -> TileView {
+    func getTileView(at location: BoardLocation) -> TileView {
         return tiles[location.row][location.column]
     }
     
-    func setColor(of location: boardLocation, to color: UIColor) {
+    func setColor(of location: BoardLocation, to color: UIColor) {
         let theTile = getTileView(at: location)
         theTile.fillColor = color
     }

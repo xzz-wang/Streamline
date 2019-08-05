@@ -8,18 +8,20 @@
 
 import UIKit
 
-typealias boardLocation = Streamline.boardLocation
+typealias BoardLocation = Streamline.BoardLocation
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - IB Property references
-    @IBOutlet weak var boardView: BoardView!
-    @IBOutlet weak var headView: Head!
+    @IBOutlet private weak var boardView: BoardView!
+    @IBOutlet private weak var headView: Head!
     
     // MARK: - Customize variables
-    var headLocation = boardLocation(row: 0, col: 0)
+    var headLocation = BoardLocation(row: 0, col: 0)
     var headSize: CGFloat = 30.0 // width and height of the head
+    
     var trails: [Trail] = []
+    var trailWidth: CGFloat = 15.0
 
     
     
@@ -32,15 +34,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        moveHead(to: boardLocation(row: 0, col: 0))
+        moveHead(to: BoardLocation(row: 0, col: 0))
     }
     
     
     // MARK: - User actions
-    func moveHeadTo(tile: boardLocation) {
-        // TODO: Check if this movement is legal
-    }
-    
     @IBAction func handleTap(sender: UITapGestureRecognizer) {
         
         if sender.state == .ended {
@@ -58,21 +56,36 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             
             if let tile = tappedTile {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.moveHead(to: tile.location!)
-                })
+                advance(to: tile.location!)
             }
         }
     }
     
     // This is only for testing
-    func setOrigin(at location: boardLocation) {
+    func setOrigin(at location: BoardLocation) {
         boardView.setColor(of: location, to: boardView.originColor)
         boardView.getTileView(at: location).type = .origin
     }
     
-    func moveHead(to location: boardLocation){
+    
+    // Move head with trail
+    func advance(to location: BoardLocation) {
+        // Check if this move is valid
+        
+        if let thisTrail = createTrail(from: headLocation, to: location) {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.moveHead(to: location)
+                thisTrail.frame = thisTrail.targetRect!
+            })
+        } else {
+            print("Error!")
+        }
+    }
+    
+    // move the headView to the given boardLocation. Everything is taken care of.
+    private func moveHead(to location: BoardLocation){
         // Just move the head
+        headLocation = location
         
         // A bit of math first
         let theTileFrame = boardView.getTileView(at: location).frame
@@ -88,11 +101,92 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         boardView.setNeedsDisplay()
     }
     
+    // Create a trail. true means success, false means the given params are illegal
+    private func createTrail(from start: BoardLocation, to end: BoardLocation) -> Trail? {
+        // Check if the trail is horizontal or vertical
+        if start.row == end.row {
+            // Horizontal
+            var leftTileFrame: CGRect?
+            var rightTileFrame: CGRect?
+            
+            if start.column < end.column {
+                leftTileFrame = boardView.getTileView(at: start).frame
+                rightTileFrame = boardView.getTileView(at: end).frame
+            } else if start.column > end.column {
+                leftTileFrame = boardView.getTileView(at: end).frame
+                rightTileFrame = boardView.getTileView(at: start).frame
+            } else {
+                // start and end are the same tile! no way!
+                return nil
+            }
+            
+            // Math time!
+            let x: CGFloat = leftTileFrame!.minX + leftTileFrame!.width / 2 - trailWidth / 2
+            let y: CGFloat = leftTileFrame!.minY + leftTileFrame!.width / 2 - trailWidth / 2
+            let width: CGFloat = rightTileFrame!.maxX - rightTileFrame!.width / 2 + trailWidth / 2 - x
+            
+            // will animate from initRect to targetRect
+            let targetRect = CGRect(x: x, y: y, width: width, height: trailWidth)
+            let initRect = CGRect(x: x, y: y, width: trailWidth, height: trailWidth)
+            
+            // Setup the initial trail
+            let newTrail = Trail(frame: initRect)
+            boardView.addSubview(newTrail)
+            newTrail.frame = initRect
+            newTrail.targetRect = targetRect
+            
+            trails.append(newTrail)
+            
+            
+            return newTrail
+            
+        } else if start.column == end.column {
+            // Vertical
+            var topTileFrame: CGRect?
+            var bottomTileFrame: CGRect?
+            
+            print("Called!")
+            
+            if start.row > end.row {
+                topTileFrame = boardView.getTileView(at: end).frame
+                bottomTileFrame = boardView.getTileView(at: start).frame
+            } else if start.row < end.row {
+                topTileFrame = boardView.getTileView(at: start).frame
+                bottomTileFrame = boardView.getTileView(at: end).frame
+            } else {
+                // start and end are the same tile! no way!
+                return nil
+            }
+            
+            // Math time!
+            let x: CGFloat = topTileFrame!.minX + topTileFrame!.width / 2 - trailWidth / 2
+            let y: CGFloat = topTileFrame!.minY + topTileFrame!.height / 2 - trailWidth / 2
+            let height: CGFloat = bottomTileFrame!.maxY - bottomTileFrame!.height / 2 + trailWidth / 2 - y
+            
+            // calculate initRect and targetRect
+            let initRect = CGRect(x: x, y: y, width: trailWidth, height: trailWidth)
+            let targetRect = CGRect(x: x, y: y, width: trailWidth, height: height)
+            
+            // Setup the newTrail
+            let newTrail = Trail(frame: initRect)
+            newTrail.targetRect = targetRect
+            
+            // Add this trail to subview and the array
+            trails.append(newTrail)
+            boardView.addSubview(newTrail)
+            
+            return newTrail
+        } else {
+            // Not on the same row nor columns
+            return nil
+        }
+    }
+    
     
     
     // An button designed to test stuff.
     @IBAction func handleTest(_ sender: UIButton) {
-        setOrigin(at: boardLocation(row: 0, col: 0))
+        setOrigin(at: BoardLocation(row: 0, col: 0))
     }
     
 }

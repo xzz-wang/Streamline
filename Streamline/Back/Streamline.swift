@@ -92,7 +92,7 @@ extension Streamline {
     
     // The type to specify the location of a tile
     // The coordinate system starts at upper-left corner, with index starts with 0.
-    struct boardLocation {
+    struct BoardLocation {
         var x: Int
         var y: Int
         
