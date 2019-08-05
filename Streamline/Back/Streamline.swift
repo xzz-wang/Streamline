@@ -119,5 +119,15 @@ extension Streamline {
         }
 
     }
+    
+    
+    // The enum type that have all the different possible types of a type
+    // TODO: Check if this is all we need.
+    enum tileType {
+        case normal
+        case origin
+        case obstacles
+        case goal
+    }
 
 }
