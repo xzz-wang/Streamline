@@ -90,12 +90,20 @@
 				B0D7E38E22EBF9A600F7FC68 /* AppDelegate.swift */,
 				B0D7E39022EBF9A600F7FC68 /* ViewController.swift */,
 				B0D7E39222EBF9A600F7FC68 /* Main.storyboard */,
-				B0C0D7F022EC017400A585F8 /* BoardView.swift */,
-				B07FB7FF22F61544008F87A1 /* TileView.swift */,
+				B0BAC97D22F7D9630087BB60 /* Game View */,
 				B0D7E39522EBF9A800F7FC68 /* Assets.xcassets */,
 				B0D7E39722EBF9A800F7FC68 /* LaunchScreen.storyboard */,
 			);
 			path = Front;
+			sourceTree = "<group>";
+		};
+		B0BAC97D22F7D9630087BB60 /* Game View */ = {
+			isa = PBXGroup;
+			children = (
+				B0C0D7F022EC017400A585F8 /* BoardView.swift */,
+				B07FB7FF22F61544008F87A1 /* TileView.swift */,
+			);
+			path = "Game View";
 			sourceTree = "<group>";
 		};
 		B0D7E38222EBF9A600F7FC68 = {
