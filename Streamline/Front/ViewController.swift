@@ -106,6 +106,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             // Horizontal
             var leftTileFrame: CGRect?
             var rightTileFrame: CGRect?
+            var willReverseAnimate = false
             
             if start.column < end.column {
                 leftTileFrame = boardView.getTileView(at: start).frame
@@ -113,6 +114,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             } else if start.column > end.column {
                 leftTileFrame = boardView.getTileView(at: end).frame
                 rightTileFrame = boardView.getTileView(at: start).frame
+                
+                willReverseAnimate = true
             } else {
                 // start and end are the same tile! no way!
                 return nil
@@ -125,7 +128,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             
             // will animate from initRect to targetRect
             let targetRect = CGRect(x: x, y: y, width: width, height: trailWidth)
-            let initRect = CGRect(x: x, y: y, width: trailWidth, height: trailWidth)
+            var initRect = CGRect(x: x, y: y, width: trailWidth, height: trailWidth)
+            
+            if willReverseAnimate {
+                initRect = CGRect(x: width + x - trailWidth, y: y, width: trailWidth, height: trailWidth)
+            }
             
             // Setup the initial trail
             let newTrail = Trail(frame: initRect)
@@ -143,11 +150,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             var topTileFrame: CGRect?
             var bottomTileFrame: CGRect?
             
+            var willReverseAnimate = false
+            
             print("Called!")
             
             if start.row > end.row {
                 topTileFrame = boardView.getTileView(at: end).frame
                 bottomTileFrame = boardView.getTileView(at: start).frame
+                
+                willReverseAnimate = true
             } else if start.row < end.row {
                 topTileFrame = boardView.getTileView(at: start).frame
                 bottomTileFrame = boardView.getTileView(at: end).frame
@@ -162,8 +173,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             let height: CGFloat = bottomTileFrame!.maxY - bottomTileFrame!.height / 2 + trailWidth / 2 - y
             
             // calculate initRect and targetRect
-            let initRect = CGRect(x: x, y: y, width: trailWidth, height: trailWidth)
+            var initRect = CGRect(x: x, y: y, width: trailWidth, height: trailWidth)
             let targetRect = CGRect(x: x, y: y, width: trailWidth, height: height)
+            
+            if willReverseAnimate {
+                initRect = CGRect(x: x, y: y + height - trailWidth, width: trailWidth, height: trailWidth)
+            }
             
             // Setup the newTrail
             let newTrail = Trail(frame: initRect)

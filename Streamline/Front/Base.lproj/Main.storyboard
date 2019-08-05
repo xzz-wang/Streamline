@@ -22,7 +22,7 @@
                                 <rect key="frame" x="20" y="44" width="374" height="780"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMJ-Br-qHe" customClass="Head" customModule="Streamline" customModuleProvider="target">
-                                        <rect key="frame" x="159" y="362" width="56" height="56"/>
+                                        <rect key="frame" x="138" y="342" width="37" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
