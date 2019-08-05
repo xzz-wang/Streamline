@@ -20,7 +20,15 @@ class BoardView: UIView {
     
     // Colors that can be accessed by interface builder
     @IBInspectable var fillColor: UIColor = .white
-    @IBInspectable var tileColor: UIColor = .purple
+    @IBInspectable var tileColor: UIColor = .red {
+        didSet {
+            for row in tiles {
+                for tile in row {
+                    if tile.type == .normal { tile.fillColor =  self.tileColor}
+                }
+            }
+        }
+    }
     @IBInspectable var originColor: UIColor = .blue
     @IBInspectable var obstacleColor: UIColor = .darkGray
 
@@ -35,7 +43,6 @@ class BoardView: UIView {
                     var newRow: [TileView] = []
                     for _ in 0..<cols { // Create a new row
                         let newTile = TileView()
-                        newTile.fillColor = tileColor
                         newRow.append(newTile)
                         self.addSubview(newTile)
                     }
@@ -62,7 +69,6 @@ class BoardView: UIView {
                 for i in 0..<rows {
                     for _ in oldValue..<cols {
                         let newTile = TileView()
-                        newTile.fillColor = tileColor
                         tiles[i].append(newTile)
                         self.addSubview(newTile)
                     }
@@ -108,7 +114,6 @@ class BoardView: UIView {
             var aRow: [TileView] = []
             for _ in 0..<cols {
                 let newTile = TileView()
-                newTile.fillColor = tileColor
                 aRow.append(newTile)
                 self.addSubview(newTile)
             }
