@@ -42,10 +42,11 @@ class BoardView: UIView {
         didSet { // code inside didSet is called when the variable did finish changing
             // If new rows need to be added, perform addition
             if rows > oldValue {
-                for _ in oldValue..<rows {
+                for row in oldValue..<rows {
                     var newRow: [TileView] = []
-                    for _ in 0..<cols { // Create a new row
+                    for col in 0..<cols { // Create a new row
                         let newTile = TileView()
+                        newTile.location = BoardLocation(row: row, col: col)
                         newRow.append(newTile)
                         self.addSubview(newTile)
                     }
@@ -69,10 +70,11 @@ class BoardView: UIView {
     @IBInspectable var cols: Int = 5 {
         didSet {
             if cols > oldValue { // If new col needs to be added
-                for i in 0..<rows {
-                    for _ in oldValue..<cols {
+                for row in 0..<rows {
+                    for col in oldValue..<cols {
                         let newTile = TileView()
-                        tiles[i].append(newTile)
+                        newTile.location = BoardLocation(row: row, col: col)
+                        tiles[row].append(newTile)
                         self.addSubview(newTile)
                     }
                 }
@@ -92,7 +94,7 @@ class BoardView: UIView {
     public var tiles: [[TileView]] = []
     
     // The location of the head of the path
-    var headLocation = boardLocation(row: 0, col: 0)
+    var headLocation = BoardLocation(row: 0, col: 0)
     
     
     
@@ -113,10 +115,11 @@ class BoardView: UIView {
     // Description: create TileViews, put them in the tiles array, and add subViews to self
     private func initTilesArr() {
         
-        for _ in 0..<rows {
+        for row in 0..<rows {
             var aRow: [TileView] = []
-            for _ in 0..<cols {
+            for col in 0..<cols {
                 let newTile = TileView()
+                newTile.location = BoardLocation(row: row, col: col)
                 aRow.append(newTile)
                 self.addSubview(newTile)
             }
@@ -129,7 +132,7 @@ class BoardView: UIView {
     // This will be called everytime the view needs to be redrawn
     override func draw(_ rect: CGRect) {
         
-        // Background rounded rect drawing code. Disabled for now.
+        // Background rounded rect drawing code. 
         path = UIBezierPath(roundedRect: rect, cornerRadius: 30.0)
         fillColor.setFill()
         path.fill()
@@ -141,30 +144,28 @@ class BoardView: UIView {
         var verticalMargin = rect.height - ((gapRatio + 1) * CGFloat(rows) - 1) * gap
         verticalMargin = verticalMargin / 2.0
         
-        //TODO: Animation removed due to Interface Builder displaying
-//        UIView.animate(withDuration: 0.5, animations: {
-            for row in 0..<self.rows {
-                // Setup first of each row
-                var tileRect = CGRect(x: gap, y: verticalMargin + CGFloat(row) * unitLength, width: self.gapRatio * gap, height: self.gapRatio * gap)
-                self.tiles[row][0].frame = tileRect
-                
-                // The rest of the line
-                for col in 1..<self.cols {
-                    tileRect = tileRect.offsetBy(dx: unitLength, dy: 0.0)
-                    self.tiles[row][col].frame = tileRect
-                }
+        // Adjust the position of each tile according to row and cols
+        for row in 0..<self.rows {
+            // Setup first of each row
+            var tileRect = CGRect(x: gap, y: verticalMargin + CGFloat(row) * unitLength, width: self.gapRatio * gap, height: self.gapRatio * gap)
+            self.tiles[row][0].frame = tileRect
+            
+            // The rest of the line
+            for col in 1..<self.cols {
+                tileRect = tileRect.offsetBy(dx: unitLength, dy: 0.0)
+                self.tiles[row][col].frame = tileRect
             }
-//        })
+        }
     }
     
     
     // MARK: - Other Methods
     
-    func getTileView(at location: boardLocation) -> TileView {
+    func getTileView(at location: BoardLocation) -> TileView {
         return tiles[location.row][location.column]
     }
     
-    func setColor(of location: boardLocation, to color: UIColor) {
+    func setColor(of location: BoardLocation, to color: UIColor) {
         let theTile = getTileView(at: location)
         theTile.fillColor = color
     }

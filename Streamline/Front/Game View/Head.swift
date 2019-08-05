@@ -8,9 +8,10 @@
 
 import UIKit
 
+@IBDesignable
 class Head: UIView {
     
-    private var headColor: UIColor = .orange
+    @IBInspectable private var headColor: UIColor = .orange
 
     override func draw(_ rect: CGRect) {
         self.layer.isOpaque = false
