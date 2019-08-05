@@ -34,7 +34,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func handleTap(sender: UITapGestureRecognizer) {
-        print("Called!!")
         
         if sender.state == .ended {
             //Get the tile that was tapped on

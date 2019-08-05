@@ -12,7 +12,11 @@ import UIKit
 class TileView: UIView {
     
     // MARK: - Properties
-    var fillColor: UIColor = .purple
+    @IBInspectable var fillColor: UIColor = .yellow {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     var type: Streamline.tileType = .normal
     
     
@@ -30,6 +34,7 @@ class TileView: UIView {
     // Setup that is called in every initializers
     private func setup() {
         self.layer.isOpaque = false
+        
     }
     
     
