@@ -8,8 +8,6 @@
 
 import UIKit
 
-typealias BoardLocation = Streamline.BoardLocation
-
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - IB Property references

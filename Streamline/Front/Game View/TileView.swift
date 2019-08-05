@@ -17,7 +17,7 @@ class TileView: UIView {
             setNeedsDisplay()
         }
     }
-    var type: Streamline.tileType = .normal
+    var type: TileType = .normal
     
     var location: BoardLocation?
     
