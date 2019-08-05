@@ -21,7 +21,9 @@ class BoardView: UIView {
     // Colors that can be accessed by interface builder
     @IBInspectable var fillColor: UIColor = .white
     @IBInspectable var tileColor: UIColor = .yellow
-    
+    @IBInspectable var originColor: UIColor = .blue
+    @IBInspectable var obstacleColor: UIColor = .darkGray
+
     // rols and columns, can be adjusted by interface builder
     // When ever these two value changes, the didSets update change the size of tiles array,
     //  and add/remove subview accordingly
@@ -151,5 +153,12 @@ class BoardView: UIView {
     func getTileView(at location: boardLocation) -> TileView {
         return tiles[location.row][location.column]
     }
+    
+    func setColor(of location: boardLocation, to color: UIColor) {
+        let theTile = getTileView(at: location)
+        theTile.fillColor = color
+        theTile.setNeedsDisplay()
+    }
+
     
 }

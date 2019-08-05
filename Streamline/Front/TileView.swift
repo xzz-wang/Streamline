@@ -13,7 +13,7 @@ class TileView: UIView {
     
     // MARK: - Properties
     var fillColor: UIColor = .purple
-    var boarderColor: UIColor = .clear
+    var type: Streamline.tileType = .normal
     
     
     // MARK: - Initializers
@@ -38,7 +38,6 @@ class TileView: UIView {
         self.backgroundColor = .clear
         let path = UIBezierPath(roundedRect: rect, cornerRadius: rect.width * 0.2)
         fillColor.setFill()
-        boarderColor.setStroke()
         
         path.fill()
     }
