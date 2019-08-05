@@ -31,6 +31,9 @@ class BoardView: UIView {
     }
     @IBInspectable var originColor: UIColor = .blue
     @IBInspectable var obstacleColor: UIColor = .darkGray
+    
+    // The ratio between the gaps and the width/height of each tile
+    @IBInspectable var gapRatio: CGFloat = 5.0
 
     // rols and columns, can be adjusted by interface builder
     // When ever these two value changes, the didSets update change the size of tiles array,
@@ -88,8 +91,8 @@ class BoardView: UIView {
     // The 2D array that holds all the TileView
     public var tiles: [[TileView]] = []
     
-    // The ratio between the gaps and the width/height of each tile
-    @IBInspectable var gapRatio: CGFloat = 5.0
+    // The location of the head of the path
+    var headLocation = boardLocation(row: 0, col: 0)
     
     
     
@@ -120,7 +123,6 @@ class BoardView: UIView {
             tiles.append(aRow)
         }
     }
-
     
     
     // MARK: - Main Drawing Function

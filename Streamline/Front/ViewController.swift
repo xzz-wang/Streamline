@@ -67,7 +67,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         boardView.setColor(of: location, to: boardView.originColor)
         boardView.getTileView(at: location).type = .origin
     }
+    
+    func moveHead(to location: boardLocation){
         
+    }
+    
+    
+    
+    // An button designed to test stuff.
     @IBAction func handleTest(_ sender: UIButton) {
         setOrigin(at: boardLocation(row: 0, col: 0))
     }
