@@ -14,7 +14,11 @@ class Trail: UIView {
     private var cornerRadius: CGFloat = 5.0
     var fillColor = UIColor.yellow
     
+    var startLocation: BoardLocation?
+    var endLocation: BoardLocation?
+
     // Trail animation Info
+    var initRect: CGRect?
     var targetRect: CGRect?
     var isAnimated = false
     

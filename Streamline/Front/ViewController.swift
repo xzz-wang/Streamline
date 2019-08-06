@@ -20,6 +20,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var trails: [Trail] = []
     var trailWidth: CGFloat = 15.0
+    
+    private let ANIMATION_DURATION: Double = 0.2
 
     
     
@@ -59,6 +61,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    // An button designed to test stuff.
+    @IBAction func handleTest(_ sender: UIButton) {
+        print(undo())
+    }
+    
+
+    
+    // MARK: - UI Actions
+    
     // This is only for testing
     func setOrigin(at location: BoardLocation) {
         boardView.setColor(of: location, to: boardView.originColor)
@@ -71,7 +82,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         // Check if this move is valid
         
         if let thisTrail = createTrail(from: headLocation, to: location) {
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: ANIMATION_DURATION, animations: {
                 self.moveHead(to: location)
                 thisTrail.frame = thisTrail.targetRect!
             })
@@ -134,14 +145,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 initRect = CGRect(x: width + x - trailWidth, y: y, width: trailWidth, height: trailWidth)
             }
             
-            // Setup the initial trail
+            // Setup the new trail
             let newTrail = Trail(frame: initRect)
-            boardView.addSubview(newTrail)
-            newTrail.frame = initRect
+            newTrail.initRect = initRect
             newTrail.targetRect = targetRect
+            newTrail.startLocation = start
+            newTrail.endLocation = end
             
             trails.append(newTrail)
-            
+            boardView.addSubview(newTrail)
+
             
             return newTrail
             
@@ -183,6 +196,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             // Setup the newTrail
             let newTrail = Trail(frame: initRect)
             newTrail.targetRect = targetRect
+            newTrail.initRect = initRect
+            newTrail.startLocation = start
+            newTrail.endLocation = end
             
             // Add this trail to subview and the array
             trails.append(newTrail)
@@ -195,11 +211,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    
-    
-    // An button designed to test stuff.
-    @IBAction func handleTest(_ sender: UIButton) {
-        setOrigin(at: BoardLocation(row: 0, col: 0))
+    // Undo the last movement
+    // Return Value: Whether the undo was a success
+    func undo() -> Bool {
+        if let lastTrail = trails.last {
+            let undoLocation = lastTrail.startLocation
+            
+            // Animate the going back movement
+            UIView.animate(withDuration: ANIMATION_DURATION, animations: {
+                self.moveHead(to: undoLocation!)
+                lastTrail.frame = lastTrail.initRect!
+            }, completion: { success in
+                if success {
+                    self.trails.removeLast()
+                    lastTrail.removeFromSuperview()
+                }
+            })
+            return true
+        }
+        
+        return false
     }
+    
     
 }
