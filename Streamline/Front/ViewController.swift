@@ -22,6 +22,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var trailWidth: CGFloat = 15.0
     
     private let ANIMATION_DURATION: Double = 0.2
+    private let DAMPING_RATIO: CGFloat = 0.7
 
     
     
@@ -88,10 +89,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if let thisTrail = createTrail(from: headLocation, to: location) {
             pendingAnimation = true
-            UIView.animate(withDuration: ANIMATION_DURATION, animations: {
+            
+            UIView.animate(withDuration: ANIMATION_DURATION, delay: 0.0, usingSpringWithDamping: DAMPING_RATIO, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+                // Animations
                 self.moveHead(to: location)
                 thisTrail.frame = thisTrail.targetRect!
-            }, completion: { succeeded in
+            }, completion: { _ in
                 self.pendingAnimation = false
             })
             
@@ -237,11 +240,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             let undoLocation = lastTrail.startLocation
             
             // Animate the going back movement
-            pendingAnimation = true
-            UIView.animate(withDuration: ANIMATION_DURATION, animations: {
+            pendingAnimation = true            
+            
+            UIView.animate(withDuration: ANIMATION_DURATION, delay: 0.0, usingSpringWithDamping: DAMPING_RATIO, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+                // Animation actions
                 self.moveHead(to: undoLocation!)
                 lastTrail.frame = lastTrail.initRect!
             }, completion: { success in
+                // Completion code
                 if success {
                     self.trails.removeLast()
                     lastTrail.removeFromSuperview()
