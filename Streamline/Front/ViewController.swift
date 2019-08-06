@@ -78,16 +78,26 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     // Move head with trail
-    func advance(to location: BoardLocation) {
+    // MARK: Major useful function to be called
+    func advance(to location: BoardLocation) -> Bool{
         // Check if this move is valid
         
+        if pendingAnimation {
+            return false
+        }
+        
         if let thisTrail = createTrail(from: headLocation, to: location) {
+            pendingAnimation = true
             UIView.animate(withDuration: ANIMATION_DURATION, animations: {
                 self.moveHead(to: location)
                 thisTrail.frame = thisTrail.targetRect!
+            }, completion: { succeeded in
+                self.pendingAnimation = false
             })
+            
+            return true
         } else {
-            print("Error!")
+            return false
         }
     }
     
@@ -211,13 +221,23 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    
+    
     // Undo the last movement
     // Return Value: Whether the undo was a success
     func undo() -> Bool {
+        
+        // Safe check if animation is in process
+        if pendingAnimation {
+            return false
+        }
+        
+        // If there's another trail, then we can redo it
         if let lastTrail = trails.last {
             let undoLocation = lastTrail.startLocation
             
             // Animate the going back movement
+            pendingAnimation = true
             UIView.animate(withDuration: ANIMATION_DURATION, animations: {
                 self.moveHead(to: undoLocation!)
                 lastTrail.frame = lastTrail.initRect!
@@ -226,12 +246,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.trails.removeLast()
                     lastTrail.removeFromSuperview()
                 }
+                self.pendingAnimation = false
             })
             return true
         }
         
         return false
     }
+    
+    var pendingAnimation = false
     
     
 }
