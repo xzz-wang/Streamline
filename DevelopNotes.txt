@@ -20,3 +20,7 @@ Gesture move?
 More elements: teleporter, dead-end, pause, dual, etc. See original game
 Share: Game Center, screenshot, etc.
 Ads & IAP to cancel
+
+
+TODO List:
+- For BOB: check tileType enum in the Streamline extension.

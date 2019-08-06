@@ -19,15 +19,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bya-Vh-Gof" customClass="BoardView" customModule="Streamline" customModuleProvider="target">
-                                <rect key="frame" x="20" y="44" width="374" height="600"/>
+                                <rect key="frame" x="20" y="44" width="374" height="780"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMJ-Br-qHe" customClass="Head" customModule="Streamline" customModuleProvider="target">
+                                        <rect key="frame" x="138" y="342" width="37" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="600" id="X7o-jr-DAV"/>
-                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rows">
-                                        <integer key="value" value="7"/>
+                                        <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cols">
                                         <integer key="value" value="6"/>
@@ -35,90 +39,54 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="gapRatio">
                                         <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="tileColor">
-                                        <color key="value" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="originColor">
+                                        <color key="value" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="obstacleColor">
+                                        <color key="value" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="cuP-Eq-uhc" appends="YES" id="aRV-YL-38p"/>
+                                    <outletCollection property="gestureRecognizers" destination="Klx-Rk-b5k" appends="YES" id="qQh-ba-vyP"/>
                                 </connections>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-2r-B5T">
-                                <rect key="frame" x="20" y="658" width="374" height="104"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="158" translatesAutoresizingMaskIntoConstraints="NO" id="adp-FY-sFl">
-                                        <rect key="frame" x="31" y="0.0" width="312.5" height="29"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Rows: 8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URE-hx-9OH">
-                                                <rect key="frame" x="0.0" y="0.0" width="60.5" height="29"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ORc-3M-U0C">
-                                                <rect key="frame" x="218.5" y="0.0" width="94" height="29"/>
-                                                <connections>
-                                                    <action selector="handleStepper:" destination="BYZ-38-t0r" eventType="valueChanged" id="bNY-Nj-F4j"/>
-                                                </connections>
-                                            </stepper>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="154" translatesAutoresizingMaskIntoConstraints="NO" id="bTh-v5-XTe">
-                                        <rect key="frame" x="32.5" y="37" width="309" height="29"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Cols: 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgA-f3-T7B">
-                                                <rect key="frame" x="0.0" y="0.0" width="61" height="29"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="qzz-dQ-qOe">
-                                                <rect key="frame" x="215" y="0.0" width="94" height="29"/>
-                                                <connections>
-                                                    <action selector="handleStepper:" destination="BYZ-38-t0r" eventType="valueChanged" id="RL5-uE-AR9"/>
-                                                </connections>
-                                            </stepper>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4v-ig-cib">
-                                        <rect key="frame" x="163.5" y="74" width="47" height="30"/>
-                                        <state key="normal" title="Shake!"/>
-                                        <connections>
-                                            <action selector="handleReset:forEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AXt-x9-D2h"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PzF-3p-NzN">
+                                <rect key="frame" x="192" y="832" width="30" height="30"/>
+                                <state key="normal" title="Test"/>
+                                <connections>
+                                    <action selector="handleTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lc2-S7-xdC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="bya-Vh-Gof" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="518-dD-869"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JdZ-2r-B5T" secondAttribute="bottom" constant="100" id="6t9-Ah-eFa"/>
                             <constraint firstItem="bya-Vh-Gof" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9MM-qQ-mYm"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JdZ-2r-B5T" secondAttribute="trailing" constant="20" id="9qK-dE-LEh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bya-Vh-Gof" secondAttribute="bottom" constant="38" id="DY9-YA-ec6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bya-Vh-Gof" secondAttribute="trailing" constant="20" id="Lcd-5o-HA8"/>
-                            <constraint firstItem="JdZ-2r-B5T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="RiQ-rZ-lja"/>
+                            <constraint firstItem="bya-Vh-Gof" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="VcE-1k-vvD"/>
+                            <constraint firstItem="PzF-3p-NzN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Xeb-Kp-6Vs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PzF-3p-NzN" secondAttribute="bottom" id="xN5-gk-TCi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="boardView" destination="bya-Vh-Gof" id="N6s-pw-uwr"/>
-                        <outlet property="colDisplay" destination="XgA-f3-T7B" id="auK-Ni-7P7"/>
-                        <outlet property="colStepper" destination="qzz-dQ-qOe" id="SXW-do-eQp"/>
-                        <outlet property="rowDisplay" destination="URE-hx-9OH" id="taL-Yx-Ev2"/>
-                        <outlet property="rowStepper" destination="ORc-3M-U0C" id="52P-Ds-6fW"/>
+                        <outlet property="headView" destination="zMJ-Br-qHe" id="xCX-Aa-854"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="cuP-Eq-uhc">
+                <tapGestureRecognizer id="Klx-Rk-b5k">
                     <connections>
-                        <action selector="handlePan:" destination="BYZ-38-t0r" id="XuM-LS-u6Q"/>
+                        <action selector="handleTapWithSender:" destination="BYZ-38-t0r" id="6lC-jB-jic"/>
                     </connections>
-                </panGestureRecognizer>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-23.188405797101453" y="137.94642857142856"/>
         </scene>
