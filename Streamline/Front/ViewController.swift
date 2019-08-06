@@ -23,6 +23,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private let ANIMATION_DURATION: Double = 0.2
     private let DAMPING_RATIO: CGFloat = 0.7
+    private let INVALID_OFFSET: CGFloat = 10.0
     
     // Flag to disable all actions when animation is in process.
     var pendingAnimation = false
@@ -68,7 +69,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // An button designed to test stuff.
     @IBAction func handleTest(_ sender: UIButton) {
-        print(undo())
+        alertInvalidMove(forDirection: .right)
     }
     
 
@@ -132,6 +133,20 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         return false
+    }
+    
+    func alertInvalidMove(forDirection direction: Direction) {
+        let transform = direction.getTransform(withOffset: INVALID_OFFSET)
+        
+        UIView.animate(withDuration: ANIMATION_DURATION / 2, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.headView.transform = transform
+        }, completion: nil)
+
+        UIView.animate(withDuration: ANIMATION_DURATION / 2, delay: ANIMATION_DURATION / 2, options: .curveEaseInOut, animations: {
+            self.headView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
+        }, completion: nil)
+
+        
     }
 
     // MARK: - Helper methods

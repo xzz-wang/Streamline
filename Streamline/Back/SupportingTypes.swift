@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 // The type to specify the location of a tile
 // The coordinate system starts at upper-left corner, with index starts with 0.
@@ -52,6 +53,19 @@ enum Direction: Int {
     case down = 3
     case left = 2
     case right = 0
+    
+    func getTransform(withOffset offset: CGFloat) -> CGAffineTransform {
+        switch self {
+        case .up:
+            return CGAffineTransform(translationX: 0.0, y: -offset)
+        case .down:
+            return CGAffineTransform(translationX: 0.0, y: offset)
+        case .left:
+            return CGAffineTransform(translationX: -offset, y: 0.0)
+        case .right:
+            return CGAffineTransform(translationX: offset, y: 0.0)
+        }
+    }
 }
 
 // Side note: This is how you would access the rawValue
@@ -85,7 +99,7 @@ enum ActionType {
     case win
     
     // The direction given by the user is invalid
-    case invalid
+    case invalid(Direction)
 }
 
 // All the back-end requirements that I may need - wxz
