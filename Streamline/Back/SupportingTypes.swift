@@ -40,14 +40,6 @@ struct BoardLocation {
 
 
 // The enum type that have all the different possible types of a type
-// TODO: Check if this is all we need.
-// enum TileType {
-//     case normal
-//     case origin
-//     case obstacles
-//     case goal
-// }
-
 enum TileType {
     case blank
     case origin
@@ -79,4 +71,28 @@ struct BoardInfo {
     var originLocation: BoardLocation
     var goalLocation: BoardLocation
     var obstacleLocations: [BoardLocation]
+}
+
+// Returned by model layer when performAction is called.
+enum ActionType {
+    // Tells the front-end to advance the player to given BoardLocation
+    case advanceTo(BoardLocation) // This is associated value. Location that the player/head will advance to.
+    
+    // Tells the front-end to perform undo action
+    case undo
+    
+    // Tells the front-end to perform action related to winning.
+    case win
+    
+    // The direction given by the user is invalid
+    case invalid
+}
+
+// All the back-end requirements that I may need - wxz
+// Implement to the class that will handle all the user interactions
+protocol GameLogicDelegate {
+    
+    func initBoard() -> BoardInfo
+    func performAction(with direction: Direction) -> ActionType
+    
 }
