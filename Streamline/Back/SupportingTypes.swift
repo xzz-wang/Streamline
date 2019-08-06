@@ -65,3 +65,18 @@ enum Direction: Int {
 // Side note: This is how you would access the rawValue
 //      var demo = Direction.down
 //      print(demo.rawValue)
+
+
+// MARK: - Front-back interaction
+
+// Used for initializing the board
+struct BoardInfo {
+    // Number of rows and cols
+    var rowNum: Int
+    var colNum: Int
+    
+    // The type of each tile
+    var originLocation: BoardLocation
+    var goalLocation: BoardLocation
+    var obstaclesLocation: [BoardLocation]
+}
