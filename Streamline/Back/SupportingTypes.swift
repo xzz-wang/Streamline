@@ -78,5 +78,5 @@ struct BoardInfo {
     // The type of each tile
     var originLocation: BoardLocation
     var goalLocation: BoardLocation
-    var obstaclesLocation: [BoardLocation]
+    var obstacleLocations: [BoardLocation]
 }
