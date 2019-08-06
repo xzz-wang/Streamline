@@ -56,6 +56,8 @@ public class Streamline {
         self.previousDirections.remove(at: self.previousDirections.count - 1)
     }
     
+    
+    // ignore saving & loading for now, focus on functionality 
     public func loadFromFile() {
         
     }

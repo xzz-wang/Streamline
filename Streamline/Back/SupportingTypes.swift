@@ -41,10 +41,16 @@ struct BoardLocation {
 
 // The enum type that have all the different possible types of a type
 // TODO: Check if this is all we need.
+// enum TileType {
+//     case normal
+//     case origin
+//     case obstacles
+//     case goal
+// }
+
 enum TileType {
-    case normal
-    case origin
-    case obstacles
+    case blank
+    case obstacle
     case goal
 }
 
