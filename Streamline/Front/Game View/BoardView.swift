@@ -24,7 +24,7 @@ class BoardView: UIView {
         didSet {
             for row in tiles {
                 for tile in row {
-                    if tile.type == .normal { tile.fillColor =  self.tileColor}
+                    if tile.type == .blank { tile.fillColor =  self.tileColor}
                 }
             }
         }

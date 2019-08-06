@@ -17,7 +17,7 @@ class TileView: UIView {
             setNeedsDisplay()
         }
     }
-    var type: TileType = .normal
+    var type: TileType = .blank
     
     var location: BoardLocation?
     
