@@ -50,13 +50,18 @@ struct BoardLocation {
 
 enum TileType {
     case blank
+    case origin
     case obstacle
     case goal
 }
 
-enum Direction {
-    case up
-    case down
-    case left
-    case right
+enum Direction: Int {
+    case up = 1
+    case down = 3
+    case left = 2
+    case right = 0
 }
+
+// Side note: This is how you would access the rawValue
+//      var demo = Direction.down
+//      print(demo.rawValue)
