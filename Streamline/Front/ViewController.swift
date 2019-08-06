@@ -56,7 +56,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             
             if let tile = tappedTile {
-                advance(to: tile.location!)
+                print(advance(to: tile.location!))
             }
         }
     }
