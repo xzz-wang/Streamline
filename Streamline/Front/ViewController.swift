@@ -62,14 +62,20 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             
             if let tile = tappedTile {
-                print(advance(to: tile.location!))
+                if !advance(to: tile.location!) {
+                    print("Error occurred!")
+                }
             }
         }
     }
     
     // An button designed to test stuff.
     @IBAction func handleTest(_ sender: UIButton) {
-        alertInvalidMove(forDirection: .right)
+        //alertInvalidMove(forDirection: .right)
+        if !undo() {
+            print("Unable to undo!!")
+            alertInvalidMove(forDirection: .right)
+        }
     }
     
 
@@ -225,8 +231,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             var bottomTileFrame: CGRect?
             
             var willReverseAnimate = false
-            
-            print("Called!")
             
             if start.row > end.row {
                 topTileFrame = boardView.getTileView(at: end).frame
