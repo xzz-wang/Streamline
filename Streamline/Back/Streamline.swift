@@ -11,8 +11,8 @@ import Foundation
 
 public class Streamline {
     var currentState: GameState
-    var previousStates: Array<GameState>
-    var previousDirections: Array<String>
+    var previousStates: [GameState]
+    var previousDirections: [Direction]
     
     public init() {
         currentState = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4)

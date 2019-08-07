@@ -46,6 +46,7 @@ enum TileType {
     case origin
     case obstacle
     case goal
+    case trail
 }
 
 enum Direction: Int {
@@ -68,11 +69,6 @@ enum Direction: Int {
     }
 }
 
-// Side note: This is how you would access the rawValue
-//      var demo = Direction.down
-//      print(demo.rawValue)
-
-
 // MARK: - Front-back interaction
 
 // Used for initializing the board
@@ -80,11 +76,13 @@ struct BoardInfo {
     // Number of rows and cols
     var rowNum: Int
     var colNum: Int
+    var levelPassed: Bool
     
     // The type of each tile
     var originLocation: BoardLocation
     var goalLocation: BoardLocation
     var obstacleLocations: [BoardLocation]
+    var trailLocations: [BoardLocation]
 }
 
 // Returned by model layer when performAction is called.
@@ -106,7 +104,7 @@ enum ActionType {
 // Implement to the class that will handle all the user interactions
 protocol GameLogicDelegate {
     
-    func initBoard() -> BoardInfo
+    func initBoard(height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo
     func performAction(with direction: Direction) -> ActionType
     
 }
