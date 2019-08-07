@@ -68,11 +68,6 @@ enum Direction: Int {
     }
 }
 
-// Side note: This is how you would access the rawValue
-//      var demo = Direction.down
-//      print(demo.rawValue)
-
-
 // MARK: - Front-back interaction
 
 // Used for initializing the board
@@ -106,7 +101,7 @@ enum ActionType {
 // Implement to the class that will handle all the user interactions
 protocol GameLogicDelegate {
     
-    func initBoard() -> BoardInfo
+    func initBoard(height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo
     func performAction(with direction: Direction) -> ActionType
     
 }
