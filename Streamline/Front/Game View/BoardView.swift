@@ -36,7 +36,7 @@ class BoardView: UIView {
     @IBInspectable var gapRatio: CGFloat = 5.0
 
     // rols and columns, can be adjusted by interface builder
-    // When ever these two value changes, the didSets update change the size of tiles array,
+    // Whenever these two value changes, the didSets update change the size of tiles array,
     //  and add/remove subview accordingly
     @IBInspectable var rows: Int = 5 {
         didSet { // code inside didSet is called when the variable did finish changing

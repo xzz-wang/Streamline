@@ -22,6 +22,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var trailWidth: CGFloat = 15.0
     
     private let ANIMATION_DURATION: Double = 0.2
+    private let DAMPING_RATIO: CGFloat = 0.7
+    private let INVALID_OFFSET: CGFloat = 10.0
+    
+    // Flag to disable all actions when animation is in process.
+    var pendingAnimation = false
+
 
     
     
@@ -63,22 +69,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // An button designed to test stuff.
     @IBAction func handleTest(_ sender: UIButton) {
-        print(undo())
+        alertInvalidMove(forDirection: .right)
     }
     
 
     
-    // MARK: - UI Actions
-    
-    // This is only for testing
-    func setOrigin(at location: BoardLocation) {
-        boardView.setColor(of: location, to: boardView.originColor)
-        boardView.getTileView(at: location).type = .origin
-    }
-    
+    // MARK: - UI Actions: Major useful function to be called
     
     // Move head with trail
-    // MARK: Major useful function to be called
     func advance(to location: BoardLocation) -> Bool{
         // Check if this move is valid
         
@@ -88,10 +86,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if let thisTrail = createTrail(from: headLocation, to: location) {
             pendingAnimation = true
-            UIView.animate(withDuration: ANIMATION_DURATION, animations: {
+            
+            UIView.animate(withDuration: ANIMATION_DURATION, delay: 0.0, usingSpringWithDamping: DAMPING_RATIO, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+                // Animations
                 self.moveHead(to: location)
                 thisTrail.frame = thisTrail.targetRect!
-            }, completion: { succeeded in
+            }, completion: { _ in
                 self.pendingAnimation = false
             })
             
@@ -100,6 +100,57 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             return false
         }
     }
+    
+    // Undo the last movement
+    // Return Value: Whether the undo was a success
+    func undo() -> Bool {
+        
+        // Safe check if animation is in process
+        if pendingAnimation {
+            return false
+        }
+        
+        // If there's another trail, then we can redo it
+        if let lastTrail = trails.last {
+            let undoLocation = lastTrail.startLocation
+            
+            // Animate the going back movement
+            pendingAnimation = true
+            
+            UIView.animate(withDuration: ANIMATION_DURATION, delay: 0.0, usingSpringWithDamping: DAMPING_RATIO, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
+                // Animation actions
+                self.moveHead(to: undoLocation!)
+                lastTrail.frame = lastTrail.initRect!
+            }, completion: { success in
+                // Completion code
+                if success {
+                    self.trails.removeLast()
+                    lastTrail.removeFromSuperview()
+                }
+                self.pendingAnimation = false
+            })
+            return true
+        }
+        
+        return false
+    }
+    
+    func alertInvalidMove(forDirection direction: Direction) {
+        let transform = direction.getTransform(withOffset: INVALID_OFFSET)
+        
+        UIView.animate(withDuration: ANIMATION_DURATION / 2, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.headView.transform = transform
+        }, completion: nil)
+
+        UIView.animate(withDuration: ANIMATION_DURATION / 2, delay: ANIMATION_DURATION / 2, options: .curveEaseInOut, animations: {
+            self.headView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
+        }, completion: nil)
+
+        
+    }
+
+    // MARK: - Helper methods
+    
     
     // move the headView to the given boardLocation. Everything is taken care of.
     private func moveHead(to location: BoardLocation){
@@ -220,41 +271,5 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             return nil
         }
     }
-    
-    
-    
-    // Undo the last movement
-    // Return Value: Whether the undo was a success
-    func undo() -> Bool {
-        
-        // Safe check if animation is in process
-        if pendingAnimation {
-            return false
-        }
-        
-        // If there's another trail, then we can redo it
-        if let lastTrail = trails.last {
-            let undoLocation = lastTrail.startLocation
-            
-            // Animate the going back movement
-            pendingAnimation = true
-            UIView.animate(withDuration: ANIMATION_DURATION, animations: {
-                self.moveHead(to: undoLocation!)
-                lastTrail.frame = lastTrail.initRect!
-            }, completion: { success in
-                if success {
-                    self.trails.removeLast()
-                    lastTrail.removeFromSuperview()
-                }
-                self.pendingAnimation = false
-            })
-            return true
-        }
-        
-        return false
-    }
-    
-    var pendingAnimation = false
-    
     
 }

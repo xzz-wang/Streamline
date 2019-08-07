@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class Trail: UIView {
     
     // UI Informationn
