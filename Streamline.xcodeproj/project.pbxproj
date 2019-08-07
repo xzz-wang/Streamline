@@ -96,7 +96,6 @@
 				B0D7E38E22EBF9A600F7FC68 /* AppDelegate.swift */,
 				B0D7E39022EBF9A600F7FC68 /* ViewController.swift */,
 				B0D7E39222EBF9A600F7FC68 /* Main.storyboard */,
-				B0BAC98022F7DF320087BB60 /* BoardViewController.swift */,
 				B0BAC97D22F7D9630087BB60 /* Game View */,
 				B0D7E39522EBF9A800F7FC68 /* Assets.xcassets */,
 				B0D7E39722EBF9A800F7FC68 /* LaunchScreen.storyboard */,
@@ -315,7 +314,6 @@
 				B0D7E39122EBF9A600F7FC68 /* ViewController.swift in Sources */,
 				B0D7E38F22EBF9A600F7FC68 /* AppDelegate.swift in Sources */,
 				B0BAC97F22F7D9AB0087BB60 /* Head.swift in Sources */,
-				B0BAC98122F7DF320087BB60 /* BoardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

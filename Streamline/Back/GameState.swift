@@ -48,40 +48,47 @@ public class GameState: GameLogicDelegate {
      *     method and tell the user to change another input.
      * */
     func initBoard (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo {
+        var ret: BoardInfo
         if (playerRow >= height || playerCol >= width || goalRow >= height || goalCol >= width) {
             print("Please double check the player and goal position parameter.");
-            
-//            conditions when invalid input
-//            self.board = [Array.init(repeating: SPACE_CHAR, count: 1)]
-//            self.playerCol = -1 // self in Swift = this in Java
-//            self.playerRow = -1
-//            self.goalRow = -1
-//            self.goalCol = -1
-//            self.levelPassed = true
-            
-            var ret: BoardInfo
             ret.rowNum = -1
             ret.colNum = -1
             ret.originLocation = BoardLocation.init(x: -1, y: -1)
             ret.goalLocation = BoardLocation.init(x: -1, y: -1)
+            ret.levelPassed = true
             ret.obstacleLocations = []
+            ret.trailLocations = []
             return ret;
         }
         else {
-            var ret: BoardInfo
             ret.rowNum = -1
             ret.colNum = -1
             ret.originLocation = BoardLocation.init(row: playerRow, col: playerCol)
             ret.goalLocation = BoardLocation.init(row: goalRow, col: goalCol)
             ret.obstacleLocations = []
+            ret.levelPassed = false
+            ret.trailLocations = []
             return ret;
-            
-//            self.board = [Array.init(repeating: SPACE_CHAR, count: height * width)]
-//            self.playerRow = playerRow;
-//            self.playerCol = playerCol;
-//            self.goalRow = goalRow;
-//            self.goalCol = goalCol;
-//            self.levelPassed = (playerCol == goalCol) && (playerRow == goalRow);
+        }
+    }
+    
+    public init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
+        if (playerRow >= height || playerCol >= width || goalRow >= height || goalCol >= width) {
+            print("Please double check the player and goal position parameter.");
+            self.board = [Array.init(repeating: SPACE_CHAR, count: 1)]
+            self.playerCol = -1 // self in Swift = this in Java
+            self.playerRow = -1
+            self.goalRow = -1
+            self.goalCol = -1
+            self.levelPassed = true
+        }
+        else {
+            self.board = [Array.init(repeating: SPACE_CHAR, count: height * width)]
+            self.playerRow = playerRow;
+            self.playerCol = playerCol;
+            self.goalRow = goalRow;
+            self.goalCol = goalCol;
+            self.levelPassed = (playerCol == goalCol) && (playerRow == goalRow);
         }
     }
     
@@ -219,7 +226,7 @@ public class GameState: GameLogicDelegate {
     }
     
     func performAction(with direction: Direction) -> ActionType {
-        <#code#>
+        return ActionType.win
     }
     
     public func toString() -> String {

@@ -46,6 +46,7 @@ enum TileType {
     case origin
     case obstacle
     case goal
+    case trail
 }
 
 enum Direction: Int {
@@ -75,11 +76,13 @@ struct BoardInfo {
     // Number of rows and cols
     var rowNum: Int
     var colNum: Int
+    var levelPassed: Bool
     
     // The type of each tile
     var originLocation: BoardLocation
     var goalLocation: BoardLocation
     var obstacleLocations: [BoardLocation]
+    var trailLocations: [BoardLocation]
 }
 
 // Returned by model layer when performAction is called.
