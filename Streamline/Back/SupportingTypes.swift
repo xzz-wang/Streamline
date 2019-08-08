@@ -11,7 +11,7 @@ import UIKit
 
 // The type to specify the location of a tile
 // The coordinate system starts at upper-left corner, with index starts with 0.
-struct BoardLocation {
+struct BoardLocation: Equatable {
     var x: Int
     var y: Int
     
@@ -35,6 +35,10 @@ struct BoardLocation {
     var column: Int {
         get { return x }
         set { x = newValue }
+    }
+    
+    static postfix func == (other: BoardLocation) -> Bool { // TODO: prefix or postfix?
+        return self.row == other.row && self.column == other.column
     }
     
 }
