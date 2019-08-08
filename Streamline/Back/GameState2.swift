@@ -57,8 +57,15 @@ public class GameState2: GameLogicDelegate {
         }
     }
     
+    func nonEmptyBoardLocation(row: Int, col: Int) -> Bool {
+//        if self.currentState.obstacleLocations.contains(BoardLocation.init(row: row, col: col)) {
+//            return true
+//        }
+        return false
+    }
+    
     func addRandomObstacles(count: Int) {
-        var empty = self.currentState.obstacleLocations.count + self.currentState.trailLocations.count
+        let empty = self.currentState.obstacleLocations.count + self.currentState.trailLocations.count
         if (count > empty) {
             print("Please enter a number no greater than the amount empty spaces on the board. ");
             print("count: \(count), empty: \(empty)")
@@ -69,7 +76,7 @@ public class GameState2: GameLogicDelegate {
             while (total < count) {
                 var randRow = Int.random(in: 0 ..< self.currentState.rowNum);
                 var randCol = Int.random(in: 0 ..< self.currentState.colNum);
-                while self.currentState.obstacleLocations.contains(BoardLocation.init(row: randRow, col: randCol)) {
+                while nonEmptyBoardLocation(toCheck: BoardLocation.init(row: randRow, col: randCol)) {
                     randRow = Int.random(in: 0 ..< self.currentState.rowNum);
                     randCol = Int.random(in: 0 ..< self.currentState.colNum);
                 } // TODO: if already an obst, trail, goal or player, random to new number (I don't know how to)
