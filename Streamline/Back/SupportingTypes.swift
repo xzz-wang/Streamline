@@ -37,9 +37,14 @@ struct BoardLocation: Equatable {
         set { x = newValue }
     }
     
-    static postfix func == (other: BoardLocation) -> Bool { // TODO: prefix or postfix?
-        return self.row == other.row && self.column == other.column
+    static func == (this: BoardLocation, that: BoardLocation) -> Bool {
+        return this.x == that.x && this.y == that.y
     }
+    
+//    static postfix func == (other: BoardLocation) -> Bool { // prefix or postfix?
+//        return self.row == other.row && self.column == other.column
+//    }
+    // Note: 这个method都static了就应该不能access self了吧
     
 }
 
