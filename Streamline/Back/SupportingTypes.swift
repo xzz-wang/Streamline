@@ -92,6 +92,18 @@ struct BoardInfo {
     var goalLocation: BoardLocation
     var obstacleLocations: [BoardLocation]
     var trailLocations: [BoardLocation]
+    
+    init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
+        if (playerRow >= height || playerCol >= width || goalRow >= height || goalCol >= width) {
+            print("Please double check the player and goal position.");
+            let ret = BoardInfo.init(rowNum: -1, colNum: -1, levelPassed: true, originLocation: BoardLocation.init(x: -1, y: -1), goalLocation: BoardLocation.init(x: -1, y: -1), obstacleLocations: [], trailLocations: [])
+            return ret;
+        }
+        else {
+            let ret = BoardInfo.init(rowNum: height, colNum: width, levelPassed: false, originLocation: BoardLocation.init(x: playerCol, y: playerRow), goalLocation: BoardLocation.init(x: goalCol, y: goalRow), obstacleLocations: [], trailLocations: [])
+            return ret;
+        }
+    }
 }
 
 // Returned by model layer when performAction is called.
