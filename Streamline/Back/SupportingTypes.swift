@@ -83,26 +83,37 @@ enum Direction: Int {
 // Used for initializing the board
 struct BoardInfo {
     // Number of rows and cols
-    var rowNum: Int
-    var colNum: Int
-    var levelPassed: Bool
+    var rowNum: Int = -1
+    var colNum: Int = -1
+    var levelPassed: Bool = true
     
     // The type of each tile
-    var originLocation: BoardLocation
-    var goalLocation: BoardLocation
-    var obstacleLocations: [BoardLocation]
-    var trailLocations: [BoardLocation]
+    var originLocation: BoardLocation = BoardLocation(x: -1, y: -1)
+    var goalLocation: BoardLocation = BoardLocation(x: -1, y: -1)
+    var obstacleLocations: [BoardLocation] = []
+    var trailLocations: [BoardLocation] = []
     
     init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
         if (playerRow >= height || playerCol >= width || goalRow >= height || goalCol >= width) {
             print("Please double check the player and goal position.");
-            let ret = BoardInfo.init(rowNum: -1, colNum: -1, levelPassed: true, originLocation: BoardLocation.init(x: -1, y: -1), goalLocation: BoardLocation.init(x: -1, y: -1), obstacleLocations: [], trailLocations: [])
-            return ret;
         }
         else {
-            let ret = BoardInfo.init(rowNum: height, colNum: width, levelPassed: false, originLocation: BoardLocation.init(x: playerCol, y: playerRow), goalLocation: BoardLocation.init(x: goalCol, y: goalRow), obstacleLocations: [], trailLocations: [])
-            return ret;
+            self.rowNum = height
+            self.colNum = width
+            self.originLocation = BoardLocation.init(row: playerRow, col: playerCol)
+            self.goalLocation = BoardLocation.init(row: goalRow, col: goalRow)
+            self.obstacleLocations = []
+            self.trailLocations = []
         }
+    }
+    
+    init() {
+        self.rowNum = -1
+        self.colNum = -1
+        self.originLocation = BoardLocation.init(row: -1, col: -1)
+        self.goalLocation = BoardLocation.init(row: -1, col: -1)
+        self.obstacleLocations = []
+        self.trailLocations = []
     }
 }
 

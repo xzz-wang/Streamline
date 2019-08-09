@@ -9,6 +9,7 @@
 import Foundation
 
 public class GameState2: GameLogicDelegate {
+    
     // Used to populate char[][] board below and to display the
     // current state of play.
     let TRAIL_CHAR: Character = ".";
@@ -29,7 +30,11 @@ public class GameState2: GameLogicDelegate {
     var currentState: BoardInfo
     
     public init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
-        self.currentState = BoardInfo.init(rowNum: height, colNum: width, levelPassed: false, originLocation: BoardLocation.init(x: -1, y: -1), goalLocation: BoardLocation.init(x: -1, y: -1), obstacleLocations: [], trailLocations: [])
+        self.currentState = BoardInfo.init(height: height, width: width, playerRow: playerRow, playerCol: playerCol, goalRow: goalRow, goalCol: goalRow)
+    }
+    
+    func initBoard(height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo {
+        return self.currentState
     }
     
     func occupiedLocation(row: Int, col: Int) -> Bool {
@@ -72,7 +77,7 @@ public class GameState2: GameLogicDelegate {
     
     func rotateClockwise() { // TODO: still need to be tested... I kinda forgot the formula for this one
         // rotated[i][j] = self.board[origH - j - 1][i]
-        var new: BoardInfo = BoardInfo.init(rowNum: -1, colNum: -1, levelPassed: true, originLocation: BoardLocation(row: 0, col: 0), goalLocation: BoardLocation(row: 0, col: 0), obstacleLocations: [], trailLocations: [])
+        var new: BoardInfo = BoardInfo.init()
         
         // update col & row num
         let previousRowCount: Int = self.currentState.rowNum
