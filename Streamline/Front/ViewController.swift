@@ -27,8 +27,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Flag to disable all actions when animation is in process.
     var pendingAnimation = false
-
-
     
     
     // MARK: - View life cycles
@@ -81,6 +79,36 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     // MARK: - UI Actions: Major useful function to be called
+    
+    // Reset the entire board with given boardInfo
+    func setBoard(with info: BoardInfo) {
+        // First, remove stuff
+        for trail in trails {
+            trail.removeFromSuperview()
+        }
+        trails = []
+        
+        // Setup the head
+        moveHead(to: info.originLocation)
+        
+        // Set the row and col number
+        boardView.rows = info.rowNum
+        boardView.cols = info.colNum
+        
+        // Set the color
+        for row in boardView.tiles {
+            for tile in row {
+                tile.fillColor = boardView.tileColor
+            }
+        }
+        
+        boardView.setColor(of: info.goalLocation, to: boardView.goalColor)
+        boardView.setColor(of: info.originLocation, to: boardView.originColor)
+        for location in info.obstacleLocations {
+            boardView.setColor(of: location, to: boardView.obstacleColor)
+        }
+
+    }
     
     // Move head with trail
     func advance(to location: BoardLocation) -> Bool{

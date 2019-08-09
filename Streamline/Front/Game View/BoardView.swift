@@ -31,7 +31,8 @@ class BoardView: UIView {
     }
     @IBInspectable var originColor: UIColor = .blue
     @IBInspectable var obstacleColor: UIColor = .darkGray
-    
+    @IBInspectable var goalColor: UIColor = .purple
+
     // The ratio between the gaps and the width/height of each tile
     @IBInspectable var gapRatio: CGFloat = 5.0
 
