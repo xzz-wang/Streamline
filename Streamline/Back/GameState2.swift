@@ -17,21 +17,21 @@ public class GameState2: GameLogicDelegate {
     let CURRENT_CHAR: Character = "O";
     let GOAL_CHAR: Character = "@";
     let NEWLINE_CHAR: Character = "\n";
-    
+
     // used to format the toString() method about the upper & lower border's
     // length
     let BORDER_MULTIPLIER: Int = 2;
     let BORDER_APPENDER: Int = 3;
-    
+
     // how many rotation required to return to the original status
     let rotate360: Int = 4;
-    
+
     var currentState: BoardInfo
-    
+
     public init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
         self.currentState = self.initBoard(height: height, width: width, playerRow: playerRow, playerCol: playerCol, goalRow: goalRow, goalCol: goalCol)
     }
-    
+
     func initBoard(height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo {
         var ret: BoardInfo
         if (playerRow >= height || playerCol >= width || goalRow >= height || goalCol >= width) {
@@ -56,14 +56,14 @@ public class GameState2: GameLogicDelegate {
             return ret;
         }
     }
-    
+
     func nonEmptyBoardLocation(row: Int, col: Int) -> Bool {
 //        if self.currentState.obstacleLocations.contains(BoardLocation.init(row: row, col: col)) {
 //            return true
 //        }
         return false
     }
-    
+
     func addRandomObstacles(count: Int) {
         let empty = self.currentState.obstacleLocations.count + self.currentState.trailLocations.count
         if (count > empty) {
@@ -76,7 +76,7 @@ public class GameState2: GameLogicDelegate {
             while (total < count) {
                 var randRow = Int.random(in: 0 ..< self.currentState.rowNum);
                 var randCol = Int.random(in: 0 ..< self.currentState.colNum);
-                while nonEmptyBoardLocation(toCheck: BoardLocation.init(row: randRow, col: randCol)) {
+                while nonEmptyBoardLocation(toCheck: BoardLocation(row: randRow, col: randCol)) {
                     randRow = Int.random(in: 0 ..< self.currentState.rowNum);
                     randCol = Int.random(in: 0 ..< self.currentState.colNum);
                 } // TODO: if already an obst, trail, goal or player, random to new number (I don't know how to)
@@ -84,7 +84,7 @@ public class GameState2: GameLogicDelegate {
             }
         }
     }
-    
+
     func rotateClockwise() {
         // rotated[i][j] = self.board[origH - j - 1][i]
         var new: BoardInfo
@@ -92,18 +92,18 @@ public class GameState2: GameLogicDelegate {
         let previousColCount: Int = self.currentState.colNum
         new.colNum = previousRowCount
         new.rowNum = self.currentState.rowNum - previousColCount - 1
-        
+
         self.currentState = new
     }
-    
+
     func moveRight() {
-        
+
     }
-    
+
     func move(dir: Direction) {
-        
+
     }
-    
+
     // TODO: can only make it print to console now, but should be good enough
     // formerly toString
     public func printBoard() {
@@ -119,12 +119,12 @@ public class GameState2: GameLogicDelegate {
         board[self.currentState.goalLocation.row][self.currentState.goalLocation.column] = "G"
         printBoard() // or print(board)??
     }
-    
+
     public func equals(toCheck: GameState2) -> Bool {
         return true
     }
-    
+
     func performAction(with direction: Direction) -> ActionType {
-        <#code#>
+        //
     }
 }

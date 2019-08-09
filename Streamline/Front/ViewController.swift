@@ -28,6 +28,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // Flag to disable all actions when animation is in process.
     var pendingAnimation = false
     
+    // Game logic delegate to back-end
+    //var gameDelegate: GameLogicDelegate =
+    
+    // Action Queue
+    var actionQueue: [ActionType] = []
+    
     
     // MARK: - View life cycles
     override func viewDidLoad() {
@@ -76,7 +82,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-
+    @IBAction func handleSwipe(_ sender: UISwipeGestureRecognizer) {
+        if sender.state == .ended {
+            print(sender.direction)
+        }
+    }
+    
     
     // MARK: - UI Actions: Major useful function to be called
     
@@ -102,6 +113,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         
+        // Set the tiles' color
         boardView.setColor(of: info.goalLocation, to: boardView.goalColor)
         boardView.setColor(of: info.originLocation, to: boardView.originColor)
         for location in info.obstacleLocations {
