@@ -68,7 +68,7 @@ public class GameState2: GameLogicDelegate {
                 while occupiedLocation(row: randRow, col: randCol) {
                     randRow = Int.random(in: 0 ..< self.currentState.rowNum);
                     randCol = Int.random(in: 0 ..< self.currentState.colNum);
-                } // TODO: if already an obst, trail, goal or player, random to new number (I don't know how to)
+                }
                 self.currentState.obstacleLocations.append(BoardLocation(row: randRow, col: randCol))
                 total += 1
             }
@@ -76,7 +76,7 @@ public class GameState2: GameLogicDelegate {
     }
     
     func rotateClockwise() { // TODO: still need to be tested... I kinda forgot the formula for this one
-        // rotated[i][j] = self.board[origH - j - 1][i]
+        // original formula: on the 2D array, rotated[i][j] = original[origH - j - 1][i]
         var new: BoardInfo = BoardInfo.init()
         
         // update col & row num
