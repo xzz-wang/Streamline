@@ -88,7 +88,7 @@ struct BoardInfo {
     var levelPassed: Bool = true
     
     // The type of each tile
-    var originLocation: BoardLocation = BoardLocation(x: -1, y: -1)
+    var currentLocation: BoardLocation = BoardLocation(x: -1, y: -1)
     var goalLocation: BoardLocation = BoardLocation(x: -1, y: -1)
     var obstacleLocations: [BoardLocation] = []
     var trailLocations: [BoardLocation] = []
@@ -100,18 +100,18 @@ struct BoardInfo {
         else {
             self.rowNum = height
             self.colNum = width
-            self.originLocation = BoardLocation.init(row: playerRow, col: playerCol)
+            self.currentLocation = BoardLocation.init(row: playerRow, col: playerCol)
             self.goalLocation = BoardLocation.init(row: goalRow, col: goalRow)
             self.obstacleLocations = []
             self.trailLocations = []
         }
     }
     
-    init() {
-        self.rowNum = -1
-        self.colNum = -1
-        self.originLocation = BoardLocation.init(row: -1, col: -1)
-        self.goalLocation = BoardLocation.init(row: -1, col: -1)
+    init() { // some default values
+        self.rowNum = 6
+        self.colNum = 5
+        self.currentLocation = BoardLocation.init(row: 5, col: 0)
+        self.goalLocation = BoardLocation.init(row: 0, col: 4)
         self.obstacleLocations = []
         self.trailLocations = []
     }
@@ -137,6 +137,6 @@ enum ActionType {
 protocol GameLogicDelegate {
     
     func initBoard(height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo
-    func performAction(with direction: Direction) -> ActionType
+    func move(with direction: Direction) -> ActionType
     
 }
