@@ -1,283 +1,206 @@
 //
-//  GameState.swift
+//  GameState2.swift
 //  Streamline
 //
-//  Created by Chongbin (Bob) Zhang on 2019/7/31.
+//  Created by Chongbin (Bob) Zhang on 2019/8/7.
 //  Copyright © 2019 Xuezheng Wang. All rights reserved.
 //
 
-//import Foundation
-//
-//public class GameState: GameLogicDelegate {
-//    // Used to populate char[][] board below and to display the
-//    // current state of play.
-//    let TRAIL_CHAR: Character = ".";
-//    let OBSTACLE_CHAR: Character = "X";
-//    let SPACE_CHAR: Character = " ";
-//    let CURRENT_CHAR: Character = "O";
-//    let GOAL_CHAR: Character = "@";
-//    let NEWLINE_CHAR: Character = "\n";
-//
-//    // used to format the toString() method about the upper & lower border's
-//    // length
-//    let BORDER_MULTIPLIER: Int = 2;
-//    let BORDER_APPENDER: Int = 3;
-//
-//    // how many rotation required to return to the original status
-//    let rotate360: Int = 4;
-//
-//    // This represents a 2D map of the board
-//    var board: [[Character]];
-//
-//    // Location of the player
-//    var playerRow: Int;
-//    var playerCol: Int;
-//
-//    // Location of the goal
-//    var goalRow: Int;
-//    var goalCol: Int;
-//
-//    // true means the player completed this level
-//    var levelPassed: Bool;
-//
-//    /** Constructor: GameState
-//     * Will initialize a board of given parameters
-//     * And fill the board with SPACE_CHAR
-//     * Those corresponding fields will be set to parameters.
-//     * If the goal or player position is off the board will terminate the
-//     *     method and tell the user to change another input.
-//     * */
-//    func initBoard (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo {
-//        var ret: BoardInfo
-//        if (playerRow >= height || playerCol >= width || goalRow >= height || goalCol >= width) {
-//            print("Please double check the player and goal position parameter.");
-//            ret.rowNum = -1
-//            ret.colNum = -1
-//            ret.originLocation = BoardLocation.init(x: -1, y: -1)
-//            ret.goalLocation = BoardLocation.init(x: -1, y: -1)
-//            ret.levelPassed = true
-//            ret.obstacleLocations = []
-//            ret.trailLocations = []
-//            return ret;
-//        }
-//        else {
-//            ret.rowNum = -1
-//            ret.colNum = -1
-//            ret.originLocation = BoardLocation.init(row: playerRow, col: playerCol)
-//            ret.goalLocation = BoardLocation.init(row: goalRow, col: goalCol)
-//            ret.obstacleLocations = []
-//            ret.levelPassed = false
-//            ret.trailLocations = []
-//            return ret;
-//        }
-//    }
-//
-//    public init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
-//        if (playerRow >= height || playerCol >= width || goalRow >= height || goalCol >= width) {
-//            print("Please double check the player and goal position parameter.");
-//            self.board = [Array.init(repeating: SPACE_CHAR, count: 1)]
-//            self.playerCol = -1 // self in Swift = this in Java
-//            self.playerRow = -1
-//            self.goalRow = -1
-//            self.goalCol = -1
-//            self.levelPassed = true
-//        }
-//        else {
-//            self.board = [Array.init(repeating: SPACE_CHAR, count: height * width)]
-//            self.playerRow = playerRow;
-//            self.playerCol = playerCol;
-//            self.goalRow = goalRow;
-//            self.goalCol = goalCol;
-//            self.levelPassed = (playerCol == goalCol) && (playerRow == goalRow);
-//        }
-//    }
-//
-//    /** Copier: GameState (the second constructor method in this class)
-//     * Will copy whatever the state of another board is
-//     * Deep copy that will loop through every element in the array to
-//     *     populate a new array for the char[][] board
-//     * */
-//    public init (other: GameState) {
-//        self.playerRow = other.playerRow;
-//        self.playerCol = other.playerCol;
-//        self.goalRow = other.goalRow;
-//        self.goalCol = other.goalCol;
-//        self.levelPassed = other.levelPassed; // checkpoint edge case
-//        self.board = [[]]
-//        for i in 0...other.board.count {
-//            for j in 0...other.board[0].count {
-//                self.board[i][j] = other.board[i][j];
-//            }
-//        }
-//    }
-//
-//    /** Method: addRandomObstacles
-//     * add count-many of random blocks into this.board
-//     * the player should stop moving when ran into it
-//     * @param count: how many obstacles we want to put onto the board
-//     * Will check if count exceeds the number of empty spaces
-//     * Will check if it is an occupied place, i.e. player, goal or already
-//     *     have something in the block
-//     * */
-//    public func addRandomObstacles(count: Int) {
-//        var empty = 0;
-//        for i in 0...self.board.count {
-//            for j in 0...self.board[0].count {
-//                if (board[i][j] != TRAIL_CHAR && board[i][j] != OBSTACLE_CHAR) {
-//                    if (i == playerRow && j == playerCol) {
-//                        continue
-//                    }
-//                    if (i == goalRow && j == goalCol) {
-//                        continue
-//                    }
-//                    empty += 1;
-//                }
-//            }
-//        } // count how many empty places are remaining on the board
-//        if (count > empty) {
-//            print("Please enter a number no greater than the amount empty spaces on the board. ");
-//            print("count: \(count), empty: \(empty)")
-//            return;
-//        }
-//        else {
-//            var total = 0;
-//            while (total < count) {
-//                let randRow = Int.random(in: 0 ..< self.board.count);
-//                let randCol = Int.random(in: 0 ..< self.board[0].count);
-//                // set up random int no greater than width & height
-//                if (self.board[randRow][randCol] != TRAIL_CHAR && self.board[randRow][randCol] != OBSTACLE_CHAR) {
-//                    if (randRow == playerRow && randCol == playerCol) {
-//                        continue;
-//                    }
-//                    if (randRow == goalRow && randCol == goalCol) {
-//                        continue;
-//                    }
-//                    self.board[randRow][randCol] = OBSTACLE_CHAR;
-//                    total += 1;
-//                } // as long as it's empty we can set an obstacle
-//            }
-//        }
-//    }
-//
-//    /** Method: rotateClockwise
-//     * Will rotate everything on the playing board clockwise once, including
-//     *     player's, goal's and obstacles' position
-//     * */
-//    public func rotateClockwise() {
-//        let origH = self.board.count;
-//        let origW = self.board[0].count;
-//        var rotated: [[Character]] = [[]];
-//        for i in 0...origW {
-//            for j in 0...origH {
-//                rotated[i][j] = self.board[origH - j - 1][i];
-//            }
-//        }
-//        let newPC = origH - self.playerRow - 1;
-//        let newPR = self.playerCol;
-//        let newGC = origH - self.goalRow - 1;
-//        let newGR = self.goalCol;
-//
-//        self.playerCol = newPC;
-//        self.playerRow = newPR;
-//        self.goalCol = newGC;
-//        self.goalRow = newGR;
-//        self.board = rotated;
-//    }
-//
-//
-//    /** Method: moveRight
-//     * First check if the player has passed the level or not, if so
-//     *     will print a message saying so and stop from further moving
-//     * Keep moving the player's position to the right, i.e. adding its column
-//     *     index as long as there's nothing in the next block
-//     * If the player meets the goal at some time in the middle, will return
-//     *     directly from the game
-//     * */
-//    public func moveRight() {
-//        if (self.levelPassed == true) {
-//            print("You've passed this level, there's no need to keep moving. ");
-//            return;
-//        }
-//        else {
-//            let nowRow = self.playerRow;
-//            var nowCol = self.playerCol;
-//            while ((nowCol + 1 < self.board[nowRow].count) && (self.board[nowRow][nowCol + 1] != OBSTACLE_CHAR) && (self.board[nowRow][nowCol + 1] != TRAIL_CHAR)) {
-//                self.board[nowRow][nowCol] = TRAIL_CHAR;
-//                nowCol += 1;
-//                if (nowRow == self.goalRow && nowCol == self.goalCol) {
-//                    self.levelPassed = true;
-//                    self.playerCol = nowCol;
-//                    return;
-//                }
-//                self.playerCol = nowCol;
-//            }
-//        }
-//    }
-//
-//    func move(direction: Direction) {
-//        let rotationCount: Int = direction.rawValue
-//        for _ in 0...rotationCount {
-//            self.rotateClockwise()
-//        }
-//        self.moveRight()
-//        for _ in 0...(4 - rotationCount) {
-//            self.rotateClockwise()
-//        }
-//    }
-//
-//    func performAction(with direction: Direction) -> ActionType {
-//        return ActionType.win
-//    }
-//
-//    public func toString() -> String {
-//        var ret: String = ""
-//        for _ in 0...(BORDER_MULTIPLIER * self.board[0].count + BORDER_APPENDER) {
-//            ret += "-"
-//        }
-//        for i in 0...self.board.count {
-//            ret += "|"
-//            for j in 0...self.board[0].count {
-//                if (self.board[i][j] == OBSTACLE_CHAR) {
-//                    ret += "X"
-//                }
-//                else if (self.board[i][j] == TRAIL_CHAR) {
-//                    ret += "."
-//                }
-//                else if (self.board[i][j] == SPACE_CHAR) {
-//                    ret += " "
-//                }
-//                else if (i == self.playerRow && j == self.playerCol) {
-//                    ret += "O"
-//                }
-//                else if (i == self.goalRow && j == self.goalCol) {
-//                    ret += "@"
-//                }
-//                ret += " "
-//            }
-//            ret += "|"
-//            ret += "\n"
-//        }
-//        for _ in 0...(BORDER_MULTIPLIER * self.board[0].count + BORDER_APPENDER) {
-//            ret += "-"
-//        }
-//        return ret
-//    }
-//
-//    public func equals(toCheck: GameState) -> Bool {
-//        if (toCheck.goalRow != self.goalRow) {return false}
-//        if (toCheck.goalCol != self.goalCol) {return false}
-//        if (toCheck.playerCol != self.playerCol) {return false}
-//        if (toCheck.playerRow != self.playerRow) {return false}
-//        if (toCheck.levelPassed != self.levelPassed) {return false}
-//        if (toCheck.board.count != self.board.count) {return false}
-//        if (toCheck.board[0].count != self.board[0].count) {return false}
-//        for i in 0...toCheck.board.count {
-//            for j in 0...toCheck.board[0].count {
-//                if toCheck.board[i][j] != self.board[i][j] {
-//                    return false
-//                }
-//            }
-//        }
-//        return true
-//    }
-//}
+import Foundation
+
+public class GameState: GameLogicDelegate {
+    
+    // how many rotation required to return to the original status
+    let rotate360: Int = 4;
+    
+    var currentState: BoardInfo
+    var previousMoves: [Direction]
+    
+    public init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
+        self.currentState = BoardInfo.init(height: height, width: width, playerRow: playerRow, playerCol: playerCol, goalRow: goalRow, goalCol: goalRow)
+        self.previousMoves = []
+    }
+    
+    public init() {
+        self.currentState = BoardInfo.init()
+        self.previousMoves = []
+    }
+    
+    func initBoard (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo {
+        return self.currentState
+    }
+    
+    func occupiedLocation (row: Int, col: Int) -> Bool {
+        if self.currentState.obstacleLocations.contains(BoardLocation(row: row, col: col)) {
+            return true
+        }
+        if self.currentState.trailLocations.contains(BoardLocation(row: row, col: col)) {
+            return true
+        }
+        if self.currentState.goalLocation == BoardLocation(row: row, col: col) {
+            return true
+        }
+        if self.currentState.currentLocation == BoardLocation(row: row, col: col) {
+            return true
+        }
+        return false
+    }
+    
+    func addRandomObstacles(count: Int) {
+        let empty = self.currentState.obstacleLocations.count + self.currentState.trailLocations.count
+        if (count > empty) {
+            print("Please enter a number no greater than the amount empty spaces on the board. ");
+            print("count: \(count), empty: \(empty)")
+            return;
+        }
+        else {
+            var total = 0;
+            while (total < count) {
+                var randRow = Int.random(in: 0 ..< self.currentState.rowNum);
+                var randCol = Int.random(in: 0 ..< self.currentState.colNum);
+                while occupiedLocation(row: randRow, col: randCol) {
+                    randRow = Int.random(in: 0 ..< self.currentState.rowNum);
+                    randCol = Int.random(in: 0 ..< self.currentState.colNum);
+                }
+                self.currentState.obstacleLocations.append(BoardLocation(row: randRow, col: randCol))
+                total += 1
+            }
+        }
+    }
+    
+    func rotateClockwise() { // TODO: still need to be tested... I kinda forgot the formula for this one
+        // original formula: on the 2D array, rotated[i][j] = original[origH - j - 1][i]
+        var new: BoardInfo = BoardInfo.init()
+        
+        // update col & row num
+        let previousRowCount: Int = self.currentState.rowNum
+        let previousColCount: Int = self.currentState.colNum
+        new.colNum = previousRowCount
+        new.rowNum = self.currentState.rowNum - previousColCount - 1
+        
+        // update original
+        let previousOriginalRow: Int = self.currentState.currentLocation.row
+        let previousOriginalCol: Int = self.currentState.currentLocation.column
+        new.currentLocation = BoardLocation.init(x: self.currentState.currentLocation.row - previousOriginalCol - 1,
+                                                 y: previousOriginalRow)
+        
+        // update goal
+        let previousGoalRow: Int = self.currentState.goalLocation.row
+        let previousGoalCol: Int = self.currentState.goalLocation.column
+        new.goalLocation = BoardLocation.init(x: self.currentState.goalLocation.row - previousGoalCol - 1,
+                                              y: previousGoalRow)
+        
+        // update trails and obstacles
+        var newObsts: [BoardLocation] = Array.init()
+        for bl in self.currentState.obstacleLocations {
+            let origX = bl.x
+            let origY = bl.y
+            let newLocation = BoardLocation.init(x: previousRowCount - origY - 1, y: origX)
+            newObsts.append(newLocation)
+        }
+        new.obstacleLocations = newObsts
+        var newTrails: [BoardLocation] = Array.init()
+        for bl in self.currentState.trailLocations {
+            let origX = bl.x
+            let origY = bl.y
+            let newLocation = BoardLocation.init(x: previousRowCount - origY - 1, y: origX)
+            newTrails.append(newLocation)
+        }
+        new.trailLocations = newTrails
+        
+        self.currentState = new
+    }
+    
+    func moveRight() -> BoardLocation {
+        while !occupiedLocation(row: self.currentState.currentLocation.row, col: self.currentState.currentLocation.column + 1) {
+            self.currentState.trailLocations.append(self.currentState.currentLocation)
+            self.currentState.currentLocation.column += 1
+            if self.currentState.currentLocation == self.currentState.goalLocation {
+                self.currentState.levelPassed = true
+                break
+            }
+        } // TODO: test if the loop condition causes the player to never move
+        return self.currentState.currentLocation
+    }
+    
+    func move(with dir: Direction) -> ActionType {
+        let rotationCount: Int = dir.rawValue
+        let previousLocation: BoardLocation = self.currentState.currentLocation
+        
+        // if undo
+        if (dir == Direction.up && previousMoves[previousMoves.count - 1] == Direction.down) {
+            return ActionType.undo
+        }
+        if (dir == Direction.down && previousMoves[previousMoves.count - 1] == Direction.up) {
+            return ActionType.undo
+        }
+        if (dir == Direction.left && previousMoves[previousMoves.count - 1] == Direction.right) {
+            return ActionType.undo
+        }
+        if (dir == Direction.right && previousMoves[previousMoves.count - 1] == Direction.left) {
+            return ActionType.undo
+        }
+
+        // not undo, try to move player
+        for _ in 0..<rotationCount {
+            self.rotateClockwise()
+        }
+        _ = self.moveRight() // just to suppress warning
+        for _ in rotationCount..<rotate360 {
+            self.rotateClockwise()
+        }
+        if self.currentState.levelPassed == true {
+            return ActionType.win
+        }
+        else if self.currentState.currentLocation == previousLocation {
+            return ActionType.invalid(dir)
+        }
+        else {
+            return ActionType.advanceTo(self.currentState.currentLocation)
+        }
+    }
+    
+    // can only make it print to console now, but should be good enough
+    // formerly toString
+    public func printBoard() {
+        let col: [Character] = Array.init(repeating: " ", count: self.currentState.colNum)
+        var board: [[Character]] = Array.init(repeating: col, count: self.currentState.rowNum)
+        for location in currentState.obstacleLocations {
+            board[location.row][location.column] = "X"
+        }
+        for location in currentState.trailLocations {
+            board[location.row][location.column] = "."
+        }
+        board[self.currentState.currentLocation.row][self.currentState.currentLocation.column] = "O"
+        board[self.currentState.goalLocation.row][self.currentState.goalLocation.column] = "G"
+        print(board)
+    }
+    
+    public func equals(toCheck: GameState) -> Bool {
+        if self.previousMoves != toCheck.previousMoves {
+            return false
+        }
+        if self.currentState.rowNum != toCheck.currentState.rowNum {
+            return false
+        }
+        if self.currentState.colNum != toCheck.currentState.colNum {
+            return false
+        }
+        if self.currentState.levelPassed != toCheck.currentState.levelPassed {
+            return false
+        }
+        if self.currentState.currentLocation != toCheck.currentState.currentLocation {
+            return false
+        }
+        if self.currentState.goalLocation != toCheck.currentState.goalLocation {
+            return false
+        }
+        if self.currentState.obstacleLocations != toCheck.currentState.obstacleLocations {
+            return false
+        }
+        if self.currentState.trailLocations != toCheck.currentState.trailLocations {
+            return false
+        }
+        return true
+    }
+}

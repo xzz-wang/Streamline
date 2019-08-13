@@ -19,9 +19,7 @@
 		B0D7E39922EBF9A800F7FC68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D7E39722EBF9A800F7FC68 /* LaunchScreen.storyboard */; };
 		B0D7E3A422EBF9A800F7FC68 /* StreamlineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D7E3A322EBF9A800F7FC68 /* StreamlineTests.swift */; };
 		B0D7E3AF22EBF9A800F7FC68 /* StreamlineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D7E3AE22EBF9A800F7FC68 /* StreamlineUITests.swift */; };
-		E051CE9E22F60C8000E35DC7 /* DevelopNotes.txt in Sources */ = {isa = PBXBuildFile; fileRef = E051CE9D22F60C8000E35DC7 /* DevelopNotes.txt */; };
-		E051CEA622FB983300E35DC7 /* GameState2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E051CEA522FB983300E35DC7 /* GameState2.swift */; };
-		E0A1475F22F2608700822784 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A1475E22F2608700822784 /* GameState.swift */; };
+		E051CEA622FB983300E35DC7 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E051CEA522FB983300E35DC7 /* GameState.swift */; };
 		E0A5956422F293C100A124C5 /* Streamline.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A5956322F293C100A124C5 /* Streamline.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,9 +59,7 @@
 		B0D7E3AA22EBF9A800F7FC68 /* StreamlineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreamlineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D7E3AE22EBF9A800F7FC68 /* StreamlineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamlineUITests.swift; sourceTree = "<group>"; };
 		B0D7E3B022EBF9A800F7FC68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E051CE9D22F60C8000E35DC7 /* DevelopNotes.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = DevelopNotes.txt; sourceTree = "<group>"; };
-		E051CEA522FB983300E35DC7 /* GameState2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState2.swift; sourceTree = "<group>"; };
-		E0A1475E22F2608700822784 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		E051CEA522FB983300E35DC7 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		E0A5956322F293C100A124C5 /* Streamline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streamline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +115,6 @@
 		B0D7E38222EBF9A600F7FC68 = {
 			isa = PBXGroup;
 			children = (
-				E051CE9D22F60C8000E35DC7 /* DevelopNotes.txt */,
 				B0D7E38D22EBF9A600F7FC68 /* Streamline */,
 				B0D7E3A222EBF9A800F7FC68 /* StreamlineTests */,
 				B0D7E3AD22EBF9A800F7FC68 /* StreamlineUITests */,
@@ -168,8 +163,7 @@
 		E0A5956022F2894D00A124C5 /* Back */ = {
 			isa = PBXGroup;
 			children = (
-				E0A1475E22F2608700822784 /* GameState.swift */,
-				E051CEA522FB983300E35DC7 /* GameState2.swift */,
+				E051CEA522FB983300E35DC7 /* GameState.swift */,
 				E0A5956322F293C100A124C5 /* Streamline.swift */,
 				B0BAC98422F8B3950087BB60 /* SupportingTypes.swift */,
 			);
@@ -307,13 +301,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E051CEA622FB983300E35DC7 /* GameState2.swift in Sources */,
+				E051CEA622FB983300E35DC7 /* GameState.swift in Sources */,
 				E0A5956422F293C100A124C5 /* Streamline.swift in Sources */,
 				B07FB80022F61544008F87A1 /* TileView.swift in Sources */,
 				B0C0D7F122EC017400A585F8 /* BoardView.swift in Sources */,
-				E0A1475F22F2608700822784 /* GameState.swift in Sources */,
 				B0BAC98322F7F3B70087BB60 /* Trail.swift in Sources */,
-				E051CE9E22F60C8000E35DC7 /* DevelopNotes.txt in Sources */,
 				B0BAC98522F8B3950087BB60 /* SupportingTypes.swift in Sources */,
 				B0D7E39122EBF9A600F7FC68 /* ViewController.swift in Sources */,
 				B0D7E38F22EBF9A600F7FC68 /* AppDelegate.swift in Sources */,
