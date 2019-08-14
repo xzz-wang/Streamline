@@ -25,9 +25,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private let DAMPING_RATIO: CGFloat = 0.7
     private let INVALID_OFFSET: CGFloat = 10.0
     
-    // Flag to disable all actions when animation is in process.
-    var pendingAnimation = false
-    
     // Game logic delegate to back-end
     //var gameDelegate: GameLogicDelegate =
     
@@ -126,19 +123,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     func advance(to location: BoardLocation) -> Bool{
         // Check if this move is valid
         
-        if pendingAnimation {
-            return false
-        }
-        
         if let thisTrail = createTrail(from: headLocation, to: location) {
-            pendingAnimation = true
             
+            // Mark: Advance animation
             UIView.animate(withDuration: ANIMATION_DURATION, delay: 0.0, usingSpringWithDamping: DAMPING_RATIO, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
                 // Animations
                 self.moveHead(to: location)
                 thisTrail.frame = thisTrail.targetRect!
-            }, completion: { _ in
-                self.pendingAnimation = false
             })
             
             return true
@@ -151,18 +142,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // Return Value: Whether the undo was a success
     func undo() -> Bool {
         
-        // Safe check if animation is in process
-        if pendingAnimation {
-            return false
-        }
-        
         // If there's another trail, then we can redo it
         if let lastTrail = trails.last {
             let undoLocation = lastTrail.startLocation
+            self.trails.removeLast()
             
-            // Animate the going back movement
-            pendingAnimation = true
-            
+            // Undo Animation
             UIView.animate(withDuration: ANIMATION_DURATION, delay: 0.0, usingSpringWithDamping: DAMPING_RATIO, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
                 // Animation actions
                 self.moveHead(to: undoLocation!)
@@ -170,10 +155,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }, completion: { success in
                 // Completion code
                 if success {
-                    self.trails.removeLast()
                     lastTrail.removeFromSuperview()
                 }
-                self.pendingAnimation = false
             })
             return true
         }
