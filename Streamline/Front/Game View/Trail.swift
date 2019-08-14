@@ -8,12 +8,18 @@
 
 import UIKit
 
-
+@IBDesignable
 class Trail: UIView {
     
     // UI Informationn
     private var cornerRadius: CGFloat = 5.0
-    var fillColor = UIColor.yellow
+    private static var fillColor: UIColor = UIColor.yellow
+    
+    @IBInspectable var color: UIColor = .yellow {
+        didSet {
+            Trail.fillColor = self.color
+        }
+    }
     
     var startLocation: BoardLocation?
     var endLocation: BoardLocation?
@@ -26,20 +32,20 @@ class Trail: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.clear
+        self.layer.isOpaque = false
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.backgroundColor = UIColor.clear
+        self.layer.isOpaque = false
     }
     
     override func draw(_ rect: CGRect) {
         // Drawing code
         let path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius)
         
-        fillColor.set()
+        Trail.fillColor.set()
         path.fill()
     }
 

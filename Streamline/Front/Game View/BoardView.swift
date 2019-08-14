@@ -104,12 +104,14 @@ class BoardView: UIView {
     // Two Initializers
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.layer.isOpaque = false
         initTilesArr()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         initTilesArr()
+        self.layer.isOpaque = false
     }
     
     // Called in the initializers

@@ -13,6 +13,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - IB Property references
     @IBOutlet private weak var boardView: BoardView!
     @IBOutlet private weak var headView: Head!
+    @IBOutlet weak var sampleTrail: Trail!
     
     // MARK: - Customize variables
     var headLocation = BoardLocation(row: 0, col: 0)
@@ -21,7 +22,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var trails: [Trail] = []
     var trailWidth: CGFloat = 15.0
     
-    private let ANIMATION_DURATION: Double = 0.2
+    private let ANIMATION_DURATION: Double = 0.3
     private let DAMPING_RATIO: CGFloat = 0.7
     private let INVALID_OFFSET: CGFloat = 10.0
     
@@ -38,6 +39,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         // Do any additional setup after loading the view.
         
         boardView.isUserInteractionEnabled = true
+        sampleTrail.removeFromSuperview()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,6 +154,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 // Animation actions
                 self.moveHead(to: undoLocation!)
                 lastTrail.frame = lastTrail.initRect!
+                lastTrail.alpha = 0.0
             }, completion: { success in
                 // Completion code
                 if success {
