@@ -1,1 +1,3 @@
 ./Streamline.xcodeproj/xcuserdata/minec_x.xcuserdatad/
+.gitignore
+.DS_Store
