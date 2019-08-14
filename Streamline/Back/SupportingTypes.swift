@@ -83,42 +83,14 @@ enum Direction: Int {
 // Used for initializing the board
 struct BoardInfo {
     // Number of rows and cols
-    var rowNum: Int// = -1
-    var colNum: Int// = -1
-    //var levelPassed: Bool = true
-    
+    var rowNum: Int
+    var colNum: Int
+
     // The type of each tile
-    var currentLocation: BoardLocation// = BoardLocation(x: -1, y: -1)
-    var goalLocation: BoardLocation// = BoardLocation(x: -1, y: -1)
-    var obstacleLocations: [BoardLocation]// = []
+    var currentLocation: BoardLocation
+    var goalLocation: BoardLocation
+    var obstacleLocations: [BoardLocation]
     var originLocation: BoardLocation
-    
-    // TODO: Delete these comments
-    //var trailLocations: [BoardLocation] = []
-    // TODO: 这个其实我display的时候也不需要这个信息……要不就不要了
-    
-//    init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
-//        if (playerRow >= height || playerCol >= width || goalRow >= height || goalCol >= width) {
-//            print("Please double check the player and goal position.");
-//        }
-//        else {
-//            self.rowNum = height
-//            self.colNum = width
-//            self.currentLocation = BoardLocation.init(row: playerRow, col: playerCol)
-//            self.goalLocation = BoardLocation.init(row: goalRow, col: goalRow)
-//            self.obstacleLocations = []
-//            self.trailLocations = []
-//        }
-//    }
-//
-//    init() { // some default values
-//        self.rowNum = 6
-//        self.colNum = 5
-//        self.currentLocation = BoardLocation.init(row: 5, col: 0)
-//        self.goalLocation = BoardLocation.init(row: 0, col: 4)
-//        self.obstacleLocations = []
-//        self.trailLocations = []
-//    }
 }
 
 // Returned by model layer when performAction is called.
