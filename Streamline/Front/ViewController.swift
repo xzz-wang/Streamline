@@ -42,10 +42,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         sampleTrail.removeFromSuperview()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setBoard(with: gameDelegate.getBoard())
-    }
-    
+    }    
     
     // MARK: - User actions
     
@@ -87,6 +86,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func handleSwipe(_ sender: UISwipeGestureRecognizer) {
         if sender.state == .ended {
             print(sender.direction)
+            
         }
     }
     
