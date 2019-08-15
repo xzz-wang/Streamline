@@ -17,7 +17,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - Customize variables
     var headLocation = BoardLocation(row: 0, col: 0)
-    var headSize: CGFloat = 30.0 // width and height of the head
+    var headSize: CGFloat = 30.0 // TODO: Make this changeable
     
     var trails: [Trail] = []
     var trailWidth: CGFloat = 15.0
@@ -44,7 +44,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         setBoard(with: gameDelegate.getBoard())
-    }    
+    } 
     
     // MARK: - User actions
     
