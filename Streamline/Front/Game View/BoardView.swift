@@ -64,8 +64,10 @@ class BoardView: UIView {
             }
             
             // Let the system redraw this view
+            updateTileFrames()
             setNeedsDisplay()
         }
+        
     }
     
     @IBInspectable var cols: Int = 5 {
@@ -87,6 +89,7 @@ class BoardView: UIView {
                     }
                 }
             }
+            updateTileFrames()
             setNeedsDisplay()
         }
     }
@@ -140,11 +143,26 @@ class BoardView: UIView {
         fillColor.setFill()
         path.fill()
         
-        
+        updateTileFrames()
+    }
+    
+    
+    // MARK: - Other Methods
+    
+    func getTileView(at location: BoardLocation) -> TileView {
+        return tiles[location.row][location.column]
+    }
+    
+    func setColor(of location: BoardLocation, to color: UIColor) {
+        let theTile = getTileView(at: location)
+        theTile.fillColor = color
+    }
+    
+    private func updateTileFrames () {
         // Now layout the tiles, starting with determining the gap, unit length ( 1 gap + 1 width ), and top/buttom margin
-        let gap = rect.width / ((gapRatio + 1) * CGFloat(cols) + 1) // Gap between each tile
+        let gap = self.frame.width / ((gapRatio + 1) * CGFloat(cols) + 1) // Gap between each tile
         let unitLength = (gapRatio + 1) * gap
-        var verticalMargin = rect.height - ((gapRatio + 1) * CGFloat(rows) - 1) * gap
+        var verticalMargin = self.frame.height - ((gapRatio + 1) * CGFloat(rows) - 1) * gap
         verticalMargin = verticalMargin / 2.0
         
         // Adjust the position of each tile according to row and cols
@@ -160,18 +178,4 @@ class BoardView: UIView {
             }
         }
     }
-    
-    
-    // MARK: - Other Methods
-    
-    func getTileView(at location: BoardLocation) -> TileView {
-        return tiles[location.row][location.column]
-    }
-    
-    func setColor(of location: BoardLocation, to color: UIColor) {
-        let theTile = getTileView(at: location)
-        theTile.fillColor = color
-    }
-
-    
 }

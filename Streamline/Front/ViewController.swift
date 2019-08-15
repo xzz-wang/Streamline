@@ -27,7 +27,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private let INVALID_OFFSET: CGFloat = 10.0
     
     // Game logic delegate to back-end
-    //var gameDelegate: GameLogicDelegate =
+    var gameDelegate: GameLogicDelegate = tempGameDelegate()
     
     // Action Queue
     var actionQueue: [ActionType] = []
@@ -43,11 +43,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        moveHead(to: BoardLocation(row: 0, col: 0))
+        setBoard(with: gameDelegate.getBoard())
     }
     
     
     // MARK: - User actions
+    
+    // TODO: Remove for final product. Testing purpose only.
     @IBAction func handleTap(sender: UITapGestureRecognizer) {
         
         if sender.state == .ended {
@@ -66,21 +68,22 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             
             if let tile = tappedTile {
                 if !advance(to: tile.location!) {
-                    print("Error occurred!")
+                    print("Error occurred! Can not move to given location.s")
                 }
             }
         }
     }
     
     // An button designed to test stuff.
+    // TODO: Remove for final product. Testing purpose only.
     @IBAction func handleTest(_ sender: UIButton) {
-        //alertInvalidMove(forDirection: .right)
         if !undo() {
             print("Unable to undo!!")
             alertInvalidMove(forDirection: .right)
         }
     }
     
+    // Main User interaction method
     @IBAction func handleSwipe(_ sender: UISwipeGestureRecognizer) {
         if sender.state == .ended {
             print(sender.direction)
@@ -97,9 +100,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             trail.removeFromSuperview()
         }
         trails = []
-        
-        // Setup the head
-        moveHead(to: info.originLocation)
         
         // Set the row and col number
         boardView.rows = info.rowNum
@@ -118,6 +118,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         for location in info.obstacleLocations {
             boardView.setColor(of: location, to: boardView.obstacleColor)
         }
+        
+        // Setup the head
+        moveHead(to: info.originLocation)
 
     }
     

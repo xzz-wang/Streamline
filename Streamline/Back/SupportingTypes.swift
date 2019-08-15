@@ -15,6 +15,19 @@ struct BoardLocation: Equatable {
     var x: Int
     var y: Int
     
+    // Row and column are basicially the same as x and y. Just in case someone got confused.
+    // MARK: x, y, row, col all starts with 0.
+    var row: Int {
+        get { return y }
+        set { y = newValue }
+    }
+    
+    var column: Int {
+        get { return x }
+        set { x = newValue }
+    }
+
+    
     // Initializers
     init(x: Int, y:Int) {
         self.x = x
@@ -26,25 +39,9 @@ struct BoardLocation: Equatable {
         self.y = row
     }
     
-    // Row and column are basicially the same as x and y. Just in case someone got confused.
-    var row: Int {
-        get { return y }
-        set { y = newValue }
-    }
-    
-    var column: Int {
-        get { return x }
-        set { x = newValue }
-    }
-    
     static func == (this: BoardLocation, that: BoardLocation) -> Bool {
         return this.x == that.x && this.y == that.y
     }
-    
-//    static postfix func == (other: BoardLocation) -> Bool { // prefix or postfix?
-//        return self.row == other.row && self.column == other.column
-//    }
-    // Note: 这个method都static了就应该不能access self了吧
     
 }
 
