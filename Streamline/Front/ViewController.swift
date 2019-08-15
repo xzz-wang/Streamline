@@ -305,4 +305,24 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    
+    // Parse the Action type
+    private func perform(action: ActionType) {
+        switch action {
+        case .advanceTo(let target):
+            if( !advance(to: target) ) {
+                fatalError("Not moving to the same row/column! Fatal Error")
+            }
+        case .invalid(let direction):
+            alertInvalidMove(forDirection: direction)
+        case .undo:
+            if ( !undo() ) {
+                fatalError("no more actions to be undo!")
+            }
+        case .win:
+            //TODO: Get win action
+            print("We won!")
+        }
+    }
+    
 }
