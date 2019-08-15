@@ -7,8 +7,9 @@ We are trying to make an iOS version of it.
 
 Feel free to contact the team!
 
+Back End Engineer: Bob Zhang
 Instagram: minec_x
 
+Front End Engineer: Xuezheng Wang
 Instagram: xzz_wang
 email: xzzwang@icloud.com
-
