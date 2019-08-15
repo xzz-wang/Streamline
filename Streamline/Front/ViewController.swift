@@ -44,7 +44,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         setBoard(with: gameDelegate.getBoard())
-    } 
+    }
     
     // MARK: - User actions
     
@@ -87,6 +87,26 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         if sender.state == .ended {
             print(sender.direction)
             
+            let swipeDirection = sender.direction
+            var direction = Direction.up
+            
+            switch swipeDirection {
+                case UISwipeGestureRecognizer.Direction.down:
+                    direction = .down
+                case UISwipeGestureRecognizer.Direction.up:
+                    direction = .up
+                case UISwipeGestureRecognizer.Direction.left:
+                    direction = .left
+                case UISwipeGestureRecognizer.Direction.right:
+                    direction = .right
+                default:
+                    fatalError("Unknown swipe direction!")
+            }
+            
+            // Call the delegate method
+            let reactAction = gameDelegate.move(with: direction)
+            
+            perform(action: reactAction)
         }
     }
     
@@ -94,7 +114,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - UI Actions: Major useful function to be called
     
     // Reset the entire board with given boardInfo
-    func setBoard(with info: BoardInfo) {
+    private func setBoard(with info: BoardInfo) {
         // First, remove stuff
         for trail in trails {
             trail.removeFromSuperview()
