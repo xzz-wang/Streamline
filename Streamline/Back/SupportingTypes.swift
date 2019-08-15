@@ -87,7 +87,6 @@ struct BoardInfo {
     var colNum: Int
 
     // The type of each tile
-    var currentLocation: BoardLocation
     var goalLocation: BoardLocation
     var obstacleLocations: [BoardLocation]
     var originLocation: BoardLocation
@@ -112,7 +111,10 @@ enum ActionType {
 // Implement to the class that will handle all the user interactions
 protocol GameLogicDelegate {
     
-    func getBoard(/* height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int */) -> BoardInfo
+    // Resume game, or automatically advance to the next level
+    func getBoard() -> BoardInfo
+    
+    // In each level, the user will try to move in the following directions.
     func move(with direction: Direction) -> ActionType
     
 }

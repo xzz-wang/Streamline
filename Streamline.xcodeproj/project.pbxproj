@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B07FB80022F61544008F87A1 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07FB7FF22F61544008F87A1 /* TileView.swift */; };
+		B08232862305016F003344AC /* TempGameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08232852305016F003344AC /* TempGameDelegate.swift */; };
 		B0BAC97F22F7D9AB0087BB60 /* Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC97E22F7D9AB0087BB60 /* Head.swift */; };
 		B0BAC98322F7F3B70087BB60 /* Trail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC98222F7F3B70087BB60 /* Trail.swift */; };
 		B0BAC98522F8B3950087BB60 /* SupportingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC98422F8B3950087BB60 /* SupportingTypes.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		B07FB7FF22F61544008F87A1 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		B08232852305016F003344AC /* TempGameDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TempGameDelegate.swift; path = Streamline/Back/TempGameDelegate.swift; sourceTree = SOURCE_ROOT; };
 		B0BAC97E22F7D9AB0087BB60 /* Head.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Head.swift; sourceTree = "<group>"; };
 		B0BAC98222F7F3B70087BB60 /* Trail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail.swift; sourceTree = "<group>"; };
 		B0BAC98422F8B3950087BB60 /* SupportingTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportingTypes.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				B0D7E38E22EBF9A600F7FC68 /* AppDelegate.swift */,
 				B0D7E39022EBF9A600F7FC68 /* ViewController.swift */,
 				B0D7E39222EBF9A600F7FC68 /* Main.storyboard */,
+				B08232852305016F003344AC /* TempGameDelegate.swift */,
 				B0BAC97D22F7D9630087BB60 /* Game View */,
 				B0D7E39522EBF9A800F7FC68 /* Assets.xcassets */,
 				B0D7E39722EBF9A800F7FC68 /* LaunchScreen.storyboard */,
@@ -303,6 +306,7 @@
 			files = (
 				E051CEA622FB983300E35DC7 /* GameState.swift in Sources */,
 				E0A5956422F293C100A124C5 /* Streamline.swift in Sources */,
+				B08232862305016F003344AC /* TempGameDelegate.swift in Sources */,
 				B07FB80022F61544008F87A1 /* TileView.swift in Sources */,
 				B0C0D7F122EC017400A585F8 /* BoardView.swift in Sources */,
 				B0BAC98322F7F3B70087BB60 /* Trail.swift in Sources */,
