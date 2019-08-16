@@ -22,7 +22,12 @@ public class GameState: GameLogicDelegate {
     var levelPassed: Bool
 
     public init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
-        self.board = BoardInfo.init(rowNum: height, colNum: width, currentLocation: BoardLocation.init(row: playerRow, col: playerCol),  goalLocation: BoardLocation.init(row: goalRow, col: goalCol), obstacleLocations: [], originLocation: BoardLocation.init(row: playerRow, col: playerCol))
+        self.board = BoardInfo.init(rowNum: height, colNum: width,
+                                    originLocation: BoardLocation.init(row: playerRow, col: playerCol),
+                                    goalLocation: BoardLocation.init(row: goalRow, col: goalCol),
+                                    obstacleLocations: [],
+                                    originLocation: BoardLocation.init(row: playerRow, col: playerCol)
+        )
         self.trailLocations = []
         self.previousMoves = []
         self.levelPassed = false
