@@ -1,88 +1,45 @@
-////
-////  Streamline.swift
-////  Streamline
-////
-////  Created by Chongbin (Bob) Zhang on 2019/7/31.
-////  Edited by Chongbin (Bob) Zhang & Xuezheng Wang
-////  Copyright © 2019 Xuezheng Wang. All rights reserved.
-////
 //
-//import Foundation
+//  Streamline.swift
+//  Streamline
 //
-//public class Streamline {
-//    var currentState: GameState
-//    var previousStates: [GameState]
-//    var previousDirections: [Direction]
+//  Created by Chongbin (Bob) Zhang on 2019/7/31.
+//  Edited by Chongbin (Bob) Zhang & Xuezheng Wang
+//  Copyright © 2019 Xuezheng Wang. All rights reserved.
 //
-//    public init() {
-//        currentState = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4)
-//        currentState.addRandomObstacles(count: 3)
-//        previousStates = Array.init()
-//        previousDirections = Array.init()
-//    }
-//
-//    //TODO: public init (file: String) {} // initializer from the board written to a text file
-//
-//    public func play() {
-//        while !currentState.levelPassed {
-//            print(currentState.toString())
-//            print("> ")
-//            let lastStep: GameState = GameState.init(other: currentState)
-//
-//            // TODO: takes user input and moves the board. Use self.recordAndMove(Direction)
-//
-//            if lastStep.equals(toCheck: currentState) {
-//                continue
-//            }
-//            else {
-//                previousStates.append(lastStep)
-//            }
-//        }
-//        print("Level passed! ")
-//    }
-//
-//    public func recordAndMove(dir: String) {
-//        if (dir != "UP" || dir != "DOWN" || dir != "LEFT" || dir != "RIGHT") {
-//            // if direction is not a valid string input
-//        }
-//        // 4 moves, pause, quit, save, undo. Also check last move to see if it's undo
-//    }
-//
-//    public func undo() {
-//        if self.previousStates.isEmpty {
-//            return
-//        }
-//        self.currentState = self.previousStates.remove(at: self.previousStates.count - 1)
-//        self.previousDirections.remove(at: self.previousDirections.count - 1)
-//    }
-//
-//
-//    // ignore saving & loading for now, focus on functionality
-//    public func loadFromFile() {
-//
-//    }
-//
-//    public func save() -> String {
-//        var toSave = String.init()
-//        toSave += "\(currentState.board.count) \(currentState.board[0].count)"
-//        toSave += "\(currentState.playerRow) \(currentState.playerCol)"
-//        toSave += "\(currentState.goalRow) \(currentState.goalCol)"
-//        for i in 0...currentState.board.count {
-//            for j in 0...currentState.board[0].count {
-//                if currentState.board[i][j] == " " {
-//                    toSave += " "
-//                } // empty block
-//                else if currentState.board[i][j] == "X" {
-//                    toSave += "X"
-//                } // obstacle
-//                else if currentState.board[i][j] == "." {
-//                    toSave += "."
-//                } // trail
-//                // toSave += currentState.board[i][j]
-//                toSave += "\n" // start a new line after each row of the board
-//            }
-//        }
-//        return toSave
-//    }
-//
-//}
+
+import Foundation
+
+public class Streamline {
+    var levels: [GameState]
+    
+    // with 8 sample levels: more on remote... I'm lazy converting them as of now
+    public init() {
+        let Lv1 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 1, col: 3), BoardLocation.init(row: 3, col: 2), BoardLocation.init(row: 4, col: 2)])
+        let Lv2 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 0, col: 2), BoardLocation.init(row: 2, col: 3), BoardLocation.init(row: 5, col: 4)])
+        let Lv3 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 0, col: 1), BoardLocation.init(row: 2, col: 4), BoardLocation.init(row: 3, col: 1)])
+        let Lv4 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 1, col: 4), BoardLocation.init(row: 2, col: 0), BoardLocation.init(row: 2, col: 2), BoardLocation.init(row: 3, col: 3), BoardLocation.init(row: 4, col: 1), BoardLocation.init(row: 5, col: 2)])
+        self.levels = [Lv1, Lv2, Lv3, Lv4]
+    }
+    
+    public init(levels: [GameState]) {
+        self.levels = levels
+    }
+    
+    public func initBoard(with level: Int) -> GameState {
+        return self.levels[level - 1]
+    }
+    
+    public func getNumOfLevels() -> Int {
+        return self.levels.count // -1??
+    }
+    
+    public func getHighestUnlockedLevel() -> Int {
+        var ret: Int = 0
+        for level in self.levels {
+            if level.levelPassed {
+                ret += 1
+            }
+        }
+        return ret // mark all levels to not passed when exiting the game? or write a method to reset the whole progress
+    }
+}

@@ -22,6 +22,7 @@ public class GameState: GameLogicDelegate {
     var previousMoves: [Direction]
     var levelPassed: Bool
 
+    // init with height, width, player & goal location: add random obstacles, risk of no way to finish
     public init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
         self.board = BoardInfo.init(rowNum: height, colNum: width,
                                     goalLocation: BoardLocation.init(row: goalRow, col: goalCol),
@@ -32,8 +33,23 @@ public class GameState: GameLogicDelegate {
         self.trailLocations = []
         self.previousMoves = []
         self.levelPassed = false
+        self.addRandomObstacles(count: Int(Double(height) * Double(width) * 0.1))
     }
 
+    // init with height, width, player & goal location and obstacle locations
+    init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int, obstLocations: [BoardLocation]) {
+        self.board = BoardInfo.init(rowNum: height, colNum: width,
+                                    goalLocation: BoardLocation.init(row: goalRow, col: goalCol),
+                                    obstacleLocations: obstLocations,
+                                    originLocation: BoardLocation.init(row: playerRow, col: playerCol)
+        )
+        self.currentLocation = self.board.originLocation
+        self.trailLocations = []
+        self.previousMoves = []
+        self.levelPassed = false
+    }
+
+    // default init: 6 rows, 5 cols, player on bottom left, goal on top right, some random obstacles
     public init() {
         self.board = BoardInfo.init(rowNum: 6, colNum: 5,
                                     goalLocation: BoardLocation.init(row: 5, col: 0),
