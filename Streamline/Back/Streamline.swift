@@ -12,7 +12,8 @@ import Foundation
 public class Streamline {
     var levels: [GameState]
     
-    // with 8 sample levels: more on remote... I'm lazy converting them as of now
+    // with 8 sample levels: more on remote... I'm lazy hard-coding them as of now... there's also some complicated levels
+    // TODO: find a way to read from files and save the games
     public init() {
         let Lv1 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 1, col: 3), BoardLocation.init(row: 3, col: 2), BoardLocation.init(row: 4, col: 2)])
         let Lv2 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 0, col: 2), BoardLocation.init(row: 2, col: 3), BoardLocation.init(row: 5, col: 4)])
@@ -30,7 +31,7 @@ public class Streamline {
     }
     
     public func getNumOfLevels() -> Int {
-        return self.levels.count // -1??
+        return self.levels.count
     }
     
     public func getHighestUnlockedLevel() -> Int {
