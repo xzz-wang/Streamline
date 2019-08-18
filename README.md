@@ -9,6 +9,7 @@ Feel free to contact the team!
 
 Back End Engineer: Bob Zhang
 Instagram: minec_x
+email: zcb0111@gmail.com
 
 Front End Engineer: Xuezheng Wang
 Instagram: xzz_wang

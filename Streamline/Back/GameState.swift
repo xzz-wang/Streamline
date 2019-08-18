@@ -17,22 +17,50 @@ public class GameState: GameLogicDelegate {
     let rotate360: Int = 4;
 
     var board: BoardInfo
+    var currentLocation: BoardLocation
     var trailLocations: [BoardLocation]
     var previousMoves: [Direction]
     var levelPassed: Bool
 
+    // init with height, width, player & goal location: add random obstacles, risk of no way to finish
     public init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) {
-        self.board = BoardInfo.init(rowNum: height, colNum: width, currentLocation: BoardLocation.init(row: playerRow, col: playerCol),  goalLocation: BoardLocation.init(row: goalRow, col: goalCol), obstacleLocations: [], originLocation: BoardLocation.init(row: playerRow, col: playerCol))
+        self.board = BoardInfo.init(rowNum: height, colNum: width,
+                                    goalLocation: BoardLocation.init(row: goalRow, col: goalCol),
+                                    obstacleLocations: [],
+                                    originLocation: BoardLocation.init(row: playerRow, col: playerCol)
+                                   )
+        self.currentLocation = self.board.originLocation
+        self.trailLocations = []
+        self.previousMoves = []
+        self.levelPassed = false
+        self.addRandomObstacles(count: Int(Double(height) * Double(width) * 0.1))
+    }
+
+    // init with height, width, player & goal location and obstacle locations
+    init (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int, obstLocations: [BoardLocation]) {
+        self.board = BoardInfo.init(rowNum: height, colNum: width,
+                                    goalLocation: BoardLocation.init(row: goalRow, col: goalCol),
+                                    obstacleLocations: obstLocations,
+                                    originLocation: BoardLocation.init(row: playerRow, col: playerCol)
+        )
+        self.currentLocation = self.board.originLocation
         self.trailLocations = []
         self.previousMoves = []
         self.levelPassed = false
     }
 
+    // default init: 6 rows, 5 cols, player on bottom left, goal on top right, some random obstacles
     public init() {
-        self.board = BoardInfo.init(rowNum: 6, colNum: 5, currentLocation: BoardLocation.init(row: 5, col: 0),  goalLocation: BoardLocation.init(row: 0, col: 4), obstacleLocations: [], originLocation: BoardLocation.init(row: 5, col: 0))
+        self.board = BoardInfo.init(rowNum: 6, colNum: 5,
+                                    goalLocation: BoardLocation.init(row: 5, col: 0),
+                                    obstacleLocations: [],
+                                    originLocation: BoardLocation.init(row: 0, col: 4)
+                                    )
+        self.currentLocation = self.board.originLocation
         self.trailLocations = []
         self.previousMoves = []
         self.levelPassed = false
+        self.addRandomObstacles(count: 3)
     }
 
     func initBoard (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo {
@@ -49,7 +77,7 @@ public class GameState: GameLogicDelegate {
         if self.board.goalLocation == BoardLocation(row: row, col: col) {
             return true
         }
-        if self.board.currentLocation == BoardLocation(row: row, col: col) {
+        if self.currentLocation == BoardLocation(row: row, col: col) {
             return true
         }
         return false
@@ -79,8 +107,17 @@ public class GameState: GameLogicDelegate {
 
     func rotateClockwise() { // TODO: still need to be tested... I kinda forgot the formula for this one
         // original formula: on the 2D array, rotated[i][j] = original[origH - j - 1][i]
-        var new: BoardInfo = BoardInfo.init(rowNum: 6, colNum: 5, currentLocation: BoardLocation.init(row: 5, col: 0),  goalLocation: BoardLocation.init(row: 0, col: 4), obstacleLocations: [], originLocation: BoardLocation.init(row: 5, col: 0))
-
+        var new: BoardInfo = BoardInfo.init(rowNum: self.board.colNum, colNum: self.board.rowNum,
+                                            goalLocation: BoardLocation.init(row: 0, col: 4),
+                                            obstacleLocations: [],
+                                            originLocation: BoardLocation.init(row: 5, col: 0))
+        
+//        self.board = BoardInfo.init(rowNum: height, colNum: width,
+//                                    goalLocation: BoardLocation.init(row: goalRow, col: goalCol),
+//                                    obstacleLocations: [],
+//                                    originLocation: BoardLocation.init(row: playerRow, col: playerCol)
+//        )
+//
         // update col & row num
         let previousRowCount: Int = self.board.rowNum
         let previousColCount: Int = self.board.colNum
@@ -88,9 +125,9 @@ public class GameState: GameLogicDelegate {
         new.rowNum = self.board.rowNum - previousColCount - 1
 
         // update original
-        let previousOriginalRow: Int = self.board.currentLocation.row
-        let previousOriginalCol: Int = self.board.currentLocation.column
-        new.currentLocation = BoardLocation.init(x: self.board.currentLocation.row - previousOriginalCol - 1,
+        let previousOriginalRow: Int = self.currentLocation.row
+        let previousOriginalCol: Int = self.currentLocation.column
+        self.currentLocation = BoardLocation.init(x: self.currentLocation.row - previousOriginalCol - 1,
                                                  y: previousOriginalRow)
 
         // update goal
@@ -121,20 +158,20 @@ public class GameState: GameLogicDelegate {
     }
 
     func moveRight() -> BoardLocation {
-        while !occupiedLocation(row: self.board.currentLocation.row, col: self.board.currentLocation.column + 1) {
-            self.trailLocations.append(self.board.currentLocation)
-            self.board.currentLocation.column += 1
-            if self.board.currentLocation == self.board.goalLocation {
+        while !occupiedLocation(row: self.currentLocation.row, col: self.currentLocation.column + 1) {
+            self.trailLocations.append(self.currentLocation)
+            self.currentLocation.column += 1
+            if self.currentLocation == self.board.goalLocation {
                 self.levelPassed = true
                 break
             }
         } // TODO: test if the loop condition causes the player to never move
-        return self.board.currentLocation
+        return self.currentLocation
     }
 
     func move(with dir: Direction) -> ActionType {
         let rotationCount: Int = dir.rawValue
-        let previousLocation: BoardLocation = self.board.currentLocation
+        let previousLocation: BoardLocation = self.currentLocation
 
         // if undo
         if (dir == Direction.up && previousMoves[previousMoves.count - 1] == Direction.down) {
@@ -161,11 +198,11 @@ public class GameState: GameLogicDelegate {
         if self.levelPassed == true {
             return ActionType.win
         }
-        else if self.board.currentLocation == previousLocation {
+        else if self.currentLocation == previousLocation {
             return ActionType.invalid(dir)
         }
         else {
-            return ActionType.advanceTo(self.board.currentLocation)
+            return ActionType.advanceTo(self.currentLocation)
         }
     }
 
@@ -180,7 +217,7 @@ public class GameState: GameLogicDelegate {
         for location in self.trailLocations {
             board[location.row][location.column] = "."
         }
-        board[self.board.currentLocation.row][self.board.currentLocation.column] = "O"
+        board[self.currentLocation.row][self.currentLocation.column] = "O"
         board[self.board.goalLocation.row][self.board.goalLocation.column] = "G"
         print(board)
     }
@@ -198,7 +235,7 @@ public class GameState: GameLogicDelegate {
         if self.levelPassed != toCheck.levelPassed {
             return false
         }
-        if self.board.currentLocation != toCheck.board.currentLocation {
+        if self.currentLocation != toCheck.currentLocation {
             return false
         }
         if self.board.goalLocation != toCheck.board.goalLocation {
