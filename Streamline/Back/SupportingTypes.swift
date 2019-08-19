@@ -98,7 +98,7 @@ enum ActionType {
     case undo
     
     // Tells the front-end to perform action related to winning.
-    case win
+    case win(BoardLocation)
     
     // The direction given by the user is invalid
     case invalid(Direction)
