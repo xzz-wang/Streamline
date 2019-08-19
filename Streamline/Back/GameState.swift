@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class GameState: GameLogicDelegate {
+public class GameState {
     func getBoard() -> BoardInfo {
         return self.board
     }

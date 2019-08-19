@@ -9,8 +9,17 @@
 
 import Foundation
 
-public class Streamline {
+public class Streamline: GameLogicDelegate {
+    func getBoard() -> BoardInfo {
+        return levels[currentLv].board
+    }
+    
+    func move(with direction: Direction) -> ActionType {
+        return levels[currentLv].move(with: direction)
+    }
+    
     var levels: [GameState]
+    var currentLv: Int
     
     // with 8 sample levels: more on remote... I'm lazy hard-coding them as of now... there's also some complicated levels
     // TODO: find a way to read from files and save the games
@@ -20,10 +29,12 @@ public class Streamline {
         let Lv3 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 0, col: 1), BoardLocation.init(row: 2, col: 4), BoardLocation.init(row: 3, col: 1)])
         let Lv4 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 1, col: 4), BoardLocation.init(row: 2, col: 0), BoardLocation.init(row: 2, col: 2), BoardLocation.init(row: 3, col: 3), BoardLocation.init(row: 4, col: 1), BoardLocation.init(row: 5, col: 2)])
         self.levels = [Lv1, Lv2, Lv3, Lv4]
+        self.currentLv = 0
     }
     
     public init(levels: [GameState]) {
         self.levels = levels
+        self.currentLv = 0
     }
     
     public func initBoard(with level: Int) -> GameState {
