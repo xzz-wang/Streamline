@@ -27,7 +27,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private let INVALID_OFFSET: CGFloat = 10.0
     
     // Game logic delegate to back-end
-    var gameDelegate: GameLogicDelegate = tempGameDelegate()
+    var gameDelegate: GameLogicDelegate = Streamline()
     
     // Action Queue
     var actionQueue: [ActionType] = []
