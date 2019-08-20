@@ -112,12 +112,6 @@ public class GameState {
                                             obstacleLocations: [],
                                             originLocation: BoardLocation.init(row: 5, col: 0))
         
-//        self.board = BoardInfo.init(rowNum: height, colNum: width,
-//                                    goalLocation: BoardLocation.init(row: goalRow, col: goalCol),
-//                                    obstacleLocations: [],
-//                                    originLocation: BoardLocation.init(row: playerRow, col: playerCol)
-//        )
-//
         // update col & row num
         let previousRowCount: Int = self.board.rowNum
         let previousColCount: Int = self.board.colNum
@@ -175,15 +169,19 @@ public class GameState {
 
         // if undo
         if (dir == Direction.up && previousMoves[previousMoves.count - 1] == Direction.down) {
+            previousMoves.removeLast()
             return ActionType.undo
         }
         if (dir == Direction.down && previousMoves[previousMoves.count - 1] == Direction.up) {
+            previousMoves.removeLast()
             return ActionType.undo
         }
         if (dir == Direction.left && previousMoves[previousMoves.count - 1] == Direction.right) {
+            previousMoves.removeLast()
             return ActionType.undo
         }
         if (dir == Direction.right && previousMoves[previousMoves.count - 1] == Direction.left) {
+            previousMoves.removeLast()
             return ActionType.undo
         }
 
@@ -196,12 +194,13 @@ public class GameState {
             self.rotateClockwise()
         }
         if self.levelPassed == true {
-            return ActionType.win
+            return ActionType.win(self.currentLocation)
         }
         else if self.currentLocation == previousLocation {
             return ActionType.invalid(dir)
         }
         else {
+            self.previousMoves.append(dir)
             return ActionType.advanceTo(self.currentLocation)
         }
     }
