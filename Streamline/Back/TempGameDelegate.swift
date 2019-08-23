@@ -8,7 +8,7 @@
 
 import Foundation
 
-class tempGameDelegate: GameLogicDelegate {
+class TempGameDelegate: GameLogicDelegate {
     
     func getBoard() -> BoardInfo {
         return BoardInfo(rowNum: 8, colNum: 6, goalLocation: BoardLocation(row: 7, col: 5),

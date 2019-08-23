@@ -27,7 +27,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private let INVALID_OFFSET: CGFloat = 10.0
     
     // Game logic delegate to back-end
-    var gameDelegate: GameLogicDelegate = Streamline()
+    var gameDelegate: GameLogicDelegate = TempGameDelegate()
     
     // Action Queue
     var actionQueue: [ActionType] = []
@@ -339,10 +339,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             if ( !undo() ) {
                 fatalError("no more actions to be undo!")
             }
-        case .win:
-            //TODO: Get win action
+        case .win(let target):
+            if( !advance(to: target) ) {
+                fatalError("Not moving to the same row/column! Fatal Error")
+            }
+            win()
             print("We won!")
         }
+    }
+    
+    private func win() {
+        // DO Nothing for now
     }
     
 }
