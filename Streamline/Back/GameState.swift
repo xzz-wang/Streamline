@@ -63,10 +63,6 @@ public class GameState {
         self.addRandomObstacles(count: 3)
     }
 
-    func initBoard (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo {
-        return self.board
-    }
-
     func occupiedLocation (row: Int, col: Int) -> Bool {
         if self.board.obstacleLocations.contains(BoardLocation(row: row, col: col)) {
             return true
@@ -162,37 +158,81 @@ public class GameState {
         } // TODO: test if the loop condition causes the player to never move
         return self.currentLocation
     }
+    
+    func moveLeft() -> BoardLocation {
+        while !occupiedLocation(row: self.currentLocation.row, col: self.currentLocation.column - 1) {
+            self.trailLocations.append(self.currentLocation)
+            self.currentLocation.column -= 1
+            if self.currentLocation == self.board.goalLocation {
+                self.levelPassed = true
+                break
+            }
+        } // TODO: test if the loop condition causes the player to never move
+        return self.currentLocation
+    }
+    
+    func moveUp() -> BoardLocation {
+        while !occupiedLocation(row: self.currentLocation.row - 1, col: self.currentLocation.column) {
+            self.trailLocations.append(self.currentLocation)
+            self.currentLocation.row -= 1
+            if self.currentLocation == self.board.goalLocation {
+                self.levelPassed = true
+                break
+            }
+        } // TODO: test if the loop condition causes the player to never move
+        return self.currentLocation
+    }
+    
+    func moveDown() -> BoardLocation {
+        while !occupiedLocation(row: self.currentLocation.row + 1, col: self.currentLocation.column) {
+            self.trailLocations.append(self.currentLocation)
+            self.currentLocation.row += 1
+            if self.currentLocation == self.board.goalLocation {
+                self.levelPassed = true
+                break
+            }
+        } // TODO: test if the loop condition causes the player to never move
+        return self.currentLocation
+    }
 
     func move(with dir: Direction) -> ActionType {
         let rotationCount: Int = dir.rawValue
         let previousLocation: BoardLocation = self.currentLocation
 
         // if undo
-        if (dir == Direction.up && previousMoves[previousMoves.count - 1] == Direction.down) {
-            previousMoves.removeLast()
-            return ActionType.undo
-        }
-        if (dir == Direction.down && previousMoves[previousMoves.count - 1] == Direction.up) {
-            previousMoves.removeLast()
-            return ActionType.undo
-        }
-        if (dir == Direction.left && previousMoves[previousMoves.count - 1] == Direction.right) {
-            previousMoves.removeLast()
-            return ActionType.undo
-        }
-        if (dir == Direction.right && previousMoves[previousMoves.count - 1] == Direction.left) {
-            previousMoves.removeLast()
-            return ActionType.undo
+        if previousMoves.count > 0 {
+            if (dir == Direction.up && previousMoves[previousMoves.count - 1] == Direction.down) {
+                previousMoves.removeLast()
+                return ActionType.undo
+            }
+            if (dir == Direction.down && previousMoves[previousMoves.count - 1] == Direction.up) {
+                previousMoves.removeLast()
+                return ActionType.undo
+            }
+            if (dir == Direction.left && previousMoves[previousMoves.count - 1] == Direction.right) {
+                previousMoves.removeLast()
+                return ActionType.undo
+            }
+            if (dir == Direction.right && previousMoves[previousMoves.count - 1] == Direction.left) {
+                previousMoves.removeLast()
+                return ActionType.undo
+            }
         }
 
         // not undo, try to move player
-        for _ in 0..<rotationCount {
-            self.rotateClockwise()
+        if dir == Direction.down {
+            _ = self.moveDown() // suppress warnings
         }
-        _ = self.moveRight() // just to suppress warning
-        for _ in rotationCount..<rotate360 {
-            self.rotateClockwise()
+        if dir == Direction.up {
+            _ = self.moveUp()
         }
+        if dir == Direction.left {
+            _ = self.moveLeft()
+        }
+        if dir == Direction.right {
+            _ = self.moveRight()
+        }
+        self.printBoard()
         if self.levelPassed == true {
             return ActionType.win(self.currentLocation)
         }

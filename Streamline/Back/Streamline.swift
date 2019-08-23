@@ -37,6 +37,14 @@ public class Streamline: GameLogicDelegate {
         self.currentLv = 0
     }
     
+    public func getCurrentLevel (toGet: Int) -> GameState {
+        if toGet > self.getNumOfLevels() {
+            print("WARNING: such level does not exist")
+            return GameState.init(height: -1, width: -1, playerRow: -1, playerCol: -1, goalRow: -1, goalCol: -1, obstLocations: [])
+        }
+        return self.levels[toGet]
+    }
+    
     public func initBoard(with level: Int) -> GameState {
         return self.levels[level - 1]
     }

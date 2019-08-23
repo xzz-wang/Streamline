@@ -27,7 +27,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private let INVALID_OFFSET: CGFloat = 10.0
     
     // Game logic delegate to back-end
-    var gameDelegate: GameLogicDelegate = TempGameDelegate()
+    var gameDelegate: Streamline = Streamline()
     
     // Action Queue
     var actionQueue: [ActionType] = []
@@ -104,6 +104,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             
             // Call the delegate method
+            // TODO: Causing the player to never move. Might also need to change handletap
             let reactAction = gameDelegate.move(with: direction)
             
             perform(action: reactAction)
