@@ -104,6 +104,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             
             // Call the delegate method
+            // TODO: Causing the player to never move. Might also need to change handletap
             let reactAction = gameDelegate.move(with: direction)
             
             perform(action: reactAction)

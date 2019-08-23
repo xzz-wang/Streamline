@@ -63,10 +63,6 @@ public class GameState {
         self.addRandomObstacles(count: 3)
     }
 
-    func initBoard (height: Int, width: Int, playerRow: Int, playerCol: Int, goalRow: Int, goalCol: Int) -> BoardInfo {
-        return self.board
-    }
-
     func occupiedLocation (row: Int, col: Int) -> Bool {
         if self.board.obstacleLocations.contains(BoardLocation(row: row, col: col)) {
             return true
@@ -236,6 +232,7 @@ public class GameState {
         if dir == Direction.right {
             _ = self.moveRight()
         }
+        self.printBoard()
         if self.levelPassed == true {
             return ActionType.win(self.currentLocation)
         }
