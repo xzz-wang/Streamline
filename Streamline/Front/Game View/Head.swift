@@ -11,15 +11,33 @@ import UIKit
 @IBDesignable
 class Head: UIView {
     
-    @IBInspectable private var headColor: UIColor = .orange
-
+    @IBInspectable private var headColor: UIColor = .orange {
+        didSet {
+            Head.defaultHeadColor = self.headColor
+        }
+    }
+    
+    static var defaultHeadColor = UIColor.orange
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.layer.isOpaque = false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.layer.isOpaque = false
+    }
+    
     override func draw(_ rect: CGRect) {
         self.layer.isOpaque = false
         
         let path = UIBezierPath(ovalIn: rect)
         
-        headColor.setFill()
+        Head.defaultHeadColor.setFill()
         path.fill()
     }
-
+    
 }
