@@ -18,7 +18,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Customize variables    
     
     // Game logic delegate to back-end
-    var gameDelegate: Streamline = Streamline()
+    var gameDelegate: GameLogicDelegate = Streamline()
     
     // Action Queue
     var actionQueue: [ActionType] = []

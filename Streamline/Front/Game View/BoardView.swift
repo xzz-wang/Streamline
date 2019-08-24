@@ -104,7 +104,7 @@ class BoardView: UIView {
     
     // The location of the head of the path
     var headLocation = BoardLocation(row: 0, col: 0)
-    private let HEAD_SIZE_RATIO: CGFloat = 0.7
+    private let HEAD_SIZE_RATIO: CGFloat = 0.65
     
     // Trails
     var trails: [Trail] = []
