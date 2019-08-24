@@ -19,6 +19,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Game logic delegate to back-end
     var gameDelegate: GameLogicDelegate = TempGameDelegate()
+
+    /*
+    // Use this line when using the actual GameLogicDelegate
+    var gameDelegate: GameLogicDelegate = Streamline()
+    */
     
     // Provide feedBack
     var feedbackGenerator: UIImpactFeedbackGenerator? = nil
@@ -106,7 +111,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             
             // Call the delegate method
-            // TODO: Causing the player to never move. Might also need to change handletap
             let reactAction = gameDelegate.move(with: direction)
             
             perform(action: reactAction)
