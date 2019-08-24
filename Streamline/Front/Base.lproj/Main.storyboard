@@ -49,16 +49,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bya-Vh-Gof" customClass="BoardView" customModule="Streamline" customModuleProvider="target">
                                 <rect key="frame" x="20" y="70" width="374" height="754"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMJ-Br-qHe" customClass="Head" customModule="Streamline" customModuleProvider="target">
-                                        <rect key="frame" x="138" y="342" width="37" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="headColor">
-                                                <color key="value" red="1" green="0.163430619985375" blue="0.59865874084404935" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5l4-GH-H49" customClass="Trail" customModule="Streamline" customModuleProvider="target">
                                         <rect key="frame" x="161" y="350" width="191" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,6 +59,16 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
                                                 <color key="value" red="0.90793622019999998" green="0.0" blue="0.99383328049999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMJ-Br-qHe" customClass="Head" customModule="Streamline" customModuleProvider="target">
+                                        <rect key="frame" x="39" y="320" width="37" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="headColor">
+                                                <color key="value" red="1" green="0.163430619985375" blue="0.59865874084404935" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -139,7 +139,7 @@
                     </view>
                     <connections>
                         <outlet property="boardView" destination="bya-Vh-Gof" id="N6s-pw-uwr"/>
-                        <outlet property="headView" destination="zMJ-Br-qHe" id="xCX-Aa-854"/>
+                        <outlet property="headView" destination="zMJ-Br-qHe" id="TVM-Gj-g9F"/>
                         <outlet property="sampleTrail" destination="5l4-GH-H49" id="0CQ-w8-XJX"/>
                     </connections>
                 </viewController>
