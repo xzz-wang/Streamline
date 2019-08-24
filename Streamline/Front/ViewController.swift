@@ -32,7 +32,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         boardView.isUserInteractionEnabled = true
         sampleTrail.removeFromSuperview()
+        sampleTrail = nil
         headView.removeFromSuperview()
+        headView = nil
         
         // Setup the head
         boardView.addSubview(boardView.headView)

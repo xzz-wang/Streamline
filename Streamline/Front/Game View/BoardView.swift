@@ -17,13 +17,11 @@ class BoardView: UIView {
     private let INVALID_OFFSET: CGFloat = 10.0
     
     // MARK: - Properties
-    var headView: Head!
-    
-    // Main reusing path
+    // MARK: Main reusing path
     private var path = UIBezierPath()
     private var tileRect = CGRect(x: 30.0, y: 30.0, width: 50.0, height: 50.0)
     
-    // Colors that can be accessed by interface builder
+    // MARK: Colors
     @IBInspectable var fillColor: UIColor = .white
     @IBInspectable var tileColor: UIColor = .red {
         didSet {
@@ -41,7 +39,7 @@ class BoardView: UIView {
     // The ratio between the gaps and the width/height of each tile
     @IBInspectable var gapRatio: CGFloat = 5.0
 
-    // rols and columns, can be adjusted by interface builder
+    // MARK: rols and columns, can be adjusted by interface builder
     // Whenever these two value changes, the didSets update change the size of tiles array,
     //  and add/remove subview accordingly
     @IBInspectable var rows: Int = 5 {
@@ -99,16 +97,18 @@ class BoardView: UIView {
         }
     }
     
+    // MARK: Subviews and layout info
     // The 2D array that holds all the TileView
     public var tiles: [[TileView]] = []
     
     // The location of the head of the path
+    var headView: Head!
     var headLocation = BoardLocation(row: 0, col: 0)
     private let HEAD_SIZE_RATIO: CGFloat = 0.65
     
     // Trails
-    var trails: [Trail] = []
-    var trailWidth: CGFloat = 15.0
+    private var trails: [Trail] = []
+    private var trailWidth: CGFloat = 15.0
 
     
     
@@ -163,53 +163,7 @@ class BoardView: UIView {
     
     
     
-    // MARK: - Methods related with moving head and adding trails
-    
-    func alertInvalidMove(forDirection direction: Direction) {
-        let transform = direction.getTransform(withOffset: INVALID_OFFSET)
-        
-        UIView.animate(withDuration: ANIMATION_DURATION / 2, delay: 0.0, options: .curveEaseInOut, animations: {
-            self.headView.transform = transform
-        }, completion: nil)
-        
-        UIView.animate(withDuration: ANIMATION_DURATION / 2, delay: ANIMATION_DURATION / 2, options: .curveEaseInOut, animations: {
-            self.headView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
-        }, completion: nil)
-        
-        
-    }
-    
-    // Reset the entire board with given boardInfo
-    func setBoard(with info: BoardInfo) {
-        // First, remove stuff
-        for trail in trails {
-            trail.removeFromSuperview()
-        }
-        trails = []
-        
-        // Set the row and col number
-        rows = info.rowNum
-        cols = info.colNum
-        
-        // Set the color
-        for row in tiles {
-            for tile in row {
-                tile.fillColor = tileColor
-            }
-        }
-        
-        // Set the tiles' color
-        setColor(of: info.goalLocation, to: goalColor)
-        setColor(of: info.originLocation, to: originColor)
-        for location in info.obstacleLocations {
-            setColor(of: location, to: obstacleColor)
-        }
-        
-        // Setup the head
-        moveHead(to: info.originLocation)
-        
-    }
-    
+    // MARK: - Methods called by ViewController
     // Move head with trail
     func advance(to location: BoardLocation) -> Bool{
         // Check if this move is valid
@@ -257,27 +211,50 @@ class BoardView: UIView {
     }
 
     
-    // move the headView to the given boardLocation. Everything is taken care of.
-    private func moveHead(to location: BoardLocation){
-        // Just move the head
-        headLocation = location
+    func alertInvalidMove(forDirection direction: Direction) {
+        let transform = direction.getTransform(withOffset: INVALID_OFFSET)
         
-        // A bit of math first
-        let theTileFrame = getTileView(at: location).frame
-        let headSize = theTileFrame.width * HEAD_SIZE_RATIO
-        let x = theTileFrame.minX + theTileFrame.width / 2 - headSize / 2
-        let y = theTileFrame.minY + theTileFrame.height / 2 - headSize / 2
+        UIView.animate(withDuration: ANIMATION_DURATION / 2, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.headView.transform = transform
+        }, completion: nil)
         
-        // Move the head
-        let rect = CGRect(x: x, y: y, width: headSize, height: headSize)
-        headView.frame = rect
+        UIView.animate(withDuration: ANIMATION_DURATION / 2, delay: ANIMATION_DURATION / 2, options: .curveEaseInOut, animations: {
+            self.headView.transform = CGAffineTransform(translationX: 0.0, y: 0.0)
+        }, completion: nil)
         
-        // Bring it to the front
-        self.bringSubviewToFront(headView)
-        self.setNeedsDisplay()
+        
     }
     
-
+    // Reset the entire board with given boardInfo
+    func setBoard(with info: BoardInfo) {
+        // First, remove stuff
+        for trail in trails {
+            trail.removeFromSuperview()
+        }
+        trails = []
+        
+        // Set the row and col number
+        rows = info.rowNum
+        cols = info.colNum
+        
+        // Set the color
+        for row in tiles {
+            for tile in row {
+                tile.fillColor = tileColor
+            }
+        }
+        
+        // Set the tiles' color
+        setColor(of: info.goalLocation, to: goalColor)
+        setColor(of: info.originLocation, to: originColor)
+        for location in info.obstacleLocations {
+            setColor(of: location, to: obstacleColor)
+        }
+        
+        // Setup the head
+        moveHead(to: info.originLocation)
+        
+    }
     
     
     // MARK: - Helper Methods
@@ -418,5 +395,27 @@ class BoardView: UIView {
         }
     }
     
+    
+    // move the headView to the given boardLocation. Everything is taken care of.
+    private func moveHead(to location: BoardLocation){
+        // Just move the head
+        headLocation = location
+        
+        // A bit of math first
+        let theTileFrame = getTileView(at: location).frame
+        let headSize = theTileFrame.width * HEAD_SIZE_RATIO
+        let x = theTileFrame.minX + theTileFrame.width / 2 - headSize / 2
+        let y = theTileFrame.minY + theTileFrame.height / 2 - headSize / 2
+        
+        // Move the head
+        let rect = CGRect(x: x, y: y, width: headSize, height: headSize)
+        headView.frame = rect
+        
+        // Bring it to the front
+        self.bringSubviewToFront(headView)
+        self.setNeedsDisplay()
+    }
+    
+
 
 }
