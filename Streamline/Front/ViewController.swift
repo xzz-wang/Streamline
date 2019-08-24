@@ -18,10 +18,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Customize variables    
     
     // Game logic delegate to back-end
-    var gameDelegate: GameLogicDelegate = Streamline()
+    var gameDelegate: GameLogicDelegate = TempGameDelegate()
     
-    // Action Queue
-    var actionQueue: [ActionType] = []
+    // Provide feedBack
+    var feedbackGenerator: UIImpactFeedbackGenerator? = nil
+
     
     
     // MARK: - View life cycles
@@ -77,10 +78,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+
+    
     // Main User interaction method
     @IBAction func handleSwipe(_ sender: UISwipeGestureRecognizer) {
         if sender.state == .ended {
-            print(sender.direction)
+            
+            feedbackGenerator = UIImpactFeedbackGenerator()
+            feedbackGenerator?.prepare()
             
             let swipeDirection = sender.direction
             var direction = Direction.up
@@ -111,6 +116,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Parse the Action type
     private func perform(action: ActionType) {
+        // Provide force feedback
+        
         switch action {
         case .advanceTo(let target):
             if( !boardView.advance(to: target) ) {
@@ -118,6 +125,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         case .invalid(let direction):
             boardView.alertInvalidMove(forDirection: direction)
+            feedbackGenerator?.impactOccurred()
         case .undo:
             if ( !boardView.undo() ) {
                 fatalError("no more actions to be undo!")
@@ -129,6 +137,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             win()
             print("We won!")
         }
+        
+        feedbackGenerator = nil
     }
     
     private func win() {
