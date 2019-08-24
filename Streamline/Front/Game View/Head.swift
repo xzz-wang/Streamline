@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 class Head: UIView {
     
-    @IBInspectable private var headColor: UIColor = .orange {
+    @IBInspectable var headColor: UIColor = .orange {
         didSet {
             Head.defaultHeadColor = self.headColor
         }

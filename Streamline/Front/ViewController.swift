@@ -144,7 +144,40 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func win() {
-        // TODO: Fill this in. DO Nothing for now
+        // Get the offset between boardView and self.view
+        let offsetX = boardView.frame.minX
+        let offsetY = boardView.frame.minY
+        
+        // Create a fake head that will animate to cover the entire view
+        let fakeHead = Head(frame: boardView.headView.frame)
+        fakeHead.transform = CGAffineTransform(translationX: offsetX, y: offsetY)
+        self.view.addSubview(fakeHead)
+        
+        // Come up with a all-covered up frame
+        var allCoveredTransform = CGAffineTransform(scaleX: 1.4, y: 1.4)
+        allCoveredTransform = allCoveredTransform.concatenating(CGAffineTransform(translationX: -self.view.bounds.width * 0.2, y: -self.view.bounds.height * 0.2))
+        let targetFrame = self.view.frame.applying(allCoveredTransform)
+        
+        // Perform animation
+        UIView.animate(withDuration: 0.4, delay: boardView.ANIMATION_DURATION, options: .curveEaseIn, animations: {
+            
+            fakeHead.frame = targetFrame
+            
+        }, completion: { _ in
+            // Setup the next board
+            self.boardView.setBoard(with: self.gameDelegate.getBoard())
+            
+            // Calculate the target frame
+            let targetFrame = self.boardView.headView.frame.applying(CGAffineTransform(translationX: offsetX, y: offsetY))
+            
+            // Animate back into the next level
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+                fakeHead.frame = targetFrame
+            }, completion: {_ in
+                fakeHead.removeFromSuperview()
+            })
+            
+        })
     }
     
 }

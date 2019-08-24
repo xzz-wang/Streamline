@@ -17,7 +17,7 @@ class TempGameDelegate: GameLogicDelegate {
     }
     
     func move(with direction: Direction) -> ActionType {
-        return ActionType.invalid(direction)
+        return ActionType.win(BoardLocation(row: 0, col: 1))
     }
     
     

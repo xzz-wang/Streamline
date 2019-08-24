@@ -118,7 +118,10 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Nf9-sl-LGt" kind="show" id="gpo-fy-WuD"/>
+                                    <segue destination="Nf9-sl-LGt" kind="show" id="gpo-fy-WuD">
+                                        <segue key="commit" inheritsFrom="parent" id="PoP-LN-8aT"/>
+                                        <segue key="preview" inheritsFrom="commit" id="gzO-We-94k"/>
+                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -173,4 +176,7 @@
             <point key="canvasLocation" x="-23.188405797101453" y="137.94642857142856"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="gpo-fy-WuD"/>
+    </inferredMetricsTieBreakers>
 </document>

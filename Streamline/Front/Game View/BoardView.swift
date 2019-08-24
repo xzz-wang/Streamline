@@ -12,9 +12,9 @@ import UIKit
 @IBDesignable
 class BoardView: UIView {
     
-    private let ANIMATION_DURATION: Double = 0.3
-    private let DAMPING_RATIO: CGFloat = 0.7
-    private let INVALID_OFFSET: CGFloat = 10.0
+    let ANIMATION_DURATION: Double = 0.3
+    let DAMPING_RATIO: CGFloat = 0.7
+    let INVALID_OFFSET: CGFloat = 10.0
     
     // MARK: - Properties
     // MARK: Main reusing path
@@ -252,7 +252,10 @@ class BoardView: UIView {
         }
         
         // Setup the head
+        //headLocation = info.originLocation
         moveHead(to: info.originLocation)
+        
+        setNeedsDisplay()
         
     }
     
