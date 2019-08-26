@@ -147,6 +147,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         feedbackGenerator = nil
     }
     
+    // Called when a win is achieved. Get a new level and create a transition.
     private func win() {
         // Get the offset between boardView and self.view
         let offsetX = boardView.frame.minX
@@ -157,10 +158,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         fakeHead.transform = CGAffineTransform(translationX: offsetX, y: offsetY)
         self.view.addSubview(fakeHead)
         
-        // Come up with a all-covered up frame
-        var allCoveredTransform = CGAffineTransform(scaleX: 1.4, y: 1.4)
-        allCoveredTransform = allCoveredTransform.concatenating(CGAffineTransform(translationX: -self.view.bounds.width * 0.2, y: -self.view.bounds.height * 0.2))
-        let targetFrame = self.view.frame.applying(allCoveredTransform)
+        // Come up with a final frame for the animation
+        let zoomSize = UIScreen.main.bounds.height * 2
+        let xLoc = fakeHead.center.x - zoomSize / 2
+        let yLoc = fakeHead.center.y - zoomSize / 2
+        let targetFrame = CGRect(x: xLoc , y: yLoc, width: zoomSize, height: zoomSize)
         
         // Perform animation
         UIView.animate(withDuration: 0.4, delay: boardView.ANIMATION_DURATION, options: .curveEaseIn, animations: {
