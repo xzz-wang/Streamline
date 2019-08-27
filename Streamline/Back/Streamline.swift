@@ -56,10 +56,13 @@ public class Streamline: GameLogicDelegate {
                 ret += 1
             }
         }
-        return ret // mark all levels to not passed when exiting the game? or write a method to reset the whole progress
+        return ret
     }
     
-    func move (dir: Direction) -> ActionType {
-        return self.getCurrentLevel().move(with: dir)
+    // mark all levels to not played
+    public func resetProgress() {
+        for level in self.levels {
+            level.levelPassed = false
+        }
     }
 }

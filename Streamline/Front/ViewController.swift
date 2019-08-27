@@ -89,6 +89,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Main User interaction method
     @IBAction func handleSwipe(_ sender: UISwipeGestureRecognizer) {
+        
+        // TODO: Fix crash & not cancelling the trail when dragging undo
+        
         if sender.state == .ended {
             
             feedbackGenerator = UIImpactFeedbackGenerator()
@@ -123,6 +126,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // Parse the Action type
     private func perform(action: ActionType) {
         // Provide force feedback
+        
+        // TODO: Fix not calling win
         
         switch action {
         case .advanceTo(let target):

@@ -103,7 +103,7 @@ class BoardView: UIView {
     
     // The location of the head of the path
     var headView: Head!
-    var headLocation = BoardLocation(row: 0, col: 0)
+    var headLocation = BoardLocation(row: 0, col: 0) // TODO: Use player current location
     private let HEAD_SIZE_RATIO: CGFloat = 0.65
     
     // Trails

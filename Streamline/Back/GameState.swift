@@ -150,7 +150,7 @@ public class GameState {
 //        self.board = new
 //    }
 
-    func moveRight() -> BoardLocation {
+    func moveRight() {
         while !stopMoving(row: self.currentLocation.row, col: self.currentLocation.column + 1) {
             self.trailLocations.append(self.currentLocation)
             self.currentLocation.column += 1
@@ -159,10 +159,9 @@ public class GameState {
                 break
             }
         } // TODO: test if the loop condition causes the player to never move
-        return self.currentLocation
     }
     
-    func moveLeft() -> BoardLocation {
+    func moveLeft() {
         while !stopMoving(row: self.currentLocation.row, col: self.currentLocation.column - 1) {
             self.trailLocations.append(self.currentLocation)
             self.currentLocation.column -= 1
@@ -171,10 +170,9 @@ public class GameState {
                 break
             }
         } // TODO: test if the loop condition causes the player to never move
-        return self.currentLocation
     }
     
-    func moveUp() -> BoardLocation {
+    func moveUp() {
         while !stopMoving(row: self.currentLocation.row - 1, col: self.currentLocation.column) {
             self.trailLocations.append(self.currentLocation)
             self.currentLocation.row -= 1
@@ -183,10 +181,9 @@ public class GameState {
                 break
             }
         } // TODO: test if the loop condition causes the player to never move
-        return self.currentLocation
     }
     
-    func moveDown() -> BoardLocation {
+    func moveDown() {
         while !stopMoving(row: self.currentLocation.row + 1, col: self.currentLocation.column) {
             self.trailLocations.append(self.currentLocation)
             self.currentLocation.row += 1
@@ -195,11 +192,9 @@ public class GameState {
                 break
             }
         } // TODO: test if the loop condition causes the player to never move
-        return self.currentLocation
     }
 
     func move(with dir: Direction) -> ActionType {
-        let rotationCount: Int = dir.rawValue
         let previousLocation: BoardLocation = self.currentLocation
 
         // if undo
@@ -224,18 +219,18 @@ public class GameState {
 
         // not undo, try to move player
         if dir == Direction.down {
-            _ = self.moveDown() // suppress warnings
+            self.moveDown() // suppress warnings
         }
         if dir == Direction.up {
-            _ = self.moveUp()
+            self.moveUp()
         }
         if dir == Direction.left {
-            _ = self.moveLeft()
+            self.moveLeft()
         }
         if dir == Direction.right {
-            _ = self.moveRight()
+            self.moveRight()
         }
-        self.printBoard()
+        // self.printBoard()
         if self.levelPassed == true {
             return ActionType.win(self.currentLocation)
         }
@@ -290,5 +285,9 @@ public class GameState {
             return false
         }
         return true
+    }
+    
+    func getCurrentLocation() -> BoardLocation {
+        return self.currentLocation
     }
 }
