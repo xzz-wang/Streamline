@@ -63,17 +63,20 @@ public class GameState {
         self.addRandomObstacles(count: 3)
     }
 
-    func occupiedLocation (row: Int, col: Int) -> Bool {
+    func stopMoving (row: Int, col: Int) -> Bool {
         if self.board.obstacleLocations.contains(BoardLocation(row: row, col: col)) {
             return true
         }
-        if self.board.obstacleLocations.contains(BoardLocation(row: row, col: col)) {
-            return true
-        }
-        if self.board.goalLocation == BoardLocation(row: row, col: col) {
+        if self.trailLocations.contains(BoardLocation(row: row, col: col)) {
             return true
         }
         if self.currentLocation == BoardLocation(row: row, col: col) {
+            return true
+        }
+        if row >= self.board.rowNum || row < 0 {
+            return true
+        }
+        if col >= self.board.colNum || col < 0 {
             return true
         }
         return false
@@ -91,7 +94,7 @@ public class GameState {
             while (total < count) {
                 var randRow = Int.random(in: 0 ..< self.board.rowNum);
                 var randCol = Int.random(in: 0 ..< self.board.colNum);
-                while occupiedLocation(row: randRow, col: randCol) {
+                while stopMoving(row: randRow, col: randCol) {
                     randRow = Int.random(in: 0 ..< self.board.rowNum);
                     randCol = Int.random(in: 0 ..< self.board.colNum);
                 }
@@ -101,54 +104,54 @@ public class GameState {
         }
     }
 
-    func rotateClockwise() { // TODO: still need to be tested... I kinda forgot the formula for this one
-        // original formula: on the 2D array, rotated[i][j] = original[origH - j - 1][i]
-        var new: BoardInfo = BoardInfo.init(rowNum: self.board.colNum, colNum: self.board.rowNum,
-                                            goalLocation: BoardLocation.init(row: 0, col: 4),
-                                            obstacleLocations: [],
-                                            originLocation: BoardLocation.init(row: 5, col: 0))
-        
-        // update col & row num
-        let previousRowCount: Int = self.board.rowNum
-        let previousColCount: Int = self.board.colNum
-        new.colNum = previousRowCount
-        new.rowNum = self.board.rowNum - previousColCount - 1
-
-        // update original
-        let previousOriginalRow: Int = self.currentLocation.row
-        let previousOriginalCol: Int = self.currentLocation.column
-        self.currentLocation = BoardLocation.init(x: self.currentLocation.row - previousOriginalCol - 1,
-                                                 y: previousOriginalRow)
-
-        // update goal
-        let previousGoalRow: Int = self.board.goalLocation.row
-        let previousGoalCol: Int = self.board.goalLocation.column
-        new.goalLocation = BoardLocation.init(x: self.board.goalLocation.row - previousGoalCol - 1,
-                                              y: previousGoalRow)
-
-        // update trails and obstacles
-        var newObsts: [BoardLocation] = Array.init()
-        for bl in self.board.obstacleLocations {
-            let origX = bl.x
-            let origY = bl.y
-            let newLocation = BoardLocation.init(x: previousRowCount - origY - 1, y: origX)
-            newObsts.append(newLocation)
-        }
-        new.obstacleLocations = newObsts
-        var newTrails: [BoardLocation] = Array.init()
-        for bl in self.trailLocations {
-            let origX = bl.x
-            let origY = bl.y
-            let newLocation = BoardLocation.init(x: previousRowCount - origY - 1, y: origX)
-            newTrails.append(newLocation)
-        }
-        self.trailLocations = newTrails
-
-        self.board = new
-    }
+//    func rotateClockwise() { // TODO: still need to be tested... I kinda forgot the formula for this one
+//        // original formula: on the 2D array, rotated[i][j] = original[origH - j - 1][i]
+//        var new: BoardInfo = BoardInfo.init(rowNum: self.board.colNum, colNum: self.board.rowNum,
+//                                            goalLocation: BoardLocation.init(row: 0, col: 4),
+//                                            obstacleLocations: [],
+//                                            originLocation: BoardLocation.init(row: 5, col: 0))
+//
+//        // update col & row num
+//        let previousRowCount: Int = self.board.rowNum
+//        let previousColCount: Int = self.board.colNum
+//        new.colNum = previousRowCount
+//        new.rowNum = self.board.rowNum - previousColCount - 1
+//
+//        // update original
+//        let previousOriginalRow: Int = self.currentLocation.row
+//        let previousOriginalCol: Int = self.currentLocation.column
+//        self.currentLocation = BoardLocation.init(x: self.currentLocation.row - previousOriginalCol - 1,
+//                                                 y: previousOriginalRow)
+//
+//        // update goal
+//        let previousGoalRow: Int = self.board.goalLocation.row
+//        let previousGoalCol: Int = self.board.goalLocation.column
+//        new.goalLocation = BoardLocation.init(x: self.board.goalLocation.row - previousGoalCol - 1,
+//                                              y: previousGoalRow)
+//
+//        // update trails and obstacles
+//        var newObsts: [BoardLocation] = Array.init()
+//        for bl in self.board.obstacleLocations {
+//            let origX = bl.x
+//            let origY = bl.y
+//            let newLocation = BoardLocation.init(x: previousRowCount - origY - 1, y: origX)
+//            newObsts.append(newLocation)
+//        }
+//        new.obstacleLocations = newObsts
+//        var newTrails: [BoardLocation] = Array.init()
+//        for bl in self.trailLocations {
+//            let origX = bl.x
+//            let origY = bl.y
+//            let newLocation = BoardLocation.init(x: previousRowCount - origY - 1, y: origX)
+//            newTrails.append(newLocation)
+//        }
+//        self.trailLocations = newTrails
+//
+//        self.board = new
+//    }
 
     func moveRight() -> BoardLocation {
-        while !occupiedLocation(row: self.currentLocation.row, col: self.currentLocation.column + 1) {
+        while !stopMoving(row: self.currentLocation.row, col: self.currentLocation.column + 1) {
             self.trailLocations.append(self.currentLocation)
             self.currentLocation.column += 1
             if self.currentLocation == self.board.goalLocation {
@@ -160,7 +163,7 @@ public class GameState {
     }
     
     func moveLeft() -> BoardLocation {
-        while !occupiedLocation(row: self.currentLocation.row, col: self.currentLocation.column - 1) {
+        while !stopMoving(row: self.currentLocation.row, col: self.currentLocation.column - 1) {
             self.trailLocations.append(self.currentLocation)
             self.currentLocation.column -= 1
             if self.currentLocation == self.board.goalLocation {
@@ -172,7 +175,7 @@ public class GameState {
     }
     
     func moveUp() -> BoardLocation {
-        while !occupiedLocation(row: self.currentLocation.row - 1, col: self.currentLocation.column) {
+        while !stopMoving(row: self.currentLocation.row - 1, col: self.currentLocation.column) {
             self.trailLocations.append(self.currentLocation)
             self.currentLocation.row -= 1
             if self.currentLocation == self.board.goalLocation {
@@ -184,7 +187,7 @@ public class GameState {
     }
     
     func moveDown() -> BoardLocation {
-        while !occupiedLocation(row: self.currentLocation.row + 1, col: self.currentLocation.column) {
+        while !stopMoving(row: self.currentLocation.row + 1, col: self.currentLocation.column) {
             self.trailLocations.append(self.currentLocation)
             self.currentLocation.row += 1
             if self.currentLocation == self.board.goalLocation {

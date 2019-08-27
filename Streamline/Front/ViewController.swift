@@ -18,12 +18,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Customize variables    
     
     // Game logic delegate to back-end
-    var gameDelegate: GameLogicDelegate = TempGameDelegate()
+    // var gameDelegate: GameLogicDelegate = TempGameDelegate()
 
-    /*
+    
     // Use this line when using the actual GameLogicDelegate
     var gameDelegate: GameLogicDelegate = Streamline()
-    */
+    
     
     // Provide feedBack
     var feedbackGenerator: UIImpactFeedbackGenerator? = nil

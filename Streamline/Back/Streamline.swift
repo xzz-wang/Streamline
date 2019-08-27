@@ -37,12 +37,8 @@ public class Streamline: GameLogicDelegate {
         self.currentLv = 0
     }
     
-    public func getCurrentLevel (toGet: Int) -> GameState {
-        if toGet > self.getNumOfLevels() {
-            print("WARNING: such level does not exist")
-            return GameState.init(height: -1, width: -1, playerRow: -1, playerCol: -1, goalRow: -1, goalCol: -1, obstLocations: [])
-        }
-        return self.levels[toGet]
+    public func getCurrentLevel() -> GameState {
+        return self.levels[getHighestUnlockedLevel()]
     }
     
     public func initBoard(with level: Int) -> GameState {
@@ -61,5 +57,9 @@ public class Streamline: GameLogicDelegate {
             }
         }
         return ret // mark all levels to not passed when exiting the game? or write a method to reset the whole progress
+    }
+    
+    func move (dir: Direction) -> ActionType {
+        return self.getCurrentLevel().move(with: dir)
     }
 }
