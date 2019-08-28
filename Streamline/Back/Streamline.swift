@@ -11,6 +11,8 @@ import Foundation
 
 public class Streamline: GameLogicDelegate {
     func getBoard() -> BoardInfo {
+        currentLv += 1
+        print(currentLv)
         return levels[currentLv].board
     }
     
@@ -34,7 +36,7 @@ public class Streamline: GameLogicDelegate {
     
     public init(levels: [GameState]) {
         self.levels = levels
-        self.currentLv = 0
+        self.currentLv = -1
     }
     
     public func getCurrentLevel() -> GameState {

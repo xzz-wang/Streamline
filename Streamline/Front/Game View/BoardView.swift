@@ -294,8 +294,6 @@ class BoardView: UIView {
         
         // Put the head to the right location.
         moveHead(to: headLocation)
-        
-        print("Frame Updated!")
     }
     
     

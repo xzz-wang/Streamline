@@ -126,6 +126,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // Parse the Action type
     private func perform(action: ActionType) {
         // Provide force feedback
+        print("Action: \(action)")
         
         // TODO: Fix not calling win
         
