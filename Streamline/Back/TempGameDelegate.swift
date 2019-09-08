@@ -8,17 +8,54 @@
 
 import Foundation
 
-class TempGameDelegate: GameLogicDelegate {
+typealias Loc = BoardLocation
+
+class TempGameDelegate: GameLogicDelegate, Codable {
+    
+    // MARK: - Player & Levels Info
+    var highestUnlockedLevel: Int = 0
+    var currentLevel = -1
+    
+    static let levels = [
+        BoardInfo(rowNum: 6, colNum: 5, goalLocation: Loc(row: 0, col: 4), obstacleLocations: [Loc(row: 1, col: 3), Loc(row: 3, col: 2), Loc(row: 4, col: 2)], originLocation: Loc(row: 0, col: 0))
+    ]
+    
+    public func getHighestUnlockedLevel() -> Int {
+        return highestUnlockedLevel
+    }
+    
+    func getNumOfLevels() -> Int {
+        return TempGameDelegate.levels.count
+    }
+    
+    
+    // MARK: - Initializing a new game
+    
+    private var playerLocation: BoardLocation!
+    private var trailLocations: [BoardLocation] = []
+    private var currentLevel: BoardInfo!
+    
+    func getBoard(with level: Int) -> BoardInfo {
+        
+        // Check if this level exists
+        if level >= getNumOfLevels() {
+            fatalError("Level out of bounds!")
+        }
+        
+        return TempGameDelegate.levels[level]
+    }
     
     func getBoard() -> BoardInfo {
-        return BoardInfo(rowNum: 8, colNum: 6, goalLocation: BoardLocation(row: 7, col: 5),
-                         obstacleLocations: [BoardLocation(row: 5, col: 4), BoardLocation(row: 5, col: 3)],
-                         originLocation: BoardLocation(row: 0, col: 0))
+        currentLevel += 1
+        return levels[currentLevel]
+        
     }
+    
+    
+    // MARK: - Handle game actions
     
     func move(with direction: Direction) -> ActionType {
         return ActionType.win(BoardLocation(row: 0, col: 1))
     }
-    
     
 }

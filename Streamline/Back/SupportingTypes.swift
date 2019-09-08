@@ -108,10 +108,20 @@ enum ActionType {
 // Implement to the class that will handle all the user interactions
 protocol GameLogicDelegate {
     
+    // Get info about the levels
+    
+    func getHighestUnlockedLevel() -> Int
+    
+    func getNumOfLevels() -> Int
+    
     // Resume game, or automatically advance to the next level
     func getBoard() -> BoardInfo
     
+    // Get a specific unloced level.
+    func getBoard(with level: Int) -> BoardInfo
+    
     // In each level, the user will try to move in the following directions.
     func move(with direction: Direction) -> ActionType
+    
     
 }
