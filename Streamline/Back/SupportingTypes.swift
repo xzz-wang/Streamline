@@ -118,7 +118,7 @@ protocol GameLogicDelegate {
     func getBoard() -> BoardInfo
     
     // Get a specific unloced level.
-    func getBoard(with level: Int) -> BoardInfo
+    func getBoard(with level: Int) -> BoardInfo?
     
     // In each level, the user will try to move in the following directions.
     func move(with direction: Direction) -> ActionType

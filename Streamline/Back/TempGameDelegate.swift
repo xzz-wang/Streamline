@@ -35,20 +35,20 @@ class TempGameDelegate: GameLogicDelegate, Codable {
     private var trailLocations: [BoardLocation] = []
     private var currentLevel: BoardInfo!
     
-    func getBoard(with level: Int) -> BoardInfo {
+    func getBoard(with level: Int) -> BoardInfo? {
         
         // Check if this level exists
         if level >= getNumOfLevels() {
-            fatalError("Level out of bounds!")
+            print("Level out of bounds!")
+            return nil
         }
         
         return TempGameDelegate.levels[level]
     }
     
-    func getBoard() -> BoardInfo {
+    func getBoard() -> BoardInfo? {
         currentLevel += 1
-        return levels[currentLevel]
-        
+        return getBoard(currentLevel)
     }
     
     

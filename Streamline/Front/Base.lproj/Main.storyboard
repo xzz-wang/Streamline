@@ -19,14 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0H-GB-PPo">
-                                <rect key="frame" x="190" y="438" width="34" height="30"/>
+                                <rect key="frame" x="186" y="435" width="42" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="showDetail" id="Ilt-9A-cF9"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.99121004343032837" green="0.94594019651412964" blue="0.86664336919784546" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="tintColor" red="0.90793622019999998" green="0.0" blue="0.99383328049999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="B0H-GB-PPo" firstAttribute="centerX" secondItem="Mtb-Mp-uqE" secondAttribute="centerX" id="8i2-aq-CZj"/>
                             <constraint firstItem="B0H-GB-PPo" firstAttribute="centerY" secondItem="Mtb-Mp-uqE" secondAttribute="centerY" id="b2M-kL-CDt"/>
