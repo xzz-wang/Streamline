@@ -43,6 +43,19 @@ struct BoardLocation: Equatable {
         return this.x == that.x && this.y == that.y
     }
     
+    func getNeighbor(of direction: Direction) -> BoardLocation {
+        switch direction {
+        case .up:
+            return BoardLocation(row: self.row - 1, col: self.column)
+        case .down:
+            return BoardLocation(row: self.row + 1, col: self.column)
+        case .left:
+            return BoardLocation(row: self.row, col: self.column - 1)
+        case .right:
+            return BoardLocation(row: self.row, col: self.column + 1)
+        }
+    }
+    
 }
 
 
@@ -87,6 +100,19 @@ struct BoardInfo {
     var goalLocation: BoardLocation
     var obstacleLocations: [BoardLocation]
     var originLocation: BoardLocation
+    
+    func contains(_ location: BoardLocation) -> Bool {
+        let row = location.row
+        let col = location.column
+        
+        if row >= rowNum || row < 0 {
+            return false
+        } else if col >= colNum || col < 0 {
+            return false
+        }
+        
+        return true
+    }
 }
 
 // Returned by model layer when performAction is called.
@@ -115,7 +141,7 @@ protocol GameLogicDelegate {
     func getNumOfLevels() -> Int
     
     // Resume game, or automatically advance to the next level
-    func getBoard() -> BoardInfo
+    func getBoard() -> BoardInfo?
     
     // Get a specific unloced level.
     func getBoard(with level: Int) -> BoardInfo?
