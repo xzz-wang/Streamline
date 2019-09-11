@@ -11,6 +11,23 @@ import Foundation
 import UIKit
 
 class Streamline: AppDelegate, GameLogicDelegate {
+    
+    // get given level, first check if that level is passed, if so return that level
+    // if not, check if it's smaller than the current highest passed level, if so return that level
+    // if not, return the current unlocked highest level
+    func getLevel(with level: Int) -> BoardInfo {
+        if self.levels[level].levelPassed {
+            return self.levels[level].board
+        }
+        else if level <= self.currentLv {
+            return self.levels[level].board
+        }
+        else {
+            return self.levels[currentLv].board
+        }
+    }
+    
+    // called when the current level is passed and player is moving on to next level
     func getNextLevelBoard() -> BoardInfo {
         currentLv += 1
         print(currentLv)

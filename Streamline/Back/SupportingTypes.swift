@@ -111,6 +111,9 @@ protocol GameLogicDelegate {
     // Resume game, or automatically advance to the next level
     func getNextLevelBoard() -> BoardInfo
     
+    // get specified level
+    func getLevel(with level: Int) -> BoardInfo
+    
     // In each level, the user will try to move in the following directions.
     func move(with direction: Direction) -> ActionType
     
