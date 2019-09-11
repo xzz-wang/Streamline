@@ -8,9 +8,11 @@
 //
 
 import Foundation
+import UIKit
 
-public class Streamline: GameLogicDelegate {
-    func getBoard() -> BoardInfo {
+
+class Streamline: AppDelegate, GameLogicDelegate {
+    func getNextLevelBoard() -> BoardInfo {
         currentLv += 1
         print(currentLv)
         return levels[currentLv].board
@@ -25,7 +27,7 @@ public class Streamline: GameLogicDelegate {
     
     // with 8 sample levels: more on remote... I'm lazy hard-coding them as of now... there's also some complicated levels
     // TODO: find a way to read from files and save the games
-    public init() {
+    public override init() {
         let Lv1 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 1, col: 3), BoardLocation.init(row: 3, col: 2), BoardLocation.init(row: 4, col: 2)])
         let Lv2 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 0, col: 2), BoardLocation.init(row: 2, col: 3), BoardLocation.init(row: 5, col: 4)])
         let Lv3 = GameState.init(height: 6, width: 5, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4, obstLocations: [BoardLocation.init(row: 0, col: 1), BoardLocation.init(row: 2, col: 4), BoardLocation.init(row: 3, col: 1)])
@@ -66,5 +68,11 @@ public class Streamline: GameLogicDelegate {
         for level in self.levels {
             level.levelPassed = false
         }
+        self.currentLv = 0
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        self.resetProgress()
+        return true
     }
 }

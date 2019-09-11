@@ -46,7 +46,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        boardView!.setBoard(with: gameDelegate.getBoard())
+        boardView!.setBoard(with: gameDelegate.getNextLevelBoard())
     }
     
     // MARK: - User actions
@@ -62,7 +62,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             outerLoop: for row in boardView.tiles {
                 for tile in row {
                     if tile.frame.contains(tappedLocation) {
-                        tappedTile = tile
+                        tappedTile = tile // TODO: Make it move all the way to the end, remove possibility of staying in the middle
                         break outerLoop
                     }
                 }
@@ -177,7 +177,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             
         }, completion: { _ in
             // Setup the next board
-            self.boardView.setBoard(with: self.gameDelegate.getBoard())
+            self.boardView.setBoard(with: self.gameDelegate.getNextLevelBoard())
             
             // Calculate the target frame
             let targetFrame = self.boardView.headView.frame.applying(CGAffineTransform(translationX: offsetX, y: offsetY))

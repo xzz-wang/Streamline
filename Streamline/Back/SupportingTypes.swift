@@ -109,7 +109,7 @@ enum ActionType {
 protocol GameLogicDelegate {
     
     // Resume game, or automatically advance to the next level
-    func getBoard() -> BoardInfo
+    func getNextLevelBoard() -> BoardInfo
     
     // In each level, the user will try to move in the following directions.
     func move(with direction: Direction) -> ActionType
