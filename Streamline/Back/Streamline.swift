@@ -10,7 +10,6 @@
 import Foundation
 import UIKit
 
-
 class Streamline: AppDelegate, GameLogicDelegate {
     func getNextLevelBoard() -> BoardInfo {
         currentLv += 1
@@ -75,6 +74,7 @@ class Streamline: AppDelegate, GameLogicDelegate {
         self.currentLv = 0
     }
     
+    // upon launch, clear all previous progress
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         self.resetProgress()
         return true
