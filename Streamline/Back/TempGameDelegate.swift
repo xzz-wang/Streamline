@@ -88,11 +88,11 @@ class TempGameDelegate: GameLogicDelegate {
             }
             
             if isUndo {
-                pastActions.popLast()
+                pastActions.removeLast()
                 playerLocation = pastLocations.popLast()
                 
                 for _ in 0..<currentStep {
-                    trailLocations.popLast()
+                    trailLocations.removeLast()
                 }
                 
                 currentStep = pastSteps.popLast()!
