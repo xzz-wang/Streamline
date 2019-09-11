@@ -36,6 +36,10 @@ class Streamline: AppDelegate, GameLogicDelegate {
         self.currentLv = 0
     }
     
+    public func getGoalLocation() -> BoardLocation {
+        return self.levels[currentLv].board.goalLocation
+    }
+    
     public init(levels: [GameState]) {
         self.levels = levels
         self.currentLv = -1

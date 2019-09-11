@@ -9,6 +9,10 @@
 import Foundation
 
 class TempGameDelegate: GameLogicDelegate {
+    func getGoalLocation() -> BoardLocation {
+        return BoardLocation(row: 7, col: 5)
+    }
+    
 
     func getNextLevelBoard() -> BoardInfo {
         return BoardInfo(rowNum: 8, colNum: 6, goalLocation: BoardLocation(row: 7, col: 5),

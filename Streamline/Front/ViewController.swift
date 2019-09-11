@@ -27,6 +27,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Provide feedBack
     var feedbackGenerator: UIImpactFeedbackGenerator? = nil
+    var levelPassedFeedbackGenerator: UINotificationFeedbackGenerator? = nil
 
     
     
@@ -62,7 +63,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             outerLoop: for row in boardView.tiles {
                 for tile in row {
                     if tile.frame.contains(tappedLocation) {
-                        tappedTile = tile // TODO: Make it move all the way to the end, remove possibility of staying in the middle
+                        tappedTile = tile
                         break outerLoop
                     }
                 }
@@ -117,6 +118,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             let reactAction = gameDelegate.move(with: direction)
             
             perform(action: reactAction)
+            
+            if reactAction == ActionType.win(gameDelegate.getGoalLocation()) {
+                levelPassedFeedbackGenerator = UINotificationFeedbackGenerator()
+                levelPassedFeedbackGenerator?.prepare()
+                levelPassedFeedbackGenerator?.notificationOccurred(.success)
+                print("Haptic Engine vibrated, type notification & success")
+            }
         }
     }
     

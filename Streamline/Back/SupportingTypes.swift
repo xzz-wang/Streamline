@@ -90,7 +90,7 @@ struct BoardInfo {
 }
 
 // Returned by model layer when performAction is called.
-enum ActionType {
+enum ActionType: Equatable {
     // Tells the front-end to advance the player to given BoardLocation
     case advanceTo(BoardLocation) // This is associated value. Location that the player/head will advance to.
     
@@ -114,4 +114,6 @@ protocol GameLogicDelegate {
     // In each level, the user will try to move in the following directions.
     func move(with direction: Direction) -> ActionType
     
+    // When won, check if there's a match between actual goal location and the final location of player, and if so, vibrate the device's taptic engine
+    func getGoalLocation() -> BoardLocation
 }
