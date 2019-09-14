@@ -31,6 +31,9 @@ class Streamline: AppDelegate, GameLogicDelegate {
     func getNextLevelBoard() -> BoardInfo {
         currentLv += 1
         print(currentLv)
+        if self.currentLv >= self.levels.count {
+            fatalError("All levels exploited")
+        }
         return levels[currentLv].board
     }
     
