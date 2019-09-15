@@ -19,6 +19,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Game logic delegate to back-end
     // var gameDelegate: GameLogicDelegate = TempGameDelegate()
+
     
     // Use this line when using the actual GameLogicDelegate
     var gameDelegate: GameLogicDelegate = Streamline()
@@ -27,6 +28,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // Provide feedBack
     var feedbackGenerator: UIImpactFeedbackGenerator? = nil
     var levelPassedFeedbackGenerator: UINotificationFeedbackGenerator? = nil
+
+    
     
     // MARK: - View life cycles
     override func viewDidLoad() {
