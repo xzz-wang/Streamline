@@ -83,8 +83,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-
-    
     // Main User interaction method
     @IBAction func handleSwipe(_ sender: UISwipeGestureRecognizer) {
         
