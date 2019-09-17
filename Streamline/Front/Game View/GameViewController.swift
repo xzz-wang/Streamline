@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate {
+class GameViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - IB Property references
     @IBOutlet private weak var boardView: BoardView!
