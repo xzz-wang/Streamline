@@ -35,7 +35,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Level Selection"/>
                                 <connections>
-                                    <segue destination="ffK-SO-NSb" kind="showDetail" id="rZu-Jf-Rga"/>
+                                    <segue destination="kzb-Td-Kig" kind="showDetail" id="rZu-Jf-Rga"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -239,13 +239,32 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="mGo-d5-NVG"/>
                     </view>
+                    <navigationItem key="navigationItem" id="b59-an-Lgm"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugy-gq-hgQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1624.6376811594205" y="132.58928571428572"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hdE-kd-gcw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kzb-Td-Kig" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="b9x-H0-JoD">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ffK-SO-NSb" kind="relationship" relationship="rootViewController" id="oh5-DE-vk5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H0N-K8-2k3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="714.49275362318849" y="132.58928571428572"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Es2-No-CmW"/>
+        <segue reference="gpo-fy-WuD"/>
     </inferredMetricsTieBreakers>
 </document>
