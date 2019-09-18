@@ -8,7 +8,7 @@
 
 import UIKit
 
-//TODO: Front folder file system re-organization
+//TODO: Front folder file system re-organization, 3D touch view functionality
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
