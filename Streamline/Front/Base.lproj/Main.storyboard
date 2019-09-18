@@ -185,10 +185,10 @@
             </objects>
             <point key="canvasLocation" x="-23.188405797101453" y="137.94642857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Level Selection Stack Controller-->
         <scene sceneID="plA-RY-iR8">
             <objects>
-                <viewController id="ffK-SO-NSb" sceneMemberID="viewController">
+                <viewController id="ffK-SO-NSb" customClass="LevelSelectionStackController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KaR-hM-ReV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -202,7 +202,7 @@
                                     <segue destination="Nf9-sl-LGt" kind="show" id="Es2-No-CmW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select a level you wish to play, or simply get back on where you left off last time" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-Bk-nL6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select a level you wish to play, or simply get back on where you left off last time （可以删了？）" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-Bk-nL6">
                                 <rect key="frame" x="20" y="251" width="374" height="73"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="73" id="uuf-TR-Lwu"/>
@@ -211,7 +211,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HvA-9N-azo">
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HvA-9N-azo">
                                 <rect key="frame" x="50" y="332" width="314" height="70"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="Xkq-wp-9u6">
@@ -258,6 +258,12 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A super fancy title bar &quot;level selection&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWV-t0-jLV">
+                                <rect key="frame" x="20" y="99" width="374" height="102"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -266,10 +272,14 @@
                             <constraint firstItem="sw4-zN-eAJ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KaR-hM-ReV" secondAttribute="trailingMargin" id="JUb-Lt-x0W"/>
                             <constraint firstItem="Sgd-Bk-nL6" firstAttribute="centerX" secondItem="KaR-hM-ReV" secondAttribute="centerX" id="SST-Xa-llq"/>
                             <constraint firstItem="sw4-zN-eAJ" firstAttribute="top" secondItem="mGo-d5-NVG" secondAttribute="top" id="eK0-xs-0Hw"/>
+                            <constraint firstItem="jWV-t0-jLV" firstAttribute="trailing" secondItem="sw4-zN-eAJ" secondAttribute="trailing" id="fOv-49-B54"/>
                             <constraint firstItem="HvA-9N-azo" firstAttribute="top" secondItem="sw4-zN-eAJ" secondAttribute="bottom" constant="258" id="gFu-fZ-f4n"/>
                             <constraint firstItem="Sgd-Bk-nL6" firstAttribute="centerX" secondItem="HvA-9N-azo" secondAttribute="centerX" id="lgx-Q4-dR5"/>
+                            <constraint firstItem="jWV-t0-jLV" firstAttribute="top" secondItem="sw4-zN-eAJ" secondAttribute="bottom" constant="25" id="mXs-ws-aAv"/>
                             <constraint firstItem="HvA-9N-azo" firstAttribute="leading" secondItem="mGo-d5-NVG" secondAttribute="leading" constant="50" id="oG1-td-24k"/>
+                            <constraint firstItem="jWV-t0-jLV" firstAttribute="leading" secondItem="Sgd-Bk-nL6" secondAttribute="leading" id="pNU-3g-qoo"/>
                             <constraint firstItem="HvA-9N-azo" firstAttribute="top" secondItem="Sgd-Bk-nL6" secondAttribute="bottom" constant="8" symbolic="YES" id="uHs-z4-NQv"/>
+                            <constraint firstItem="Sgd-Bk-nL6" firstAttribute="top" secondItem="jWV-t0-jLV" secondAttribute="bottom" constant="50" id="uyS-C1-Zeo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mGo-d5-NVG"/>
                     </view>
