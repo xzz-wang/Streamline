@@ -8,6 +8,8 @@
 
 import UIKit
 
+//TODO: Front folder file system re-organization
+
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - IB Property references
