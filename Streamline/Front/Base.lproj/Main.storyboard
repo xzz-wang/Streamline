@@ -193,9 +193,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sw4-zN-eAJ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sw4-zN-eAJ">
                                 <rect key="frame" x="360" y="44" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Back">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -203,40 +202,41 @@
                                     <segue destination="Nf9-sl-LGt" kind="show" id="Es2-No-CmW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please select a level you wish to play, or simply get back on where you left off last time" lineBreakMode="characterWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-Bk-nL6">
-                                <rect key="frame" x="20" y="72" width="660" height="73"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select a level you wish to play, or simply get back on where you left off last time" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-Bk-nL6">
+                                <rect key="frame" x="20" y="251" width="374" height="73"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="uuf-TR-Lwu"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="HvA-9N-azo">
-                                <rect key="frame" x="51" y="169" width="315" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HvA-9N-azo">
+                                <rect key="frame" x="50" y="332" width="314" height="70"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="Xkq-wp-9u6">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="314" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UF-CI-UqJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2UF-CI-UqJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
                                                 <state key="normal" title="Level 1"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twx-C9-VjH">
-                                                <rect key="frame" x="89" y="0.0" width="49" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twx-C9-VjH">
+                                                <rect key="frame" x="88" y="0.0" width="49" height="30"/>
                                                 <state key="normal" title="Level 2"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtw-xr-JZi">
-                                                <rect key="frame" x="177" y="0.0" width="49" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtw-xr-JZi">
+                                                <rect key="frame" x="176" y="0.0" width="49" height="30"/>
                                                 <state key="normal" title="Level 3"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8z-21-uWE">
-                                                <rect key="frame" x="265" y="0.0" width="50" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8z-21-uWE">
+                                                <rect key="frame" x="264" y="0.0" width="50" height="30"/>
                                                 <state key="normal" title="Level 4"/>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="byX-81-Zcc">
-                                        <rect key="frame" x="0.0" y="30" width="315" height="30"/>
+                                        <rect key="frame" x="0.0" y="40" width="314" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="585-Mn-aHG">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="30"/>
@@ -246,12 +246,12 @@
                                                 <rect key="frame" x="89" y="0.0" width="49" height="30"/>
                                                 <state key="normal" title="Level 6"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rcw-Su-btL">
-                                                <rect key="frame" x="178" y="0.0" width="48" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Rcw-Su-btL">
+                                                <rect key="frame" x="178" y="0.0" width="47" height="30"/>
                                                 <state key="normal" title="Level 7"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cb-AZ-rti">
-                                                <rect key="frame" x="266" y="0.0" width="49" height="30"/>
+                                                <rect key="frame" x="265" y="0.0" width="49" height="30"/>
                                                 <state key="normal" title="Level 8"/>
                                             </button>
                                         </subviews>
@@ -260,6 +260,17 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Sgd-Bk-nL6" firstAttribute="leading" secondItem="KaR-hM-ReV" secondAttribute="leadingMargin" id="5iG-aJ-9IL"/>
+                            <constraint firstItem="sw4-zN-eAJ" firstAttribute="leading" secondItem="mGo-d5-NVG" secondAttribute="leading" constant="360" id="ANV-o9-9Ki"/>
+                            <constraint firstItem="sw4-zN-eAJ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KaR-hM-ReV" secondAttribute="trailingMargin" id="JUb-Lt-x0W"/>
+                            <constraint firstItem="Sgd-Bk-nL6" firstAttribute="centerX" secondItem="KaR-hM-ReV" secondAttribute="centerX" id="SST-Xa-llq"/>
+                            <constraint firstItem="sw4-zN-eAJ" firstAttribute="top" secondItem="mGo-d5-NVG" secondAttribute="top" id="eK0-xs-0Hw"/>
+                            <constraint firstItem="HvA-9N-azo" firstAttribute="top" secondItem="sw4-zN-eAJ" secondAttribute="bottom" constant="258" id="gFu-fZ-f4n"/>
+                            <constraint firstItem="Sgd-Bk-nL6" firstAttribute="centerX" secondItem="HvA-9N-azo" secondAttribute="centerX" id="lgx-Q4-dR5"/>
+                            <constraint firstItem="HvA-9N-azo" firstAttribute="leading" secondItem="mGo-d5-NVG" secondAttribute="leading" constant="50" id="oG1-td-24k"/>
+                            <constraint firstItem="HvA-9N-azo" firstAttribute="top" secondItem="Sgd-Bk-nL6" secondAttribute="bottom" constant="8" symbolic="YES" id="uHs-z4-NQv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mGo-d5-NVG"/>
                     </view>
                     <navigationItem key="navigationItem" id="b59-an-Lgm"/>
