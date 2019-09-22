@@ -88,8 +88,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // Main User interaction method
     @IBAction func handleSwipe(_ sender: UISwipeGestureRecognizer) {
         
-        // TODO: Fix crash & not cancelling the trail when dragging undo
-        
         if sender.state == .ended {
             
             feedbackGenerator = UIImpactFeedbackGenerator()
@@ -136,23 +134,23 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         // TODO: Fix not calling win
         
         switch action {
-        case .advanceTo(let target):
-            if( !boardView.advance(to: target) ) {
-                fatalError("Not moving to the same row/column! Fatal Error")
-            }
-        case .invalid(let direction):
-            boardView.alertInvalidMove(forDirection: direction)
-            feedbackGenerator?.impactOccurred()
-        case .undo:
-            if ( !boardView.undo() ) {
-                fatalError("no more actions to be undo!")
-            }
-        case .win(let target):
-            if( !boardView.advance(to: target) ) {
-                fatalError("Not moving to the same row/column! Fatal Error")
-            }
-            win()
-            print("We won!")
+            case .advanceTo(let target):
+                if( !boardView.advance(to: target) ) {
+                    fatalError("Not moving to the same row/column! Fatal Error")
+                }
+            case .invalid(let direction):
+                boardView.alertInvalidMove(forDirection: direction)
+                feedbackGenerator?.impactOccurred()
+            case .undo:
+                if ( !boardView.undo() ) {
+                    fatalError("no more actions to be undo!")
+                }
+            case .win(let target):
+                if( !boardView.advance(to: target) ) {
+                    fatalError("Not moving to the same row/column! Fatal Error")
+                }
+                win()
+                print("We won!")
         }
         
         feedbackGenerator = nil

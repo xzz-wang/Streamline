@@ -12,6 +12,9 @@ import UIKit
 
 class Streamline: AppDelegate, GameLogicDelegate {
     
+    var levels: [GameState]
+    var currentLv: Int
+    
     // get given level, first check if that level is passed, if so return that level
     // if not, check if it's smaller than the current highest passed level, if so return that level
     // if not, return the current unlocked highest level
@@ -40,9 +43,6 @@ class Streamline: AppDelegate, GameLogicDelegate {
     func move(with direction: Direction) -> ActionType {
         return levels[currentLv].move(with: direction)
     }
-    
-    var levels: [GameState]
-    var currentLv: Int
     
     // with 8 sample levels: more on remote... I'm lazy hard-coding them as of now... there's also some complicated levels
     // TODO: find a way to read from files and save the games

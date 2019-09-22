@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TempGameDelegate: GameLogicDelegate {
+class TempGameDelegate: GameLogicDelegate { 
     func getLevel(with level: Int) -> BoardInfo {
         return BoardInfo(rowNum: 8, colNum: 6, goalLocation: BoardLocation(row: 7, col: 5),
                          obstacleLocations: [BoardLocation(row: 5, col: 4), BoardLocation(row: 5, col: 3)],
