@@ -12,6 +12,8 @@ let ID = "LevelCell"
 
 class LevelsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    var gameDelegate: GameLogicDelegate!
+    
     // MARK: - Collection View related
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
