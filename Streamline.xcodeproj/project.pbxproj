@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B07FB80022F61544008F87A1 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07FB7FF22F61544008F87A1 /* TileView.swift */; };
 		B08232862305016F003344AC /* TempGameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08232852305016F003344AC /* TempGameDelegate.swift */; };
+		B08F29A6233E6DC000DC9550 /* LevelViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F29A5233E6DC000DC9550 /* LevelViewCell.swift */; };
 		B0BAC97F22F7D9AB0087BB60 /* Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC97E22F7D9AB0087BB60 /* Head.swift */; };
 		B0BAC98322F7F3B70087BB60 /* Trail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC98222F7F3B70087BB60 /* Trail.swift */; };
 		B0BAC98522F8B3950087BB60 /* SupportingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC98422F8B3950087BB60 /* SupportingTypes.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		B07FB7FF22F61544008F87A1 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		B08232852305016F003344AC /* TempGameDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TempGameDelegate.swift; path = Streamline/Back/TempGameDelegate.swift; sourceTree = SOURCE_ROOT; };
+		B08F29A5233E6DC000DC9550 /* LevelViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewCell.swift; sourceTree = "<group>"; };
 		B0BAC97E22F7D9AB0087BB60 /* Head.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Head.swift; sourceTree = "<group>"; };
 		B0BAC98222F7F3B70087BB60 /* Trail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail.swift; sourceTree = "<group>"; };
 		B0BAC98422F8B3950087BB60 /* SupportingTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportingTypes.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				B0F204032330C4D400584543 /* LevelsViewController.swift */,
+				B08F29A5233E6DC000DC9550 /* LevelViewCell.swift */,
 			);
 			path = "Levels View";
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				B08232862305016F003344AC /* TempGameDelegate.swift in Sources */,
 				B07FB80022F61544008F87A1 /* TileView.swift in Sources */,
 				B0F204042330C4D400584543 /* LevelsViewController.swift in Sources */,
+				B08F29A6233E6DC000DC9550 /* LevelViewCell.swift in Sources */,
 				B0C0D7F122EC017400A585F8 /* BoardView.swift in Sources */,
 				B0BAC98322F7F3B70087BB60 /* Trail.swift in Sources */,
 				B0BAC98522F8B3950087BB60 /* SupportingTypes.swift in Sources */,
