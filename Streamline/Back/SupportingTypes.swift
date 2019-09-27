@@ -138,12 +138,12 @@ protocol GameLogicDelegate {
     
     func getHighestUnlockedLevel() -> Int
     
-    func getNumOfLevels() -> Int
+    func getNumLevels() -> Int
     
     // Resume game, or automatically advance to the next level
     func getBoard() -> BoardInfo?
     
-    // Get a specific unloced level.
+    // Get a specific unlocked level.
     func getBoard(with level: Int) -> BoardInfo?
     
     // In each level, the user will try to move in the following directions.
