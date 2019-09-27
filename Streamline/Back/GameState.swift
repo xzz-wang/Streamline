@@ -104,52 +104,6 @@ public class GameState {
         }
     }
 
-//    func rotateClockwise() { // TODO: still need to be tested... I kinda forgot the formula for this one
-//        // original formula: on the 2D array, rotated[i][j] = original[origH - j - 1][i]
-//        var new: BoardInfo = BoardInfo.init(rowNum: self.board.colNum, colNum: self.board.rowNum,
-//                                            goalLocation: BoardLocation.init(row: 0, col: 4),
-//                                            obstacleLocations: [],
-//                                            originLocation: BoardLocation.init(row: 5, col: 0))
-//
-//        // update col & row num
-//        let previousRowCount: Int = self.board.rowNum
-//        let previousColCount: Int = self.board.colNum
-//        new.colNum = previousRowCount
-//        new.rowNum = self.board.rowNum - previousColCount - 1
-//
-//        // update original
-//        let previousOriginalRow: Int = self.currentLocation.row
-//        let previousOriginalCol: Int = self.currentLocation.column
-//        self.currentLocation = BoardLocation.init(x: self.currentLocation.row - previousOriginalCol - 1,
-//                                                 y: previousOriginalRow)
-//
-//        // update goal
-//        let previousGoalRow: Int = self.board.goalLocation.row
-//        let previousGoalCol: Int = self.board.goalLocation.column
-//        new.goalLocation = BoardLocation.init(x: self.board.goalLocation.row - previousGoalCol - 1,
-//                                              y: previousGoalRow)
-//
-//        // update trails and obstacles
-//        var newObsts: [BoardLocation] = Array.init()
-//        for bl in self.board.obstacleLocations {
-//            let origX = bl.x
-//            let origY = bl.y
-//            let newLocation = BoardLocation.init(x: previousRowCount - origY - 1, y: origX)
-//            newObsts.append(newLocation)
-//        }
-//        new.obstacleLocations = newObsts
-//        var newTrails: [BoardLocation] = Array.init()
-//        for bl in self.trailLocations {
-//            let origX = bl.x
-//            let origY = bl.y
-//            let newLocation = BoardLocation.init(x: previousRowCount - origY - 1, y: origX)
-//            newTrails.append(newLocation)
-//        }
-//        self.trailLocations = newTrails
-//
-//        self.board = new
-//    }
-
     func moveRight() {
         while !stopMoving(row: self.currentLocation.row, col: self.currentLocation.column + 1) {
             self.trailLocations.append(self.currentLocation)
