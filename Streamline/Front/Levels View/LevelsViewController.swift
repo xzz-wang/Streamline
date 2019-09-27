@@ -34,5 +34,15 @@ class LevelsViewController: UIViewController, UICollectionViewDataSource, UIColl
         // Do any additional setup after loading the view.
     }
     
-
+    // MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is GameViewController
+        {
+            let vc = segue.destination as? GameViewController
+            vc!.currentLevel = (sender as! LevelViewCell).levelNumber
+        }
+        
+    }
+    
 }

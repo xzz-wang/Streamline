@@ -51,6 +51,9 @@ class TempGameDelegate: GameLogicDelegate {
             return nil
         }
         
+        // Update current level.
+        currentLevel = level
+        
         // Switch to this level
         currentLevelInfo = TempGameDelegate.levels[level]
         

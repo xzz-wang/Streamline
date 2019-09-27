@@ -29,13 +29,15 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var feedbackGenerator: UIImpactFeedbackGenerator? = nil
     var levelPassedFeedbackGenerator: UINotificationFeedbackGenerator? = nil
 
-    
+    // Track the current level
+    var currentLevel: Int = 0
     
     // MARK: - View life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        // Remove a lot of stuff
         boardView.isUserInteractionEnabled = true
         sampleTrail.removeFromSuperview()
         sampleTrail = nil
@@ -48,7 +50,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         // TODO: This will cause crash if there are no boards. Check before unwrap
-        boardView!.setBoard(with: gameDelegate.getBoard()!)
+        boardView!.setBoard(with: gameDelegate.getBoard(with: currentLevel)!)
     }
     
     // MARK: - User actions

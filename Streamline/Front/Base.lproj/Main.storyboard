@@ -24,9 +24,8 @@
                                     <segue destination="BYZ-38-t0r" kind="showDetail" id="Ilt-9A-cF9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ns8-dp-J7m">
-                                <rect key="frame" x="189" y="509" width="37" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ns8-dp-J7m">
+                                <rect key="frame" x="188.5" y="509" width="37" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Test"/>
                                 <connections>
@@ -38,7 +37,9 @@
                         <color key="tintColor" red="0.90793622019999998" green="0.0" blue="0.99383328049999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="B0H-GB-PPo" firstAttribute="centerX" secondItem="Mtb-Mp-uqE" secondAttribute="centerX" id="8i2-aq-CZj"/>
+                            <constraint firstItem="ns8-dp-J7m" firstAttribute="top" secondItem="B0H-GB-PPo" secondAttribute="bottom" constant="38" id="Y7M-H8-jyv"/>
                             <constraint firstItem="B0H-GB-PPo" firstAttribute="centerY" secondItem="Mtb-Mp-uqE" secondAttribute="centerY" id="b2M-kL-CDt"/>
+                            <constraint firstItem="ns8-dp-J7m" firstAttribute="centerX" secondItem="Mtb-Mp-uqE" secondAttribute="centerX" id="ixN-gV-LhX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mtb-Mp-uqE"/>
                     </view>
@@ -51,7 +52,7 @@
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="GameViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameView" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="GameViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,30 +123,15 @@
                                     <action selector="handleTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lc2-S7-xdC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDZ-vt-ebb">
-                                <rect key="frame" x="354" y="44" width="34" height="30"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Nf9-sl-LGt" kind="show" id="gpo-fy-WuD">
-                                        <segue key="commit" inheritsFrom="parent" id="PoP-LN-8aT"/>
-                                        <segue key="preview" inheritsFrom="commit" id="gzO-We-94k"/>
-                                    </segue>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99121004343032837" green="0.94594019651412964" blue="0.86664336919784546" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="bya-Vh-Gof" firstAttribute="top" secondItem="zDZ-vt-ebb" secondAttribute="bottom" constant="-4" id="85J-Il-1Bq"/>
                             <constraint firstItem="bya-Vh-Gof" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9MM-qQ-mYm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bya-Vh-Gof" secondAttribute="bottom" constant="38" id="DY9-YA-ec6"/>
-                            <constraint firstItem="zDZ-vt-ebb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Esg-my-2sO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bya-Vh-Gof" secondAttribute="trailing" constant="20" id="Lcd-5o-HA8"/>
                             <constraint firstItem="bya-Vh-Gof" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="VcE-1k-vvD"/>
                             <constraint firstItem="PzF-3p-NzN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Xeb-Kp-6Vs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zDZ-vt-ebb" secondAttribute="trailing" constant="26" id="uoC-aW-pEd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PzF-3p-NzN" secondAttribute="bottom" id="xN5-gk-TCi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -184,12 +170,12 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-23.188405797101453" y="137.94642857142856"/>
+            <point key="canvasLocation" x="212" y="138"/>
         </scene>
         <!--Levels View Controller-->
         <scene sceneID="xpY-pZ-1A2">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="SI6-XT-aWV" customClass="LevelsViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelsView" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="SI6-XT-aWV" customClass="LevelsViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vYQ-XH-6gn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -198,21 +184,21 @@
                                 <rect key="frame" x="20" y="94" width="374" height="718"/>
                                 <color key="backgroundColor" red="0.99121004339999996" green="0.94594019650000005" blue="0.86664336919999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6kw-0o-ovt">
-                                    <size key="itemSize" width="80" height="80"/>
+                                    <size key="itemSize" width="60" height="60"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LevelCell" id="VI3-PW-lmu" customClass="LevelViewCell" customModule="Streamline" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJX-1q-O5k">
-                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -227,6 +213,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="levelLabel" destination="gJX-1q-O5k" id="KWg-xZ-J2e"/>
+                                            <segue destination="BYZ-38-t0r" kind="showDetail" id="mUF-dt-t0Z"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -249,10 +236,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T4t-6c-h6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-797.10144927536237" y="958.92857142857133"/>
+            <point key="canvasLocation" x="-797" y="946"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gpo-fy-WuD"/>
+        <segue reference="mUF-dt-t0Z"/>
     </inferredMetricsTieBreakers>
 </document>
