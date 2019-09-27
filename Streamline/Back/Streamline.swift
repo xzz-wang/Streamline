@@ -35,7 +35,9 @@ class Streamline: AppDelegate, GameLogicDelegate {
         currentLv += 1
         print(currentLv)
         if self.currentLv >= self.levels.count {
-            fatalError("All levels exploited")
+            let newRandomLevel: GameState = GameState.init(height: 12, width: 10, playerRow: 5, playerCol: 0, goalRow: 0, goalCol: 4)
+            newRandomLevel.addRandomObstacles(count: 6)
+            return newRandomLevel.board
         }
         return levels[currentLv].board
     }
