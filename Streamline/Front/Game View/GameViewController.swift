@@ -47,6 +47,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // TODO: This will cause crash if there are no boards. Check before unwrap
         boardView!.setBoard(with: gameDelegate.getBoard()!)
     }
     
@@ -118,13 +119,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             let reactAction = gameDelegate.move(with: direction)
             
             perform(action: reactAction)
-            
-            if reactAction == ActionType.win(gameDelegate.getGoalLocation()) {
-                levelPassedFeedbackGenerator = UINotificationFeedbackGenerator()
-                levelPassedFeedbackGenerator?.prepare()
-                levelPassedFeedbackGenerator?.notificationOccurred(.success)
-                print("Haptic Engine vibrated, type notification & success")
-            }
         }
     }
     
@@ -154,6 +148,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             if( !boardView.advance(to: target) ) {
                 fatalError("Not moving to the same row/column! Fatal Error")
             }
+            
+            levelPassedFeedbackGenerator = UINotificationFeedbackGenerator()
+            levelPassedFeedbackGenerator?.prepare()
+            levelPassedFeedbackGenerator?.notificationOccurred(.success)
+            print("Haptic Engine vibrated, type notification & success")
+
             win()
             print("We won!")
         }
@@ -185,6 +185,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             
         }, completion: { _ in
             // Setup the next board
+            // TODO: This will cause crash if there are no more boards. Check before unwrap
             self.boardView.setBoard(with: self.gameDelegate.getBoard()!)
             
             // Calculate the target frame
