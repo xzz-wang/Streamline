@@ -58,7 +58,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bya-Vh-Gof" customClass="BoardView" customModule="Streamline" customModuleProvider="target">
-                                <rect key="frame" x="20" y="70" width="374" height="754"/>
+                                <rect key="frame" x="20" y="92.5" width="374" height="731.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5l4-GH-H49" customClass="Trail" customModule="Streamline" customModuleProvider="target">
                                         <rect key="frame" x="161" y="350" width="191" height="22"/>
@@ -123,16 +123,25 @@
                                     <action selector="handleTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lc2-S7-xdC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muO-wN-57T">
+                                <rect key="frame" x="20" y="64" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99121004343032837" green="0.94594019651412964" blue="0.86664336919784546" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bya-Vh-Gof" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9MM-qQ-mYm"/>
+                            <constraint firstItem="bya-Vh-Gof" firstAttribute="top" secondItem="muO-wN-57T" secondAttribute="bottom" constant="8" id="9xm-6d-U5k"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bya-Vh-Gof" secondAttribute="bottom" constant="38" id="DY9-YA-ec6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bya-Vh-Gof" secondAttribute="trailing" constant="20" id="Lcd-5o-HA8"/>
-                            <constraint firstItem="bya-Vh-Gof" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="VcE-1k-vvD"/>
+                            <constraint firstItem="muO-wN-57T" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Pyc-6P-spv"/>
                             <constraint firstItem="PzF-3p-NzN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Xeb-Kp-6Vs"/>
+                            <constraint firstItem="muO-wN-57T" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="wlp-hu-5Bz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PzF-3p-NzN" secondAttribute="bottom" id="xN5-gk-TCi"/>
+                            <constraint firstItem="muO-wN-57T" firstAttribute="width" secondItem="bya-Vh-Gof" secondAttribute="width" id="zsw-Cn-HQQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -140,7 +149,9 @@
                     <connections>
                         <outlet property="boardView" destination="bya-Vh-Gof" id="N6s-pw-uwr"/>
                         <outlet property="headView" destination="zMJ-Br-qHe" id="TVM-Gj-g9F"/>
+                        <outlet property="levelLabel" destination="muO-wN-57T" id="agf-RY-Nch"/>
                         <outlet property="sampleTrail" destination="5l4-GH-H49" id="0CQ-w8-XJX"/>
+                        <outlet property="testButton" destination="PzF-3p-NzN" id="3rz-3t-Oio"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -170,7 +181,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="212" y="138"/>
+            <point key="canvasLocation" x="211.59420289855075" y="137.94642857142856"/>
         </scene>
         <!--Levels View Controller-->
         <scene sceneID="xpY-pZ-1A2">

@@ -8,12 +8,16 @@
 
 import UIKit
 
+let IS_DEBUG = false
+
 class GameViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - IB Property references
     @IBOutlet private weak var boardView: BoardView!
     @IBOutlet private weak var headView: Head!
     @IBOutlet weak var sampleTrail: Trail!
+    @IBOutlet private weak var testButton: UIButton!
+    @IBOutlet private weak var levelLabel: UILabel!
     
     // MARK: - Customize variables    
     
@@ -44,6 +48,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         headView.removeFromSuperview()
         headView = nil
         
+        // Remove test button if not debuging
+        if !IS_DEBUG {
+            testButton.removeFromSuperview()
+            testButton = nil
+        }
+                
         // Setup the head
         boardView.addSubview(boardView.headView)
     }
@@ -51,6 +61,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         // TODO: This will cause crash if there are no boards. Check before unwrap
         boardView!.setBoard(with: gameDelegate.getBoard(with: currentLevel)!)
+        
+        // Initialize the title
+        levelLabel.text = "Level " + String(currentLevel + 1)
     }
     
     // MARK: - User actions
@@ -58,23 +71,25 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     // TODO: Remove for final product. Testing purpose only.
     @IBAction func handleTap(sender: UITapGestureRecognizer) {
         
-        if sender.state == .ended {
-            //Get the tile that was tapped on
-            var tappedTile: TileView? = nil
-            
-            let tappedLocation = sender.location(in: boardView)
-            outerLoop: for row in boardView.tiles {
-                for tile in row {
-                    if tile.frame.contains(tappedLocation) {
-                        tappedTile = tile
-                        break outerLoop
+        if IS_DEBUG {
+            if sender.state == .ended {
+                //Get the tile that was tapped on
+                var tappedTile: TileView? = nil
+                
+                let tappedLocation = sender.location(in: boardView)
+                outerLoop: for row in boardView.tiles {
+                    for tile in row {
+                        if tile.frame.contains(tappedLocation) {
+                            tappedTile = tile
+                            break outerLoop
+                        }
                     }
                 }
-            }
-            
-            if let tile = tappedTile {
-                if !boardView.advance(to: tile.location!) {
-                    print("Error occurred! Can not move to given location.s")
+                
+                if let tile = tappedTile {
+                    if !boardView.advance(to: tile.location!) {
+                        print("Error occurred! Can not move to given location.s")
+                    }
                 }
             }
         }
@@ -186,9 +201,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             fakeHead.frame = targetFrame
             
         }, completion: { _ in
+            
             // Setup the next board
             // TODO: This will cause crash if there are no more boards. Check before unwrap
             self.boardView.setBoard(with: self.gameDelegate.getBoard()!)
+            self.currentLevel += 1
+            self.levelLabel.text = "Level " + String(self.currentLevel + 1)
             
             // Calculate the target frame
             let targetFrame = self.boardView.headView.frame.applying(CGAffineTransform(translationX: offsetX, y: offsetY))
