@@ -43,6 +43,7 @@ class LevelsViewController: UIViewController, UICollectionViewDataSource, UIColl
         {
             let vc = segue.destination as? GameViewController
             vc!.currentLevel = (sender as! LevelViewCell).levelNumber
+            vc!.gameDelegate = gameDelegate
         }
         
     }

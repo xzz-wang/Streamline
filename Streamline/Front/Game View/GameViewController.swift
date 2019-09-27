@@ -22,7 +22,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Customize variables    
     
     // Game logic delegate to back-end
-    var gameDelegate: GameLogicDelegate = TempGameDelegate()
+    var gameDelegate: GameLogicDelegate!
 
     
     // Use this line when using the actual GameLogicDelegate

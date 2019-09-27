@@ -21,15 +21,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="showDetail" id="Ilt-9A-cF9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ns8-dp-J7m">
-                                <rect key="frame" x="188.5" y="509" width="37" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Test"/>
-                                <connections>
-                                    <segue destination="SI6-XT-aWV" kind="showDetail" id="s2Y-Yi-pTK"/>
+                                    <segue destination="SI6-XT-aWV" kind="showDetail" id="rF4-v8-IkS"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -37,9 +29,7 @@
                         <color key="tintColor" red="0.90793622019999998" green="0.0" blue="0.99383328049999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="B0H-GB-PPo" firstAttribute="centerX" secondItem="Mtb-Mp-uqE" secondAttribute="centerX" id="8i2-aq-CZj"/>
-                            <constraint firstItem="ns8-dp-J7m" firstAttribute="top" secondItem="B0H-GB-PPo" secondAttribute="bottom" constant="38" id="Y7M-H8-jyv"/>
                             <constraint firstItem="B0H-GB-PPo" firstAttribute="centerY" secondItem="Mtb-Mp-uqE" secondAttribute="centerY" id="b2M-kL-CDt"/>
-                            <constraint firstItem="ns8-dp-J7m" firstAttribute="centerX" secondItem="Mtb-Mp-uqE" secondAttribute="centerX" id="ixN-gV-LhX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mtb-Mp-uqE"/>
                     </view>
@@ -129,6 +119,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH0-Se-fJB">
+                                <rect key="frame" x="360" y="59" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99121004343032837" green="0.94594019651412964" blue="0.86664336919784546" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <gestureRecognizers/>
@@ -181,7 +176,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="211.59420289855075" y="137.94642857142856"/>
+            <point key="canvasLocation" x="939" y="138"/>
         </scene>
         <!--Levels View Controller-->
         <scene sceneID="xpY-pZ-1A2">
@@ -233,6 +228,11 @@
                                     <outlet property="delegate" destination="SI6-XT-aWV" id="ILK-Bd-NER"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7c-4Q-P95">
+                                <rect key="frame" x="354" y="44" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99121004339999996" green="0.94594019650000005" blue="0.86664336919999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -247,10 +247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T4t-6c-h6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-797" y="946"/>
+            <point key="canvasLocation" x="80" y="138"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Ilt-9A-cF9"/>
-    </inferredMetricsTieBreakers>
 </document>
