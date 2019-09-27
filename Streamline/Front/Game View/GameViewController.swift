@@ -23,10 +23,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Game logic delegate to back-end
     var gameDelegate: GameLogicDelegate!
-
-    
-    // Use this line when using the actual GameLogicDelegate
-    //var gameDelegate: GameLogicDelegate = Streamline()
     
     
     // Provide feedBack
@@ -137,6 +133,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             
             perform(action: reactAction)
         }
+    }
+    
+    @IBAction func handleTap(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: {})
     }
     
     

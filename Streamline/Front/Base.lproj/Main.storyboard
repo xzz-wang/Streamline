@@ -119,10 +119,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH0-Se-fJB">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH0-Se-fJB">
                                 <rect key="frame" x="360" y="59" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="handleTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PGh-IJ-3Rg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99121004343032837" green="0.94594019651412964" blue="0.86664336919784546" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -134,6 +136,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bya-Vh-Gof" secondAttribute="trailing" constant="20" id="Lcd-5o-HA8"/>
                             <constraint firstItem="muO-wN-57T" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Pyc-6P-spv"/>
                             <constraint firstItem="PzF-3p-NzN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Xeb-Kp-6Vs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NH0-Se-fJB" secondAttribute="trailing" constant="20" id="ZaM-Rg-AFr"/>
+                            <constraint firstItem="NH0-Se-fJB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="h3y-Cb-SFZ"/>
                             <constraint firstItem="muO-wN-57T" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="wlp-hu-5Bz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PzF-3p-NzN" secondAttribute="bottom" id="xN5-gk-TCi"/>
                             <constraint firstItem="muO-wN-57T" firstAttribute="width" secondItem="bya-Vh-Gof" secondAttribute="width" id="zsw-Cn-HQQ"/>
@@ -206,12 +210,14 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJX-1q-O5k">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <gestureRecognizers/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
                                                 <color key="value" red="0.99563199281692505" green="0.0" blue="0.99943810701370239" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -228,17 +234,21 @@
                                     <outlet property="delegate" destination="SI6-XT-aWV" id="ILK-Bd-NER"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7c-4Q-P95">
-                                <rect key="frame" x="354" y="44" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7c-4Q-P95">
+                                <rect key="frame" x="360" y="44" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="handlesBack:" destination="SI6-XT-aWV" eventType="touchUpInside" id="DWU-QF-xte"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99121004339999996" green="0.94594019650000005" blue="0.86664336919999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="k7c-4Q-P95" firstAttribute="top" secondItem="vaD-CE-1OL" secondAttribute="top" id="Kyr-ig-ww7"/>
                             <constraint firstItem="fXo-xS-Thx" firstAttribute="trailing" secondItem="vYQ-XH-6gn" secondAttribute="trailingMargin" id="PN3-Ro-E2p"/>
                             <constraint firstItem="vaD-CE-1OL" firstAttribute="bottom" secondItem="fXo-xS-Thx" secondAttribute="bottom" constant="50" id="gGh-TS-DVQ"/>
                             <constraint firstItem="fXo-xS-Thx" firstAttribute="top" secondItem="vaD-CE-1OL" secondAttribute="top" constant="50" id="ivW-er-WMa"/>
+                            <constraint firstItem="vaD-CE-1OL" firstAttribute="trailing" secondItem="k7c-4Q-P95" secondAttribute="trailing" constant="20" id="kOX-r5-Okm"/>
                             <constraint firstItem="fXo-xS-Thx" firstAttribute="leading" secondItem="vYQ-XH-6gn" secondAttribute="leadingMargin" id="ttN-p2-JAZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vaD-CE-1OL"/>

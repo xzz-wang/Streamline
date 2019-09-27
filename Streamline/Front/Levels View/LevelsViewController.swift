@@ -17,7 +17,7 @@ class LevelsViewController: UIViewController, UICollectionViewDataSource, UIColl
     // MARK: - Collection View related
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return gameDelegate.getNumLevels()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -48,4 +48,7 @@ class LevelsViewController: UIViewController, UICollectionViewDataSource, UIColl
         
     }
     
+    @IBAction func handlesBack(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: {})
+    }
 }
