@@ -27,7 +27,7 @@ class TempGameDelegate: GameLogicDelegate {
         return highestUnlockedLevel
     }
     
-    func getNumOfLevels() -> Int {
+    func getNumLevels() -> Int {
         return TempGameDelegate.levels.count
     }
     
@@ -46,7 +46,7 @@ class TempGameDelegate: GameLogicDelegate {
     func getBoard(with level: Int) -> BoardInfo? {
         
         // Check if this level exists
-        if level >= getNumOfLevels() {
+        if level >= getNumLevels() {
             print("Level out of bounds!")
             return nil
         }
