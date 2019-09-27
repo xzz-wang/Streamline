@@ -18,11 +18,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Customize variables    
     
     // Game logic delegate to back-end
-    // var gameDelegate: GameLogicDelegate = TempGameDelegate()
+    var gameDelegate: GameLogicDelegate = TempGameDelegate()
 
     
     // Use this line when using the actual GameLogicDelegate
-    var gameDelegate: GameLogicDelegate = Streamline()
+    //var gameDelegate: GameLogicDelegate = Streamline()
     
     
     // Provide feedBack
@@ -47,7 +47,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        boardView!.setBoard(with: gameDelegate.getNextLevelBoard())
+        boardView!.setBoard(with: gameDelegate.getBoard()!)
     }
     
     // MARK: - User actions
@@ -185,7 +185,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             
         }, completion: { _ in
             // Setup the next board
-            self.boardView.setBoard(with: self.gameDelegate.getNextLevelBoard())
+            self.boardView.setBoard(with: self.gameDelegate.getBoard()!)
             
             // Calculate the target frame
             let targetFrame = self.boardView.headView.frame.applying(CGAffineTransform(translationX: offsetX, y: offsetY))

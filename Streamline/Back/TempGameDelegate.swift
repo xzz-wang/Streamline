@@ -179,4 +179,8 @@ class TempGameDelegate: GameLogicDelegate {
         return returnValue
     }
     
+    func getGoalLocation() -> BoardLocation {
+        return currentLevelInfo.goalLocation
+    }
+    
 }
