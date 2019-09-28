@@ -64,7 +64,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - User actions
     
-    // TODO: Remove for final product. Testing purpose only.
+    // Remove for final product. Testing purpose only.
     @IBAction func handleTap(sender: UITapGestureRecognizer) {
         
         if IS_DEBUG {
@@ -92,7 +92,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     // An button designed to test stuff.
-    // TODO: Remove for final product. Testing purpose only.
+    // Remove for final product. Testing purpose only.
     @IBAction func handleTest(_ sender: UIButton) {
         if !boardView.undo() {
             print("Unable to undo!!")
