@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nf9-sl-LGt">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
@@ -13,15 +13,15 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="Nf9-sl-LGt" customClass="RootViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vl0-3C-duY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0H-GB-PPo">
-                                <rect key="frame" x="186" y="435" width="42" height="36"/>
+                                <rect key="frame" x="166.66666666666666" y="393" width="42" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
-                                    <segue destination="SI6-XT-aWV" kind="showDetail" id="rF4-v8-IkS"/>
+                                    <segue destination="SI6-XT-aWV" kind="show" id="Ida-gq-Exs"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -44,11 +44,11 @@
             <objects>
                 <viewController storyboardIdentifier="GameView" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="GameViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bya-Vh-Gof" customClass="BoardView" customModule="Streamline" customModuleProvider="target">
-                                <rect key="frame" x="20" y="92.5" width="374" height="731.5"/>
+                                <rect key="frame" x="20" y="92.666666666666686" width="335" height="647.33333333333326"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5l4-GH-H49" customClass="Trail" customModule="Streamline" customModuleProvider="target">
                                         <rect key="frame" x="161" y="350" width="191" height="22"/>
@@ -107,20 +107,20 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PzF-3p-NzN">
-                                <rect key="frame" x="192" y="832" width="30" height="30"/>
+                                <rect key="frame" x="172.66666666666666" y="748" width="30" height="30"/>
                                 <state key="normal" title="Test"/>
                                 <connections>
                                     <action selector="handleTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lc2-S7-xdC"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muO-wN-57T">
-                                <rect key="frame" x="20" y="64" width="374" height="20.5"/>
+                                <rect key="frame" x="20" y="63.999999999999993" width="335" height="20.666666666666664"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH0-Se-fJB">
-                                <rect key="frame" x="360" y="59" width="34" height="30"/>
+                                <rect key="frame" x="321" y="59" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="handleTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PGh-IJ-3Rg"/>
@@ -182,16 +182,55 @@
             </objects>
             <point key="canvasLocation" x="939" y="138"/>
         </scene>
+        <!--WinViewController-->
+        <scene sceneID="PTA-a9-HpD">
+            <objects>
+                <viewController storyboardIdentifier="WinView" title="WinViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="4f7-he-GgX" customClass="WinViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KzK-jR-dmC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Congratulations!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCk-JK-3PR">
+                                <rect key="frame" x="80" y="216" width="214" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You have finished all the levels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVo-6P-eJB">
+                                <rect key="frame" x="71" y="275" width="233" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9B-hh-Qbq">
+                                <rect key="frame" x="120" y="505" width="134" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back To Main Menu"/>
+                                <connections>
+                                    <action selector="handleButton:" destination="4f7-he-GgX" eventType="touchUpInside" id="muf-Jk-2B0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99997705219999999" green="0.95259660479999997" blue="0.87663942579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="A5v-2j-2XQ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u9Q-XF-iQR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1754" y="137"/>
+        </scene>
         <!--Levels View Controller-->
         <scene sceneID="xpY-pZ-1A2">
             <objects>
                 <viewController storyboardIdentifier="LevelsView" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="SI6-XT-aWV" customClass="LevelsViewController" customModule="Streamline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vYQ-XH-6gn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fXo-xS-Thx">
-                                <rect key="frame" x="20" y="94" width="374" height="718"/>
+                                <rect key="frame" x="16" y="94" width="343" height="634"/>
                                 <color key="backgroundColor" red="0.99121004339999996" green="0.94594019650000005" blue="0.86664336919999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6kw-0o-ovt">
                                     <size key="itemSize" width="60" height="60"/>
@@ -225,7 +264,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="levelLabel" destination="gJX-1q-O5k" id="KWg-xZ-J2e"/>
-                                            <segue destination="BYZ-38-t0r" kind="showDetail" id="mUF-dt-t0Z"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="XDS-Cz-7ML"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -235,7 +274,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7c-4Q-P95">
-                                <rect key="frame" x="360" y="44" width="34" height="30"/>
+                                <rect key="frame" x="321" y="44" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="handlesBack:" destination="SI6-XT-aWV" eventType="touchUpInside" id="DWU-QF-xte"/>

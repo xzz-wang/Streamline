@@ -204,22 +204,36 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }, completion: { _ in
             
             // Setup the next board
-            // TODO: This will cause crash if there are no more boards. Check before unwrap
-            self.boardView.setBoard(with: self.gameDelegate.getBoard()!)
-            self.currentLevel += 1
-            self.levelLabel.text = "Level " + String(self.currentLevel + 1)
-            
-            // Calculate the target frame
-            let targetFrame = self.boardView.headView.frame.applying(CGAffineTransform(translationX: offsetX, y: offsetY))
-            
-            // Animate back into the next level
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
-                fakeHead.frame = targetFrame
-            }, completion: {_ in
-                fakeHead.removeFromSuperview()
-            })
+
+            // Check if there's a new board for the next level
+            if let newBoard = self.gameDelegate.getBoard() {
+                self.boardView.setBoard(with: newBoard)
+                self.currentLevel += 1
+                self.levelLabel.text = "Level " + String(self.currentLevel + 1)
+                
+                // Calculate the target frame
+                let targetFrame = self.boardView.headView.frame.applying(CGAffineTransform(translationX: offsetX, y: offsetY))
+                
+                // Animate back into the next level
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+                    fakeHead.frame = targetFrame
+                }, completion: {_ in
+                    fakeHead.removeFromSuperview()
+                })
+            } else {
+                // We finished all the levels!
+                self.showFinalWinController()
+            }
             
         })
+    }
+    
+    // Show the new scene of wining
+    private func showFinalWinController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let winController = storyboard.instantiateViewController(withIdentifier: "WinView")
+
+        show(winController, sender: self)
     }
     
 }

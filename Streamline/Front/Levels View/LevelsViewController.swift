@@ -14,6 +14,12 @@ class LevelsViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     var gameDelegate: GameLogicDelegate!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
     // MARK: - Collection View related
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -23,6 +29,7 @@ class LevelsViewController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ID, for: indexPath) as! LevelViewCell
         
+        // Set the level number for each cell
         cell.levelLabel.text = String(indexPath.item + 1)
         cell.levelNumber = indexPath.item
         
@@ -30,12 +37,6 @@ class LevelsViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
