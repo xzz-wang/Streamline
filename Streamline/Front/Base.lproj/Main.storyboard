@@ -261,10 +261,13 @@
                                             <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
                                                 <color key="value" red="0.99563199281692505" green="0.0" blue="0.99943810701370239" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="inactiveColor">
+                                                <color key="value" red="0.80288523440000004" green="0.77470177409999996" blue="0.69157153370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="levelLabel" destination="gJX-1q-O5k" id="KWg-xZ-J2e"/>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="XDS-Cz-7ML"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="gotoLevel" id="XDS-Cz-7ML"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -293,6 +296,9 @@
                         <viewLayoutGuide key="safeArea" id="vaD-CE-1OL"/>
                     </view>
                     <navigationItem key="navigationItem" id="gaN-NN-RBa"/>
+                    <connections>
+                        <outlet property="collectionView" destination="fXo-xS-Thx" id="Xza-Lv-Wrc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T4t-6c-h6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

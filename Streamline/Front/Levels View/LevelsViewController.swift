@@ -13,11 +13,18 @@ let ID = "LevelCell"
 class LevelsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var gameDelegate: GameLogicDelegate!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        collectionView.reloadData()
     }
     
     // MARK: - Collection View related
@@ -33,6 +40,10 @@ class LevelsViewController: UIViewController, UICollectionViewDataSource, UIColl
         cell.levelLabel.text = String(indexPath.item + 1)
         cell.levelNumber = indexPath.item
         
+        // Set if this cell is active
+        cell.isActive = ( cell.levelNumber <= gameDelegate.getHighestUnlockedLevel() )
+        cell.setNeedsDisplay()
+        
         return cell
     }
     
@@ -47,6 +58,14 @@ class LevelsViewController: UIViewController, UICollectionViewDataSource, UIColl
             vc!.gameDelegate = gameDelegate
         }
         
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "gotoLevel" {
+            return (sender as! LevelViewCell).isActive
+        }
+        
+        return true
     }
     
     @IBAction func handlesBack(_ sender: UIButton) {

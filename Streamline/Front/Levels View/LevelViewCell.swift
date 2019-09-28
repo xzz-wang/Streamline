@@ -13,15 +13,22 @@ class LevelViewCell: UICollectionViewCell {
     
     @IBOutlet weak var levelLabel: UILabel!
     @IBInspectable var fillColor: UIColor = .yellow
+    @IBInspectable var inactiveColor: UIColor!
     
     var levelNumber: Int!
-    
+    var isActive = true
     
     // Custom drawing
     override func draw(_ rect: CGRect) {
 
         let path = UIBezierPath(roundedRect: rect, cornerRadius: rect.width * 0.2)
-        fillColor.setFill()
+        if isActive {
+            fillColor.setFill()
+        } else {
+            inactiveColor.setFill()
+        }
+        
+        print("Draw a cell with isActive: \(isActive)")
         
         path.fill()
 
