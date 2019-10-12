@@ -51,6 +51,9 @@ class TempGameDelegate: GameLogicDelegate {
             return nil
         }
         
+        // Update current level.
+        currentLevel = level
+        
         // Switch to this level
         currentLevelInfo = TempGameDelegate.levels[level]
         
@@ -65,6 +68,11 @@ class TempGameDelegate: GameLogicDelegate {
     
     func getBoard() -> BoardInfo? {
         currentLevel += 1
+        
+        if currentLevel > highestUnlockedLevel {
+            highestUnlockedLevel = currentLevel
+        }
+        
         return getBoard(with: currentLevel)  
     }
     

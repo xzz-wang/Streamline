@@ -8,78 +8,91 @@
 
 import UIKit
 
+let IS_DEBUG = false
+
 class GameViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - IB Property references
     @IBOutlet private weak var boardView: BoardView!
     @IBOutlet private weak var headView: Head!
     @IBOutlet weak var sampleTrail: Trail!
+    @IBOutlet private weak var testButton: UIButton!
+    @IBOutlet private weak var levelLabel: UILabel!
     
     // MARK: - Customize variables    
     
     // Game logic delegate to back-end
-    var gameDelegate: GameLogicDelegate = TempGameDelegate()
-
-    
-    // Use this line when using the actual GameLogicDelegate
-    //var gameDelegate: GameLogicDelegate = Streamline()
+    var gameDelegate: GameLogicDelegate!
     
     
     // Provide feedBack
     var feedbackGenerator: UIImpactFeedbackGenerator? = nil
     var levelPassedFeedbackGenerator: UINotificationFeedbackGenerator? = nil
 
-    
+    // Track the current level
+    var currentLevel: Int = 0
     
     // MARK: - View life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        // Remove a lot of stuff
         boardView.isUserInteractionEnabled = true
         sampleTrail.removeFromSuperview()
         sampleTrail = nil
         headView.removeFromSuperview()
         headView = nil
         
+        // Remove test button if not debuging
+        if !IS_DEBUG {
+            testButton.removeFromSuperview()
+            testButton = nil
+        }
+                
         // Setup the head
         boardView.addSubview(boardView.headView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // TODO: This will cause crash if there are no boards. Check before unwrap
-        boardView!.setBoard(with: gameDelegate.getBoard()!)
+        boardView!.setBoard(with: gameDelegate.getBoard(with: currentLevel)!)
+        
+        // Initialize the title
+        levelLabel.text = "Level " + String(currentLevel + 1)
     }
     
     // MARK: - User actions
     
-    // TODO: Remove for final product. Testing purpose only.
+    // Remove for final product. Testing purpose only.
     @IBAction func handleTap(sender: UITapGestureRecognizer) {
         
-        if sender.state == .ended {
-            //Get the tile that was tapped on
-            var tappedTile: TileView? = nil
-            
-            let tappedLocation = sender.location(in: boardView)
-            outerLoop: for row in boardView.tiles {
-                for tile in row {
-                    if tile.frame.contains(tappedLocation) {
-                        tappedTile = tile
-                        break outerLoop
+        if IS_DEBUG {
+            if sender.state == .ended {
+                //Get the tile that was tapped on
+                var tappedTile: TileView? = nil
+                
+                let tappedLocation = sender.location(in: boardView)
+                outerLoop: for row in boardView.tiles {
+                    for tile in row {
+                        if tile.frame.contains(tappedLocation) {
+                            tappedTile = tile
+                            break outerLoop
+                        }
                     }
                 }
-            }
-            
-            if let tile = tappedTile {
-                if !boardView.advance(to: tile.location!) {
-                    print("Error occurred! Can not move to given location.s")
+                
+                if let tile = tappedTile {
+                    if !boardView.advance(to: tile.location!) {
+                        print("Error occurred! Can not move to given location.s")
+                    }
                 }
             }
         }
     }
     
     // An button designed to test stuff.
-    // TODO: Remove for final product. Testing purpose only.
+    // Remove for final product. Testing purpose only.
     @IBAction func handleTest(_ sender: UIButton) {
         if !boardView.undo() {
             print("Unable to undo!!")
@@ -120,6 +133,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             
             perform(action: reactAction)
         }
+    }
+    
+    @IBAction func handleTap(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: {})
     }
     
     
@@ -184,21 +202,38 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             fakeHead.frame = targetFrame
             
         }, completion: { _ in
+            
             // Setup the next board
-            // TODO: This will cause crash if there are no more boards. Check before unwrap
-            self.boardView.setBoard(with: self.gameDelegate.getBoard()!)
-            
-            // Calculate the target frame
-            let targetFrame = self.boardView.headView.frame.applying(CGAffineTransform(translationX: offsetX, y: offsetY))
-            
-            // Animate back into the next level
-            UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
-                fakeHead.frame = targetFrame
-            }, completion: {_ in
-                fakeHead.removeFromSuperview()
-            })
+
+            // Check if there's a new board for the next level
+            if let newBoard = self.gameDelegate.getBoard() {
+                self.boardView.setBoard(with: newBoard)
+                self.currentLevel += 1
+                self.levelLabel.text = "Level " + String(self.currentLevel + 1)
+                
+                // Calculate the target frame
+                let targetFrame = self.boardView.headView.frame.applying(CGAffineTransform(translationX: offsetX, y: offsetY))
+                
+                // Animate back into the next level
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+                    fakeHead.frame = targetFrame
+                }, completion: {_ in
+                    fakeHead.removeFromSuperview()
+                })
+            } else {
+                // We finished all the levels!
+                self.showFinalWinController()
+            }
             
         })
+    }
+    
+    // Show the new scene of wining
+    private func showFinalWinController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let winController = storyboard.instantiateViewController(withIdentifier: "WinView")
+
+        show(winController, sender: self)
     }
     
 }
